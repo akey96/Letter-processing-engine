@@ -21,7 +21,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
-	//Descomentar cuando se añada seguridad
+	//Quitar comentario cuando se añada seguridad
 	//implementation 'org.springframework.boot:spring-boot-starter-security'
 	//implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure'
 	compileOnly 'org.projectlombok:lombok'
