@@ -1,0 +1,37 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer>
+    <mat-toolbar color="primary">
+      <img src="../../assets/images/logo-Fundacion.png">
+    </mat-toolbar>
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar class="header-image"></div>
+        <mat-card-title>Adrian Grajeda</mat-card-title>
+        <mat-card-subtitle>Trainer</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-list>
+      <mat-list-item>Programas</mat-list-item>
+      <mat-list-item>Periodos</mat-list-item>
+      <mat-list-item>Materias</mat-list-item>
+      <mat-list-item> Usuarios</mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button class="responsive-menu" type="button" aria-label="Toggle sidenav" mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <img class="web-menu" src="../../assets/images/logo-Fundacion.png">&nbsp;&nbsp;&nbsp;&nbsp;
+      <span class="web-menu">Programas</span>&nbsp;&nbsp;&nbsp;&nbsp;
+      <span class="web-menu">Periodos</span>&nbsp;&nbsp;&nbsp;&nbsp;
+      <span class="web-menu">Materias</span>&nbsp;&nbsp;&nbsp;&nbsp;
+      <span class="web-menu">Usuarios</span>&nbsp;&nbsp;&nbsp;&nbsp;
+      <span class="toolbar-spacer"></span>
+      <div mat-card-avatar class="header-image"></div>&nbsp;&nbsp;&nbsp;
+      <a>Adrian Grajeda</a>
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
