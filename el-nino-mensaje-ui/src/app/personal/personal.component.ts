@@ -14,8 +14,4 @@ export class PersonalComponent implements OnInit {
   ngOnInit() {
   }
 
-/*public register() {
-  const user = this.formGroup.value;
-  console.log(user);
-}*/
 }
