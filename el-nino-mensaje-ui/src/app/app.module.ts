@@ -10,7 +10,17 @@ import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+
+
 import { UserHomeComponent } from './home/user-home/user-home.component';
+import { WriteLetterComponent } from './home/write-letter/write-letter.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { LetterService } from './shared/services/letter.service';
+import { PopUpService } from './shared/services/pop-up.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -18,6 +28,7 @@ import { UserHomeComponent } from './home/user-home/user-home.component';
     AppComponent,
     NavigationMenuComponent,
     UserHomeComponent,
+    WriteLetterComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,8 +39,14 @@ import { UserHomeComponent } from './home/user-home/user-home.component';
     MatToolbarModule,
     MatListModule,
     MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [LetterService, PopUpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
