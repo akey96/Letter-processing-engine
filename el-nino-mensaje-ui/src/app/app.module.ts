@@ -15,12 +15,17 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 
 
+import {MatNativeDateModule,MatCheckboxModule, MatRadioModule} from  '@angular/material';
+import {MatDatepickerModule} from  '@angular/material/datepicker';
+
+
 import { UserHomeComponent } from './home/user-home/user-home.component';
 import { WriteLetterComponent } from './home/write-letter/write-letter.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LetterService } from './shared/services/letter.service';
 import { PopUpService } from './shared/services/pop-up.service';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterUserComponent } from './register-user/register-user.component';
 
 
 @NgModule({
@@ -29,6 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
     NavigationMenuComponent,
     UserHomeComponent,
     WriteLetterComponent,
+    RegisterUserComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +50,14 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatNativeDateModule,
+    MatCheckboxModule, 
+    MatRadioModule,
+    MatDatepickerModule
   ],
   providers: [LetterService, PopUpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
