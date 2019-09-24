@@ -16,7 +16,7 @@ public class GlobalRepositoryRestConfigurer extends RepositoryRestConfigurerAdap
                 .addMapping("/**")
                 .allowedOrigins("*")
                 .allowedHeaders("*")
-                .allowedMethods("ALL");
+                .allowedMethods("POST", "GET", "DELETE", "PUT", "PATCH");
     }
 
 }

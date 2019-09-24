@@ -2,10 +2,9 @@ package com.lirirum.nino_mensajero.user;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -14,6 +13,13 @@ public class ContactInformation {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-    private List<Integer> telephones;
-    private List<String> secondaryEmails;
+    @NotBlank
+    @Column(nullable = false)
+    private String reference;
+    @NotNull
+    @Column(nullable = false)
+    private String contact;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }
