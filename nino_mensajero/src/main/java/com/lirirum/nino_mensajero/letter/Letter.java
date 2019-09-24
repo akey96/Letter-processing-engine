@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 @Entity
 @Table(name = "LETTER")
@@ -15,10 +16,11 @@ public class Letter {
     private long id;
     @NotBlank
     @Column(nullable = false)
-    private String title;
-    @NotBlank
-    @Column(nullable = false)
     private String message;
+    @Temporal(TemporalType.DATE)
+    private Date creationDate;
     @Enumerated(EnumType.STRING)
     private Priority priority;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 }

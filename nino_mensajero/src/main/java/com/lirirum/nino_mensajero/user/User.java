@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @Entity
@@ -23,6 +24,6 @@ public class User {
     private String primaryEmail;
     @OneToOne
     private UserCredentials userCredentials;
-    @OneToOne
-    private ContactInformation contactInformation;
+    @OneToMany(mappedBy = "user")
+    private Set<ContactInformation> contactInformation;
 }
