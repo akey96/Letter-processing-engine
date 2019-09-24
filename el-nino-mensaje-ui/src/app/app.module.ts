@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterUserComponent } from './register-user/register-user.component';
 
 import {MaterialModule} from './material.module'; 
+import { UserService } from './shared/services/user.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import {MaterialModule} from './material.module';
     HttpClientModule,
     MaterialModule
   ],
-  providers: [LetterService, PopUpService],
+  providers: [LetterService, PopUpService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
