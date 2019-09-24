@@ -5,18 +5,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { NavigationMenuComponent } from './home/navigation-menu/navigation-menu.component';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatCardModule} from '@angular/material/card';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatListModule} from '@angular/material/list';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatButtonModule} from '@angular/material/button';
-
-
-import {MatNativeDateModule,MatCheckboxModule, MatRadioModule} from  '@angular/material';
-import {MatDatepickerModule} from  '@angular/material/datepicker';
 
 
 import { UserHomeComponent } from './home/user-home/user-home.component';
@@ -27,6 +15,7 @@ import { PopUpService } from './shared/services/pop-up.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterUserComponent } from './register-user/register-user.component';
 
+import {MaterialModule} from './material.module'; 
 
 @NgModule({
   declarations: [
@@ -40,21 +29,10 @@ import { RegisterUserComponent } from './register-user/register-user.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    MatSidenavModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatListModule,
-    MatIconModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatButtonModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    MatNativeDateModule,
-    MatCheckboxModule, 
-    MatRadioModule,
-    MatDatepickerModule
+    MaterialModule
   ],
   providers: [LetterService, PopUpService],
   bootstrap: [AppComponent]
