@@ -1,9 +1,27 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RegisterUserComponent } from './register-user/register-user.component';
-import { AdministratorRoutingModule } from './administrator-routing.module';
-import { MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule } from '@angular/material';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  NgModule
+} from '@angular/core';
+import {
+  CommonModule
+} from '@angular/common';
+import {
+  RegisterUserComponent
+} from './register-user/register-user.component';
+import {
+  AdministratorRoutingModule
+} from './administrator-routing.module';
+import {
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatButtonModule,
+  MatSelectModule
+} from '@angular/material';
+import {
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 
 
 
@@ -18,7 +36,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ]
 })
-export class AdministratorModule { }
+export class AdministratorModule {}

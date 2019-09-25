@@ -10,7 +10,6 @@ import java.util.Date;
 @Table(name = "LETTER")
 @Data
 public class Letter {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;

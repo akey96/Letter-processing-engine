@@ -8,7 +8,7 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Correo Electronico</mat-label>
-            <input matInput placeholder="Correo Electronico*" formControlName="primaryEmail" >
+            <input matInput placeholder="Correo Electronico*" formControlName="email" >
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -17,9 +17,20 @@
             <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
             <mat-datepicker #datepicker disabled="false"></mat-datepicker>
           </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Rol</mat-label>
+            <mat-select formControlName="userRole">
+              <mat-option [value]="'EDITOR'">
+                Editor
+              </mat-option>
+              <mat-option [value]="'REDACTOR'">
+                Redactor
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         <div class="form-buttons">
             <button mat-raised-button color="accent">Cancelar</button>
-            <button mat-raised-button (click)="sendMessage()" color="primary">Registrar</button>
+            <button mat-raised-button (click)="registerUser()" [disabled]="!userForm.valid" color="primary">Registrar</button>
         </div>
     </form>
 </mat-card>
