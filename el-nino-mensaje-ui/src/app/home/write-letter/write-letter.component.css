@@ -1,9 +1,11 @@
 h2 {
   text-align: center;
 }
+
 .mat-form-field {
   width: 100%;
 }
+
 form {
   width: 80%;
   margin: auto;

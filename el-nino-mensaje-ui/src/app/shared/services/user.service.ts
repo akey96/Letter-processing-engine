@@ -11,7 +11,7 @@ export class UserService {
   url: string;
 
   constructor(public httpClient: HttpClient) {
-    this.url = `${environment.serverUrl}/users`;
+    this.url = `${environment.serverUrl}/persons`;
   }
 
   sendUser(user: User) {

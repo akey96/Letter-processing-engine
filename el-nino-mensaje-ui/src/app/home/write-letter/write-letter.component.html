@@ -1,22 +1,21 @@
-
-  <h2>Escribe tus aventuras, emociones e imaginaciones!<br>Recuerda! Puedes mandarnos fotos y dibujos de tus
-    experiencias!</h2>
-    <form [formGroup]="letter">
-      <mat-form-field appearance="outline">
-        <mat-label>
-          <mat-icon matSuffix>create</mat-icon>
-          Escribe Aqui!
-        </mat-label>
-        <textarea matInput rows="17" formControlName="message"></textarea>
-      </mat-form-field>
-      <div class="buttons">
-        <button type="button" mat-raised-button color="accent" (click)="cleanMessage()" [disabled]="!letter.valid">
-          <mat-icon matSuffix>delete</mat-icon>
-          Borrar Carta
-        </button>
-        <button type="button" mat-raised-button color="primary" (click)="sendMessage()" [disabled]="!letter.valid">
-          <mat-icon matSuffix>create</mat-icon>
-          Mandar Carta
-        </button>
-      </div>
-    </form>
+<h2>Escribe tus aventuras, emociones e imaginaciones!<br>Recuerda! Puedes mandarnos fotos y dibujos de tus
+  experiencias!</h2>
+<form [formGroup]="letter">
+  <mat-form-field appearance="outline">
+    <mat-label>
+      <mat-icon matSuffix>create</mat-icon>
+      Escribe Aqui!
+    </mat-label>
+    <textarea matInput rows="17" formControlName="message"></textarea>
+  </mat-form-field>
+  <div class="buttons">
+    <button type="button" mat-raised-button color="accent" (click)="cleanMessage()" [disabled]="!letter.valid">
+      <mat-icon matSuffix>delete</mat-icon>
+      Borrar Carta
+    </button>
+    <button type="button" mat-raised-button color="primary" (click)="sendMessage()" [disabled]="!letter.valid">
+      <mat-icon matSuffix>create</mat-icon>
+      Mandar Carta
+    </button>
+  </div>
+</form>

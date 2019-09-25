@@ -1,6 +1,6 @@
 package com.lirirum.nino_mensajero.user;
 
-public enum UserStatus {
+public enum PersonStatus {
     ACTIVE,
     PENDING,
     BLOCKED

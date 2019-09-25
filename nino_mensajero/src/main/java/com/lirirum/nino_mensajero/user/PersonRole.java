@@ -1,6 +1,6 @@
 package com.lirirum.nino_mensajero.user;
 
-public enum UserRole {
+public enum PersonRole {
     ADMINISTRATOR,
     EDITOR,
     REDACTOR
