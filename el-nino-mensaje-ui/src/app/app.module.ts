@@ -13,7 +13,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { UserHomeComponent } from './home/user-home/user-home.component';
 import { WriteLetterComponent } from './home/write-letter/write-letter.component';
@@ -21,6 +21,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LetterService } from './shared/services/letter.service';
 import { PopUpService } from './shared/services/pop-up.service';
 import { HttpClientModule } from '@angular/common/http';
+import { RedactorModule } from './redactor/redactor.module';
 
 
 @NgModule({
@@ -42,9 +43,11 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RedactorModule
   ],
   providers: [LetterService, PopUpService],
   bootstrap: [AppComponent]

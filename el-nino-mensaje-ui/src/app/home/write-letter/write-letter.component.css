@@ -1,9 +1,11 @@
 h2 {
   text-align: center;
 }
+
 .mat-form-field {
   width: 100%;
 }
+
 form {
   width: 80%;
   margin: auto;
@@ -16,6 +18,7 @@ textarea {
 .buttons {
   text-align: end;
 }
+
 .buttons button {
   margin: 10px;
 }

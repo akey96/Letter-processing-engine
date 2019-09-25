@@ -1,0 +1,34 @@
+.header-image {
+  background-size: cover;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.responsive-menu {
+  display: none;
+}
+
+.web-menu {
+  cursor: pointer;
+}
+
+.logo {
+  background-size: cover;
+  border-radius: 40px;
+  width: 45px;
+  height: 45px;
+}
+
+
+@media screen and (max-width: 800px) {
+  .web-menu {
+    display: none;
+  }
+
+  .responsive-menu {
+    display: unset;
+  }
+
+}
