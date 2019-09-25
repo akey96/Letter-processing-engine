@@ -1,0 +1,25 @@
+<mat-card>
+  <h2>Registro de Usuarios</h2>
+    <form [formGroup]="userForm" >
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre Completo</mat-label>
+            <input matInput placeholder="Nombre Completo*" formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Correo Electronico</mat-label>
+            <input matInput placeholder="Correo Electronico*" formControlName="primaryEmail" >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Fecha de Nacimiento</mat-label>
+          <input matInput formControlName="birthday" [matDatepicker]="datepicker">
+            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker disabled="false"></mat-datepicker>
+          </mat-form-field>
+        <div class="form-buttons">
+            <button mat-raised-button color="accent">Cancelar</button>
+            <button mat-raised-button (click)="sendMessage()" color="primary">Registrar</button>
+        </div>
+    </form>
+</mat-card>

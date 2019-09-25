@@ -60,7 +60,9 @@ export class LetterListComponent implements OnInit {
       this.dataSource = new MatTableDataSource(letters._embedded.letters);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-      this.letter.get('message').setValue(letters._embedded.letters[0].message);
+      if (letters._embedded.letters[0]) {
+        this.letter.get('message').setValue(letters._embedded.letters[0].message);
+      }
     }, () => {
       this.popupService.showError('Algo fallo al cargar las cartas, recarga la pagina por favor.');
     });

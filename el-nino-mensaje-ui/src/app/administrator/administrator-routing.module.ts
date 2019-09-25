@@ -8,31 +8,29 @@ import {
 import {
   UserHomeComponent
 } from '../home/user-home/user-home.component';
-import {
-  LetterListComponent
-} from './letter-list/letter-list.component';
+import { RegisterUserComponent } from './register-user/register-user.component';
 
-export const redactorRoutes: Routes = [{
-  path: 'redactor',
+export const administratorRoutes: Routes = [{
+  path: 'administrator',
   component: UserHomeComponent,
   children: [{
       path: '',
-      redirectTo: 'letters-list',
+      redirectTo: 'register-user',
       pathMatch: 'full'
     },
     {
-      path: 'letter-list',
-      component: LetterListComponent
+      path: 'register-user',
+      component: RegisterUserComponent
     },
   ]
 }];
 
 @NgModule({
   imports: [
-    RouterModule.forChild(redactorRoutes)
+    RouterModule.forChild(administratorRoutes)
   ],
   exports: [
     RouterModule
   ]
 })
-export class RedactorRoutingModule {}
+export class AdministratorRoutingModule {}

@@ -14,6 +14,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatNativeDateModule, MatCheckboxModule, MatRadioModule } from '@angular/material';
 
 import { UserHomeComponent } from './home/user-home/user-home.component';
 import { WriteLetterComponent } from './home/write-letter/write-letter.component';
@@ -22,19 +24,15 @@ import { LetterService } from './shared/services/letter.service';
 import { PopUpService } from './shared/services/pop-up.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RedactorModule } from './redactor/redactor.module';
-
-import { RegisterUserComponent } from './register-user/register-user.component';
-
-import {MaterialModule} from './material.module';
 import { UserService } from './shared/services/user.service';
+import { AdministratorModule } from './administrator/administrator.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationMenuComponent,
     UserHomeComponent,
-    WriteLetterComponent,
-    RegisterUserComponent
+    WriteLetterComponent
   ],
   imports: [
     BrowserModule,
@@ -49,11 +47,15 @@ import { UserService } from './shared/services/user.service';
     MatFormFieldModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatNativeDateModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatSelectModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
     RedactorModule,
-    MaterialModule
+    AdministratorModule
   ],
   providers: [LetterService, PopUpService, UserService],
   bootstrap: [AppComponent]

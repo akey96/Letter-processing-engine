@@ -36,7 +36,7 @@ export class WriteLetterComponent implements OnInit {
   }
 
   cleanMessage() {
-    this.letter.reset();
+    this.letter.get('message').reset();
   }
 
   sendMessage() {
