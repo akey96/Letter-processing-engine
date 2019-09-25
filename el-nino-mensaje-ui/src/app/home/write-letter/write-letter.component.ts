@@ -9,7 +9,7 @@ import { PopUpService } from 'src/app/shared/services/pop-up.service';
   styleUrls: ['./write-letter.component.css']
 })
 export class WriteLetterComponent implements OnInit {
-  letter: FormGroup;
+  letter: FormGroup;  
   constructor(public formBuilder: FormBuilder, public letterService: LetterService, public popUpService: PopUpService) {
     this.letter = formBuilder.group({
       message: new FormControl('', Validators.required),
@@ -28,6 +28,7 @@ export class WriteLetterComponent implements OnInit {
   }
 
   sendMessage() {
+    console.log(this.letter.value);
     this.letterService.sendLetter(this.letter.value).subscribe(() => {
       this.popUpService.showSuccess('Felicidades tu carta fue mandada exitosamente!');
     }, () => {

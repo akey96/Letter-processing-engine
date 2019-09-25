@@ -45,6 +45,4 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         MatSelectModule
     ]
 })
-export class MaterialModule {
-
-}
+export class MaterialModule {}
