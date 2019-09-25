@@ -3,27 +3,30 @@ package com.lirirum.nino_mensajero.user;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.util.Date;
-import java.util.Set;
 
 @Data
 @Entity
+@Table(name = "USER")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     @NotBlank
-    private String Name;
+    private String name;
     @Past
     private Date birthday;
-    @Email
     @NotBlank
-    private String primaryEmail;
-    @OneToOne
-    private UserCredentials userCredentials;
-    @OneToMany(mappedBy = "user")
-    private Set<ContactInformation> contactInformation;
+    private String email;
+    @NotNull
+    private String username;
+    @NotNull
+    private String password;
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
+    @Enumerated(EnumType.STRING)
+    private UserStatus userStatus;
 }
