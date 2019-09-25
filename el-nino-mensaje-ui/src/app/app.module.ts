@@ -23,6 +23,10 @@ import { PopUpService } from './shared/services/pop-up.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RedactorModule } from './redactor/redactor.module';
 
+import { RegisterUserComponent } from './register-user/register-user.component';
+
+import {MaterialModule} from './material.module';
+import { UserService } from './shared/services/user.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,7 @@ import { RedactorModule } from './redactor/redactor.module';
     NavigationMenuComponent,
     UserHomeComponent,
     WriteLetterComponent,
+    RegisterUserComponent
   ],
   imports: [
     BrowserModule,
@@ -47,9 +52,11 @@ import { RedactorModule } from './redactor/redactor.module';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    RedactorModule
+    RedactorModule,
+    MaterialModule
   ],
-  providers: [LetterService, PopUpService],
+  providers: [LetterService, PopUpService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
