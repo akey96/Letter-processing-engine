@@ -9,6 +9,7 @@
     <textarea matInput rows="17" formControlName="message"></textarea>
   </mat-form-field>
   <div class="buttons">
+    
     <button type="button" mat-raised-button color="accent" (click)="cleanMessage()" [disabled]="!letter.valid">
       <mat-icon matSuffix>delete</mat-icon>
       Borrar Carta
@@ -17,5 +18,8 @@
       <mat-icon matSuffix>create</mat-icon>
       Mandar Carta
     </button>
+
+    <app-file-upload (complete)="onFileComplete($event)"></app-file-upload>
   </div>
+ 
 </form>

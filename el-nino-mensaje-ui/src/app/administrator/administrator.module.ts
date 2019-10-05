@@ -37,7 +37,7 @@ import {
     ReactiveFormsModule,
     MatDatepickerModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
   ]
 })
 export class AdministratorModule {}

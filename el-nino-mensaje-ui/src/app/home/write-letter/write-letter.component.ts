@@ -22,9 +22,13 @@ import {
 })
 export class WriteLetterComponent implements OnInit {
   letter: FormGroup;
+  listImages = [];
   constructor(public formBuilder: FormBuilder, public letterService: LetterService, public popUpService: PopUpService) {
+    
+
     this.letter = formBuilder.group({
       message: new FormControl('', Validators.required),
+      images: new FormControl(this.listImages),
       creationDate: new FormControl(new Date()),
       priority: new FormControl('LOW_PRIORITY'),
       status: new FormControl('NEW')
@@ -40,12 +44,17 @@ export class WriteLetterComponent implements OnInit {
   }
 
   sendMessage() {
+    console.log(this.letter.value);
     this.letterService.sendLetter(this.letter.value).subscribe(() => {
       this.popUpService.showSuccess('Felicidades tu carta fue mandada exitosamente!');
       this.cleanMessage();
     }, () => {
       this.popUpService.showError('Ups!! Algo malo paso, intenta mandarnos tu carta nuevamente');
     });
+  }
+
+  onFileComplete(data: any) {
+    this.listImages.push(data.link)
   }
 
 }

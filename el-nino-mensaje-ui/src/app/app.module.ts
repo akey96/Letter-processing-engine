@@ -28,14 +28,19 @@ import { UserService } from './shared/services/user.service';
 import { AdministratorModule } from './administrator/administrator.module';
 
 
-import {MAT_DATE_LOCALE} from '@angular/material';
+import {MAT_DATE_LOCALE, MatProgressBarModule} from '@angular/material';
+
+import { FileUploadComponent } from './home/file-upload/file-upload.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationMenuComponent,
     UserHomeComponent,
-    WriteLetterComponent
+    WriteLetterComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +59,7 @@ import {MAT_DATE_LOCALE} from '@angular/material';
     MatCheckboxModule,
     MatRadioModule,
     MatSelectModule,
+    MatProgressBarModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,

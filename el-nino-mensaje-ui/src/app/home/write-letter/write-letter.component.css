@@ -18,6 +18,8 @@ textarea {
 .buttons {
   text-align: end;
 }
-.buttons button {
+
+.buttons button,app-file-upload {
   margin: 10px;
 }
+
