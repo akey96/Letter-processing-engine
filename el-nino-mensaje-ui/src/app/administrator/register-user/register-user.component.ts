@@ -20,7 +20,7 @@ export class RegisterUserComponent implements OnInit {
   ngOnInit() {
     this.userForm = this.formBuilder.group({
       name: new FormControl('', Validators.required),
-      birthday: new FormControl('', Validators.required),
+      birthday: new FormControl(new Date(), Validators.required),
       email: new FormControl('', Validators.compose([Validators.email, Validators.required])),
       username: new FormControl('undefined'),
       password: new FormControl('undefined'),
@@ -37,7 +37,7 @@ export class RegisterUserComponent implements OnInit {
       this.userForm.get('email').reset();
       this.userForm.get('userRole').reset();
     }, () => {
-      this.popUpService.showError('No se pudo guardar al usuario intenta nuevamente');
+      this.popUpService.showError('Ya existe un usuario registrado con ese email');
     });
 
   }
