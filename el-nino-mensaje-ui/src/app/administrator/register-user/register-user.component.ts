@@ -11,6 +11,10 @@ import { PopUpService } from '../../shared/services/pop-up.service';
 })
 export class RegisterUserComponent implements OnInit {
   userForm: FormGroup;
+  
+
+  minDate = new Date(1910, 0, 1);
+  maxDate = new Date((new Date()).getFullYear() - 18, 0, 1);
 
   constructor(public formBuilder: FormBuilder, public userService: UserService, public popUpService: PopUpService ) {
 
@@ -19,8 +23,13 @@ export class RegisterUserComponent implements OnInit {
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
-      name: new FormControl('', Validators.required),
-      birthday: new FormControl(new Date(), Validators.required),
+      name: new FormControl('',[
+        Validators.required, 
+        Validators.pattern('^[A-Za-z]+( [A-Za-z]+)+$')]),
+      ci: new FormControl('',[
+        Validators.required, 
+        Validators.pattern('^[1-9]+ [A-Za-z]{2,3}$')]),
+      birthday: new FormControl('', Validators.required),
       email: new FormControl('', Validators.compose([Validators.email, Validators.required])),
       username: new FormControl('undefined'),
       password: new FormControl('undefined'),
@@ -31,13 +40,15 @@ export class RegisterUserComponent implements OnInit {
 
   registerUser() {
     this.userService.sendUser(this.userForm.value).subscribe(() => {
-      this.popUpService.showSuccess('El usuario fue guardado!');
+      this.popUpService.showSuccess('Se registro al usuario correctamente');
       this.userForm.get('name').reset();
+      this.userForm.get('ci').reset();
       this.userForm.get('birthday').reset();
       this.userForm.get('email').reset();
       this.userForm.get('userRole').reset();
-    }, () => {
-      this.popUpService.showError('Ya existe un usuario registrado con ese email');
+    }, (error) => {
+      
+      this.popUpService.showError(error.message);
     });
 
   }
