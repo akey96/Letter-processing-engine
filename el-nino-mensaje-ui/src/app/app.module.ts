@@ -27,6 +27,9 @@ import { RedactorModule } from './redactor/redactor.module';
 import { UserService } from './shared/services/user.service';
 import { AdministratorModule } from './administrator/administrator.module';
 
+
+import {MAT_DATE_LOCALE} from '@angular/material';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +60,11 @@ import { AdministratorModule } from './administrator/administrator.module';
     RedactorModule,
     AdministratorModule
   ],
-  providers: [LetterService, PopUpService, UserService],
+  providers: [
+    LetterService,
+    PopUpService,
+    UserService,
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

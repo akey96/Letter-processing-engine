@@ -7,15 +7,20 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
+          <mat-label>CI</mat-label>
+          <input matInput placeholder="Carnet de identidad*" formControlName="ci">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
             <mat-label>Correo Electronico</mat-label>
             <input matInput placeholder="Correo Electronico*" formControlName="email" >
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Fecha de Nacimiento</mat-label>
-          <input matInput formControlName="birthday" [matDatepicker]="datepicker">
+          <input matInput formControlName="birthday" [min]="minDate" [max]="maxDate" [matDatepicker]="datepicker">
             <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-            <mat-datepicker #datepicker disabled="false"></mat-datepicker>
+            <mat-datepicker #datepicker disabled="false" startView="year" [startAt]="startDate"></mat-datepicker>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Rol</mat-label>
