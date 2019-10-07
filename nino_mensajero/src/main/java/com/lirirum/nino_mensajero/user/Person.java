@@ -15,19 +15,23 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-    @NotBlank
     @NotNull
+    @NotBlank
+    @Column(nullable = false)
     private String name;
     @NotNull
     @NotBlank
-    @Column(unique = true, nullable = false)
-    private String email;
+    @Column(nullable = false, unique = true)
+    private String ci;
+    @NotNull
     @Past
+    @Column(nullable = false)
     private Date birthday;
     @NotNull
-    private String username;
-    @NotNull
-    private String password;
+    @NotBlank
+    @Column( nullable = false, unique = true)
+    private String email;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private PersonRole userRole;
     @Enumerated(EnumType.STRING)
