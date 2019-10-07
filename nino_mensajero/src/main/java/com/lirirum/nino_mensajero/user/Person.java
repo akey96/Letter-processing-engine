@@ -1,5 +1,6 @@
 package com.lirirum.nino_mensajero.user;
 
+import com.lirirum.nino_mensajero.letter.Letter;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @Entity
@@ -33,7 +35,9 @@ public class Person {
     private String email;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private PersonRole userRole;
+    private PersonRole personRole;
     @Enumerated(EnumType.STRING)
-    private PersonStatus userStatus;
+    private PersonStatus personStatus;
+    @OneToMany(mappedBy = "responsable", cascade = CascadeType.ALL)
+    private Set<Letter> assignedCards;
 }
