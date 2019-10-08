@@ -4,6 +4,9 @@ import { HttpClient, HttpResponse, HttpRequest, HttpEventType, HttpErrorResponse
 import { catchError, last, map, tap } from 'rxjs/operators';
 import { FileUploadModel } from '../../shared/models/fileUploadedModel';
 import { of } from 'rxjs/internal/observable/of';
+import {PopUpService} from 'src/app/shared/services/pop-up.service';
+
+
 
 @Component({
   selector: 'app-file-upload',
@@ -19,39 +22,66 @@ import { of } from 'rxjs/internal/observable/of';
   ]
 })
 export class FileUploadComponent implements OnInit {
-  @Input() text = 'Upload';
+  @Input() text = 'Click para agregar tus imagenes';
   @Input() param = 'file';
   @Input() target = 'https://file.io';
-  @Input() accept = 'text/*';
+  @Input() accept = 'image/png, image/jpeg, image/jpg';
+  @Input() isEnabled;
+  
+
   // tslint:disable-next-line:no-output-native
   @Output() complete = new EventEmitter<string>();
   fileInformation: any;
   private files: Array<FileUploadModel> = [];
 
   // tslint:disable-next-line:variable-name
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, public popUpService: PopUpService) { 
+
+  }
 
   ngOnInit() {
   }
 
   onClick() {
     const fileUpload = document.getElementById('fileUpload') as HTMLInputElement;
+    let validate = true;
 
     fileUpload.onchange = () => {
       // tslint:disable-next-line:prefer-for-of
       for (let index = 0; index < fileUpload.files.length; index++) {
         const file = fileUpload.files[index];
-        this.files.push({
-          data: file,
-          state: 'in',
-          inProgress: false,
-          progress: 0,
-          canRetry: false,
-          canCancel: true
-        });
-      }
+        
+        var fileName = file.name;
+        var fileSize = file.size;
 
-      this.uploadFiles();
+
+        if(fileSize > 3000000){
+          validate = false;
+          this.popUpService.showError('Solo se permiten imágenes de hasta 3 Mbytes de tamaño');
+
+        }else{
+          // recuperamos la extensión del archivo
+          var ext = fileName.split('.').pop();
+          if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' ) {
+
+            this.files.push({
+              data: file,
+              state: 'in',
+              inProgress: false,
+              progress: 0,
+              canRetry: false,
+              canCancel: true
+            });
+          } else {
+            validate = false;
+            this.popUpService.showError('Solo se permiten imágenes de formato jpg, jpeg y png');
+          }
+        }
+
+      }
+      if(validate) {
+        this.uploadFiles();
+      }
     };
 
     fileUpload.click();

@@ -14,12 +14,13 @@
       <mat-icon matSuffix>delete</mat-icon>
       Borrar Carta
     </button>
+    
     <button type="button" mat-raised-button color="primary" (click)="sendMessage()" [disabled]="!letter.valid">
       <mat-icon matSuffix>create</mat-icon>
       Mandar Carta
     </button>
-
-    <app-file-upload (complete)="onFileComplete($event)"></app-file-upload>
+    <app-file-upload [isEnabled]="!letter.valid" (complete)="onFileComplete($event)" ></app-file-upload>
+    
   </div>
  
 </form>
