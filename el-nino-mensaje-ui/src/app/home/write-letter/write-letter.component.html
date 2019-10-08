@@ -8,9 +8,14 @@
     </mat-label>
     <textarea matInput rows="17" formControlName="message"></textarea>
   </mat-form-field>
-  <div class="buttons">
+  
+  <ng-container id="mi_div" layout="row" layout-align="center center" *ngFor="let item of listImages">
+      <img width="60" height="60" label="" class="imagen-adaptable" src="{{item}}" />
+  </ng-container>
+
+  <div layout="row" class="buttons">
     
-    <button type="button" mat-raised-button color="accent" (click)="cleanMessage()" [disabled]="!letter.valid">
+    <button type="button" mat-raised-button color="warn" (click)="cleanMessage()" [disabled]="!letter.valid">
       <mat-icon matSuffix>delete</mat-icon>
       Borrar Carta
     </button>
@@ -19,8 +24,10 @@
       <mat-icon matSuffix>create</mat-icon>
       Mandar Carta
     </button>
+    
     <app-file-upload [isEnabled]="!letter.valid" (complete)="onFileComplete($event)" ></app-file-upload>
+
     
   </div>
- 
+  
 </form>
