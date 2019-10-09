@@ -34,6 +34,7 @@ public class Letter {
     private Status status;
     @ElementCollection
     private Set<String> images;
+    private String response;
     @ManyToOne
     @JoinColumn(name = "responsable_id")
     private Person responsable;
