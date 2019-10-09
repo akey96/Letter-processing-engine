@@ -40,6 +40,7 @@ export class WriteLetterComponent implements OnInit {
 
   cleanMessage() {
     this.letter.get('message').reset();
+    this.listImages = [];
   }
 
   sendMessage() {
@@ -54,7 +55,7 @@ export class WriteLetterComponent implements OnInit {
 
   onFileComplete(data: any) {
     this.listImages.push(data.link)
-
+    console.log(this.listImages)
   }
 
 }
