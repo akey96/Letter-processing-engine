@@ -39,7 +39,7 @@ compilamos el proyecto con gradle
 gradle build
 ```
 
-levantamos el servidor en ambiente de desarrollo
+Levantamos el servidor en ambiente de desarrollo
 ```
 gradle bootRun
 ```
@@ -51,17 +51,17 @@ Ingrese a la carpeta el-ninio-mensajero-ui
 cd el-ninio-mensajero-ui
 ```
 
-instalamos las dependencias con npm
+Instale las dependencias con npm
 ```
 npm install
 ```
 
-levantamos el servidor  de angular para ambiente de desarrollo
+Levante el servidor  de angular para ambiente de desarrollo
 ```
 ng serve
 ```
 
-ingresamos con un navegador a la url:
+Ingrese a un navegador con la url:
 ```
 http://localhost:4200
 ```
