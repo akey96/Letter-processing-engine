@@ -36,7 +36,6 @@ export class WriteLetterComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   cleanMessage() {
@@ -48,6 +47,7 @@ export class WriteLetterComponent implements OnInit {
     this.letterService.sendLetter(this.letter.value).subscribe(() => {
       this.popUpService.showSuccess('Felicidades tu carta fue mandada exitosamente!');
       this.cleanMessage();
+      this.listImages = [];
     }, () => {
       this.popUpService.showError('Ups!! Algo malo paso, intenta mandarnos tu carta nuevamente');
     });
@@ -55,6 +55,7 @@ export class WriteLetterComponent implements OnInit {
 
   onFileComplete(data: any) {
     this.listImages.push(data.link)
+
   }
 
 }

@@ -23,3 +23,20 @@ textarea {
   margin: 10px;
 }
 
+
+
+#mi_div { 
+  margin:  auto; 
+  width: 900px;
+}
+
+#mi_div img {
+  max-width: 300px;
+  width: auto;
+}
+
+.imagen-adaptable {
+  border-radius: 8px;
+  margin-left: 5px;
+  margin-right: 5px;
+}

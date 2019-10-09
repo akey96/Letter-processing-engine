@@ -1,8 +1,9 @@
-<button type="button" mat-raised-button color="warn"  (click)="onClick()"  [disabled]="isEnabled">
+<button type="button" mat-raised-button color="accent"  (click)="onClick()"  [disabled]="isEnabled">
     <mat-icon>file_upload</mat-icon>
     {{text}}
 </button>
-  
+
+
 <br/>
 <ul>
   <li *ngFor="let file of files" [@fadeInOut]="file.state">
