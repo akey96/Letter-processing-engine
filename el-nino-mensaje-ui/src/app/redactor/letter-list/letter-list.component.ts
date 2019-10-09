@@ -82,4 +82,9 @@ export class LetterListComponent implements OnInit {
       return 'selected';
     }
   }
+
+  filterWithRedactorLetters() {
+    this.dataSource = new MatTableDataSource([]);
+    this.letter.get('message').setValue('');
+  }
 }

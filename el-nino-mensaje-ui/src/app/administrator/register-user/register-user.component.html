@@ -18,13 +18,13 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Fecha de Nacimiento</mat-label>
-          <input matInput formControlName="birthday" [min]="minDate" [max]="maxDate" [matDatepicker]="datepicker">
+          <input matInput formControlName="birthday" [min]="minDate" [max]="maxDate" [matDatepicker]="datepicker" readonly>
             <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-            <mat-datepicker #datepicker disabled="false" startView="year" [startAt]="startDate"></mat-datepicker>
+            <mat-datepicker #datepicker disabled="false" startView="year"></mat-datepicker>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Rol</mat-label>
-            <mat-select formControlName="userRole">
+            <mat-select formControlName="personRole">
               <mat-option [value]="'EDITOR'">
                 Editor
               </mat-option>

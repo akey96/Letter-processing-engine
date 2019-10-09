@@ -24,7 +24,7 @@ export class WriteLetterComponent implements OnInit {
   letter: FormGroup;
   listImages = [];
   constructor(public formBuilder: FormBuilder, public letterService: LetterService, public popUpService: PopUpService) {
-    
+
 
     this.letter = formBuilder.group({
       message: new FormControl('', Validators.required),
@@ -43,7 +43,6 @@ export class WriteLetterComponent implements OnInit {
   }
 
   sendMessage() {
-    console.log(this.letter.value);
     this.letterService.sendLetter(this.letter.value).subscribe(() => {
       this.popUpService.showSuccess('Felicidades tu carta fue mandada exitosamente!');
       this.cleanMessage();

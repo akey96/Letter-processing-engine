@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-table [dataSource]="dataSource" matSort>
+  <mat-table *ngIf="letter.valid" [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="date">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.creationDate | date:'fullDate'}} </mat-cell>
@@ -19,7 +19,7 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;" class="selected-period" [ngClass]="periodIsSelected(row)"
       (click)="selectLetter(row)"></mat-row>
   </mat-table>
-  <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
+  <mat-paginator *ngIf="letter.valid" [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
   <form [formGroup]="letter" *ngIf="letter.valid">
     <mat-form-field appearance="outline">
       <mat-label>
@@ -28,8 +28,11 @@
       <textarea matInput formControlName="message" rows="10" readonly></textarea>
     </mat-form-field>
     <div class="buttons">
-      <button color="warn" mat-raised-button>Descartar Carta</button>
+      <button color="warn" mat-raised-button (click)="filterWithRedactorLetters()">Descartar Carta</button>
       <button color="primary" mat-raised-button>Responder Carta</button>
     </div>
   </form>
+  <div *ngIf="!letter.valid">
+    <h3>Aun no tiene cartas asignadas, Espere a que el sistema le asigne alguna carta.</h3>
+  </div>
 </mat-card>
