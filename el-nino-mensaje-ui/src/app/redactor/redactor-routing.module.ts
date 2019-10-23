@@ -11,6 +11,9 @@ import {
 import {
   LetterListComponent
 } from './letter-list/letter-list.component';
+import { 
+  LetterResponseComponent
+} from './letter-response/letter-response.component';
 
 export const redactorRoutes: Routes = [{
   path: 'redactor',
@@ -24,12 +27,16 @@ export const redactorRoutes: Routes = [{
       path: 'letter-list',
       component: LetterListComponent
     },
+    {
+      path: 'letter-response/:id',
+      component: LetterResponseComponent
+    },
   ]
 }];
 
 @NgModule({
   imports: [
-    RouterModule.forChild(redactorRoutes)
+    RouterModule.forChild(redactorRoutes),
   ],
   exports: [
     RouterModule

@@ -1,0 +1,35 @@
+<mat-card>
+  <form [formGroup]="letter">
+    <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+      <div fxFlex="50%">
+        <h3 fxLayoutAlign="start">Carta Actual</h3>
+        <mat-form-field  appearance="outline">
+          <textarea matInput formControlName="message" rows="18" readonly></textarea>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="50%">
+        <h3 fxLayoutAlign="start">Carta Respuesta</h3>
+        <mat-form-field appearance="outline">
+            
+          <mat-label>
+            <mat-icon>markunread</mat-icon> Responde aqui...
+          </mat-label>
+          <textarea matInput formControlName="response" rows="18"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="end">
+      <div class="buttons">
+        <button color="warn" mat-raised-button >Derivar</button>
+        <button color="primary" mat-raised-button (click)="responseLetter()">Guardar</button>
+      </div>
+    </div>
+  </form>
+
+  <!--
+  <div *ngIf="!letter.valid">
+    <h3>Aun no tiene cartas asignadas, Espere a que el sistema le asigne alguna carta.</h3>
+  </div>
+  -->
+</mat-card>

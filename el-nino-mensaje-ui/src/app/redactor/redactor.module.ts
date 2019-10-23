@@ -38,10 +38,14 @@ import {
   FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
+import { LetterResponseComponent } from './letter-response/letter-response.component';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
-  declarations: [LetterListComponent],
+  declarations: [LetterListComponent, LetterResponseComponent],
   imports: [
     CommonModule,
     RedactorRoutingModule,
@@ -54,7 +58,8 @@ import {
     MatButtonModule,
     MatPaginatorModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule,
   ]
 })
 export class RedactorModule {}

@@ -28,4 +28,15 @@ export class LetterService {
   getLetters() {
     return this.httpClient.get < Letter[] > (this.url);
   }
+
+  getLettersId(id: string) {
+    let urlId = `${this.url}/${id}`;
+    return this.httpClient.get < Letter > (urlId);
+  }
+
+  updateLetter(id: string, letter: Letter ) {
+    let urlId = `${this.url}/${id}`;
+    console.log(urlId)
+    return this.httpClient.patch(urlId, letter);
+  }
 }

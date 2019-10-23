@@ -31,6 +31,8 @@ import {
   MatPaginator
 } from '@angular/material/paginator';
 
+import { Router} from '@angular/router';
+
 @Component({
   selector: 'app-letter-list',
   templateUrl: './letter-list.component.html',
@@ -41,6 +43,8 @@ export class LetterListComponent implements OnInit {
   dataSource: MatTableDataSource < Letter > ;
   subcription: Subscription;
   letter: FormGroup;
+  letterSelected: string;
+
   @ViewChild(MatPaginator, {
     static: true
   }) paginator: MatPaginator;
@@ -48,7 +52,11 @@ export class LetterListComponent implements OnInit {
     static: true
   }) sort: MatSort;
 
-  constructor(public letterService: LetterService, public popupService: PopUpService, public formBuilder: FormBuilder) {
+  constructor(
+    public letterService: LetterService, 
+    public popupService: PopUpService, 
+    public formBuilder: FormBuilder,
+    private router: Router) {
     this.displayedColumns = ['date', 'status', 'priority'];
     this.letter = formBuilder.group({
       message: new FormControl('', Validators.required)
@@ -62,6 +70,7 @@ export class LetterListComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       if (letters._embedded.letters[0]) {
         this.letter.get('message').setValue(letters._embedded.letters[0].message);
+        this.letterSelected = letters._embedded.letters[0]['_links'].letter.href.split('/')[4];
       }
     }, () => {
       this.popupService.showError('Algo fallo al cargar las cartas, recarga la pagina por favor.');
@@ -75,7 +84,9 @@ export class LetterListComponent implements OnInit {
   }
 
   selectLetter(letter: Letter) {
+    
     this.letter.get('message').setValue(letter.message);
+    this.letterSelected = letter['_links'].letter.href.split('/')[4];
   }
   periodIsSelected(letter: Letter) {
     if (letter.message === this.letter.get('message').value) {
@@ -86,5 +97,10 @@ export class LetterListComponent implements OnInit {
   filterWithRedactorLetters() {
     this.dataSource = new MatTableDataSource([]);
     this.letter.get('message').setValue('');
+  }
+  
+  responseLetter(){
+    this.router.navigate(['/redactor','letter-response',this.letterSelected]);
+
   }
 }
