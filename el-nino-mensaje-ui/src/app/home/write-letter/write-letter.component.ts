@@ -44,6 +44,8 @@ export class WriteLetterComponent implements OnInit {
   }
 
   sendMessage() {
+    this.letter.value.images = this.listImages;
+    console.log(this.letter.value);
     this.letterService.sendLetter(this.letter.value).subscribe(() => {
       this.popUpService.showSuccess('Felicidades tu carta fue mandada exitosamente!');
       this.cleanMessage();
@@ -55,7 +57,6 @@ export class WriteLetterComponent implements OnInit {
 
   onFileComplete(data: any) {
     this.listImages.push(data.link)
-    console.log(this.listImages)
   }
 
 }

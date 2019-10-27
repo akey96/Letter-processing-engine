@@ -36,7 +36,6 @@ export class LetterService {
 
   updateLetter(id: string, letter: Letter ) {
     let urlId = `${this.url}/${id}`;
-    console.log(urlId)
     return this.httpClient.patch(urlId, letter);
   }
 }

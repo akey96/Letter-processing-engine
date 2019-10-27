@@ -142,6 +142,7 @@ export class FileUploadComponent implements OnInit {
     this.files.forEach(file => {
       this.uploadFile(file);
     });
+
   }
 
   private removeFileFromArray(file: FileUploadModel) {
