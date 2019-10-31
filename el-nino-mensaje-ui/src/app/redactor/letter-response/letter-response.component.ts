@@ -26,6 +26,9 @@ export class LetterResponseComponent implements OnInit {
   subcription: Subscription;
   letter: FormGroup;
   letterSelected: string;
+
+  isAnswered: boolean;
+
   constructor(
     public letterService: LetterService,
     public popupService: PopUpService,
@@ -37,9 +40,9 @@ export class LetterResponseComponent implements OnInit {
       response: new FormControl('', Validators.required),
     });
   }
-
+ 
   ngOnInit() {
-
+    this.isAnswered = false;
     this.route.paramMap.subscribe(params => {
       if (params.has("id")) {
         this.letterSelected = params.get('id');
@@ -56,10 +59,10 @@ export class LetterResponseComponent implements OnInit {
 
   responseLetter(){
     this.letterService.updateLetter(this.letterSelected, this.letter.value).subscribe((resp) => {
-      this.popupService.showSuccess('Felicidades tu carta fue mandada exitosamente!');
+      this.popupService.showSuccess('Tu respuesta fue guardada exitosamente');
       this.router.navigate(['/redactor','letter-list']);
     }, (error) => {
-      this.popupService.showError('Ups!! Algo malo paso, intenta mandarnos tu carta nuevamente');
+      this.popupService.showError('NO SE PUDO GUARDAR TU RESPUESTA, POR FAVOR INTENTA GUARDARLA NUEVAMENTE');
     });
     console.log(this.letter.value);
   }
@@ -68,5 +71,13 @@ export class LetterResponseComponent implements OnInit {
     this.letter.get('response').reset();
   }
 
+  enableAnswers() {
+    this.isAnswered = !this.isAnswered;
+    
+  }
+
+  back() {
+    this.router.navigate(['/redactor','letter-list']);
+  }
   
 }

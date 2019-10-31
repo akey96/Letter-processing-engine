@@ -1,17 +1,24 @@
 <mat-card>
   <form [formGroup]="letter">
     <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-      <div fxFlex="50%">
+
+      <div class="fade" fxFlex="100%" *ngIf="!isAnswered">
         <h3 fxLayoutAlign="start">Carta Actual</h3>
         <mat-form-field  appearance="outline">
           <textarea matInput formControlName="message" rows="18" readonly></textarea>
         </mat-form-field>
       </div>
 
-      <div fxFlex="50%">
+      <div class="fade" fxFlex="50%" *ngIf="isAnswered">
+        <h3 fxLayoutAlign="start">Carta Actual</h3>
+        <mat-form-field  appearance="outline">
+          <textarea matInput formControlName="message" rows="18" readonly></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="fade" fxFlex="50%" *ngIf="isAnswered" >
         <h3 fxLayoutAlign="start">Carta Respuesta</h3>
         <mat-form-field appearance="outline">
-            
           <mat-label>
             <mat-icon>markunread</mat-icon> Responde aqui...
           </mat-label>
@@ -19,10 +26,13 @@
         </mat-form-field>
       </div>
     </div>
+
     <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="end">
       <div class="buttons">
-        <button color="warn" mat-raised-button >Derivar</button>
-        <button color="primary" mat-raised-button (click)="responseLetter()">Guardar</button>
+          <button  color="warn" mat-raised-button (click)="back()" >Cancelar</button>
+        <button  *ngIf="isAnswered" style="background-color: #28A745; color: honeydew" mat-raised-button (click)="enableAnswers()" >Deshabilitar</button>
+        <button  *ngIf="!isAnswered" style="background-color: #28A745; color: honeydew" mat-raised-button (click)="enableAnswers()" >Habilitar</button>
+        <button color="primary" [disabled]="!letter.valid" mat-raised-button (click)="responseLetter()">Guardar</button>
       </div>
     </div>
   </form>
