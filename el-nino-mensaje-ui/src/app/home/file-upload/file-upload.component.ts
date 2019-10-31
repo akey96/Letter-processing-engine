@@ -130,6 +130,7 @@ export class FileUploadComponent implements OnInit {
         if (typeof (event) === 'object') {
           this.removeFileFromArray(file);
           this.complete.emit(event.body);
+          
         }
       }
     );

@@ -9,9 +9,7 @@
     <textarea matInput rows="17" formControlName="message"></textarea>
   </mat-form-field>
 
-  <ng-container id="mi_div" layout="row" layout-align="center center" *ngFor="let item of listImages">
-      <img  width="60" height="60" label="" class="imagen-adaptable" src="{{item}}" />
-  </ng-container>
+  <app-list-images [listImages]="listImages" ></app-list-images>
 
   <div layout="row" class="buttons">
 

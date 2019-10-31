@@ -1,12 +1,11 @@
 import {
   Component,
-  OnInit
+  OnInit,
 } from '@angular/core';
 import { Letter } from 'src/app/shared/models/letter.model';
 import { LetterService } from 'src/app/shared/services/letter.service';
 import { PopUpService } from 'src/app/shared/services/pop-up.service';
 import { Subscription } from 'rxjs';
-
 
 import {
   FormControl,
@@ -17,16 +16,19 @@ import {
 
 import { Router, ActivatedRoute } from '@angular/router';
 
+
+
 @Component({
   selector: 'app-letter-response',
   templateUrl: './letter-response.component.html',
   styleUrls: ['./letter-response.component.css']
 })
 export class LetterResponseComponent implements OnInit {
+
   subcription: Subscription;
   letter: FormGroup;
   letterSelected: string;
-
+  listImages = [];
   isAnswered: boolean;
 
   constructor(
@@ -35,18 +37,21 @@ export class LetterResponseComponent implements OnInit {
     public formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute) {
-    this.letter = formBuilder.group({
-      message: new FormControl('', Validators.required),
-      response: new FormControl('', Validators.required),
-    });
+
+      this.letter = formBuilder.group({
+        message: new FormControl('', Validators.required),
+        response: new FormControl('', Validators.required),
+      });
+      
   }
- 
+
   ngOnInit() {
     this.isAnswered = false;
     this.route.paramMap.subscribe(params => {
       if (params.has("id")) {
         this.letterSelected = params.get('id');
         this.letterService.getLettersId(this.letterSelected).subscribe((letter: any) => {
+          this.listImages = letter.images;
           this.letter.get('message').setValue(letter.message);
           this.letter.get('response').setValue(letter.response);
         }, (err) => {
@@ -81,3 +86,4 @@ export class LetterResponseComponent implements OnInit {
   }
   
 }
+

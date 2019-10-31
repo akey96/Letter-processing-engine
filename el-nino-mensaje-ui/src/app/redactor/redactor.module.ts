@@ -39,13 +39,23 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { LetterResponseComponent } from './letter-response/letter-response.component';
+import { DialogImage } from '../home/list-images/dialog-image/dialog-image';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import {MatToolbarModule} from '@angular/material/toolbar';
+
+import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material";
+import { ListImagesComponent } from '../home/list-images/list-images.component';
+
 
 @NgModule({
-  declarations: [LetterListComponent, LetterResponseComponent],
+  declarations: [LetterListComponent, LetterResponseComponent, DialogImage, ListImagesComponent],
+  entryComponents: [
+    DialogImage
+  ],
+  providers: [
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+  ],
   imports: [
     CommonModule,
     RedactorRoutingModule,
@@ -60,6 +70,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-  ]
+    MatDialogModule
+  ],
+  exports: [ListImagesComponent]
 })
 export class RedactorModule {}
