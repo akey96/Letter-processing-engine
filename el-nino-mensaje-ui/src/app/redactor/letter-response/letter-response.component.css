@@ -31,4 +31,7 @@ th.mat-sort-header-sorted {
   h3 {
     text-align: center;
   }
-  
+  .mat-card-title{
+    text-align: center;
+    color: rgb(39, 126, 4);
+  }
