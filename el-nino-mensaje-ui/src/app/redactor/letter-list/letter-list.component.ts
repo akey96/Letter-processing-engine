@@ -15,23 +15,21 @@ import {
 import {
   Subscription
 } from 'rxjs';
-import {
-  MatTableDataSource
-} from '@angular/material/table';
-import {
-  MatSort
-} from '@angular/material/sort';
+import { MatTableDataSource} from '@angular/material/table';
+import { MatSort} from '@angular/material/sort';
 import {
   FormControl,
   FormGroup,
   FormBuilder,
   Validators
 } from '@angular/forms';
-import {
-  MatPaginator
-} from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 
 import { Router} from '@angular/router';
+import { Letters2Service } from 'src/app/shared/services/letters-2.service';
+import { take } from 'rxjs/operators';
+import { ActivatedRoute, Params, ChildrenOutletContexts } from '@angular/router';
+
 
 @Component({
   selector: 'app-letter-list',
@@ -46,7 +44,7 @@ export class LetterListComponent implements OnInit {
   letterSelected: string;
 
   @ViewChild(MatPaginator, {
-    static: true
+    static: true,
   }) paginator: MatPaginator;
   @ViewChild(MatSort, {
     static: true
@@ -54,10 +52,12 @@ export class LetterListComponent implements OnInit {
 
   constructor(
     public letterService: LetterService, 
+    public letter2Service: Letters2Service,
     public popupService: PopUpService, 
     public formBuilder: FormBuilder,
+    private rutaActiva: ActivatedRoute,
     private router: Router) {
-    this.displayedColumns = ['date', 'status', 'priority'];
+    this.displayedColumns = ['id','date', 'status', 'priority'];
     this.letter = formBuilder.group({
       message: new FormControl('', Validators.required)
     });
@@ -74,7 +74,7 @@ export class LetterListComponent implements OnInit {
       }
     }, () => {
       this.popupService.showError('Algo fallo al cargar las cartas, recarga la pagina por favor.');
-    });
+    });    
   }
 
   parsePriority(priority: string) {
@@ -87,7 +87,20 @@ export class LetterListComponent implements OnInit {
     
     this.letter.get('message').setValue(letter.message);
     this.letterSelected = letter['_links'].letter.href.split('/')[4];
+
+    this.letter2Service.updateLetterStatusToRead(letter.id).pipe(take(1)).subscribe((letterResponse: Letter) => {
+      this.dataSource.data = this.dataSource.data.map(letterDataSource => {
+        if (letterResponse.id === letterDataSource.id) {
+          return letterResponse;
+        } else {
+          return letterDataSource;
+        }
+      });
+    }, () => {
+          console.log('error', letter);
+        });
   }
+
   periodIsSelected(letter: Letter) {
     if (letter.message === this.letter.get('message').value) {
       return 'selected';

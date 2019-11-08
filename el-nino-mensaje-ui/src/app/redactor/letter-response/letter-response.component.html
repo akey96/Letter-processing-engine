@@ -1,5 +1,14 @@
 <mat-card>
+
+  <mat-card-title>
+    N° de Carta {{letterSelected}}
+    con {{letter_status}},
+    recibido el {{letter.value.creationDate}}
+     </mat-card-title>
+ 
   <form [formGroup]="letter">
+      <!--label  formControlName="status">stado: {{letter}}</label-->
+
     <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
 
       <div class="fade" fxFlex="100%" *ngIf="!isAnswered">
@@ -13,7 +22,7 @@
         <h3 fxLayoutAlign="start">Carta Actual</h3>
         <mat-form-field  appearance="outline">
           <textarea matInput formControlName="message" rows="18" readonly></textarea>
-        </mat-form-field>
+         </mat-form-field>
       </div>
 
       <div class="fade" fxFlex="50%" *ngIf="isAnswered" >

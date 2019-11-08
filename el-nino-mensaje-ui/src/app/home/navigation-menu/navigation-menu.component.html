@@ -3,7 +3,7 @@
     <mat-toolbar color="primary">
       <div class="toolbar-spacer">
           <img class="logo" src="../../assets/images/lirium.jpeg">
-      </div>
+       </div>
     </mat-toolbar>
     <mat-list>
       <mat-list-item>Lista de Cartas</mat-list-item>
@@ -16,10 +16,9 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <img class="logo web-menu"  src="../../assets/images/lirium.jpeg">&nbsp;&nbsp;&nbsp;&nbsp;
-      <span class="web-menu">Lista de Cartas</span>&nbsp;&nbsp;&nbsp;&nbsp;
-      <span class="web-menu">Lista de Cartas</span>&nbsp;&nbsp;&nbsp;&nbsp;
-      <span class="web-menu">Lista de Cartas</span>&nbsp;&nbsp;&nbsp;&nbsp;
+      <span *ngFor="let ruta of rutas" class="web-menu" [routerLink]="ruta.url">{{ruta.nombre}}</span>
     </mat-toolbar>
+  <!-- {{letter.routerState.snapshot.url}}-->
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
