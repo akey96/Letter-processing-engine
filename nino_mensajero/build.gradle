@@ -15,7 +15,11 @@ configurations {
 }
 
 repositories {
-	mavenCentral()
+	// Adding these two repositories via method calls is made possible by Gradle's Java plugin
+	jcenter()
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
+    
 }
 
 dependencies {
@@ -36,6 +40,6 @@ dependencies {
 
 	// librerias para languagetool
 	compile group: 'org.languagetool', name: 'languagetool-core', version: '3.5'
-	compile group: 'org.languagetool', name: 'language-all', version: '4.6'
+	compile group: 'org.languagetool', name: 'language-all', version: '3.5'
 
 }

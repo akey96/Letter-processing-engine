@@ -11,10 +11,10 @@ import java.io.IOException;
 
 public class TextCorrector {
 
-    public static void main(String[] args) throws IOException {
+    /*public static void main(String[] args) throws IOException {
         String texto = "mmi gato es muy gordooo nino";
         System.out.println(correctorGaby(texto));
-    }
+    }*/
 
     public static String correctorGaby(String texto) throws IOException  {
         JLanguageTool langTool = new JLanguageTool(new Spanish());
