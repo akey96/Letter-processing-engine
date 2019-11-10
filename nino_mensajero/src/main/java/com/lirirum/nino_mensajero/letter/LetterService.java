@@ -1,5 +1,6 @@
 package com.lirirum.nino_mensajero.letter;
 
+import com.lirirum.nino_mensajero.Utils.TextCorrector.TextCorrector;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class LetterService {
         Optional<Letter> optionalLetter = letterRepository.findById(letterId);
         if (optionalLetter.isPresent()) {
             Letter letter = optionalLetter.get();
+            TextCorrector.correctorGaby(letter.getMessage());
             letter.setStatus(Status.READ);
             return letterRepository.save(letter);
         } else {
