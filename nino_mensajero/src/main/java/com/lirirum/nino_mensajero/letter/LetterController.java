@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.io.IOException;
+
 
 @RestController
 @RequestMapping("/letters-2")
@@ -26,7 +28,7 @@ public class LetterController {
 //    }
 
     @PutMapping("/{letterId}/status/read") // mismo nombre en aqui y en PathVariable
-    public Letter updateLetterStatusToRead(@PathVariable("letterId") long letterId) {
+    public Letter updateLetterStatusToRead(@PathVariable("letterId") long letterId) throws IOException {
         return letterService.updateLetterStatusToRead(letterId);
     }
     /*@GetMapping ( " / redactor/letter-response/{letterId} " )

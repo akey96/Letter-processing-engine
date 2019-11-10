@@ -2,7 +2,7 @@ package com.lirirum.nino_mensajero.letter;
 
 import com.lirirum.nino_mensajero.Utils.TextCorrector.TextCorrector;
 import org.springframework.stereotype.Service;
-
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,11 +23,11 @@ public class LetterService {
         return letterRepository.save(letter);
     }
 
-    public Letter updateLetterStatusToRead(long letterId) {
+    public Letter updateLetterStatusToRead(long letterId) throws IOException {
         Optional<Letter> optionalLetter = letterRepository.findById(letterId);
         if (optionalLetter.isPresent()) {
             Letter letter = optionalLetter.get();
-            TextCorrector.correctorGaby(letter.getMessage());
+            System.out.println(TextCorrector.spellChecker(letter.getMessage()));
             letter.setStatus(Status.READ);
             return letterRepository.save(letter);
         } else {

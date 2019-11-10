@@ -39,7 +39,7 @@ dependencies {
 	compile 'edu.stanford.nlp:stanford-corenlp:3.9.2:models-spanish'
 
 	// librerias para languagetool
-	compile group: 'org.languagetool', name: 'languagetool-core', version: '3.5'
-	compile group: 'org.languagetool', name: 'language-all', version: '3.5'
+	compile group: 'org.languagetool', name: 'languagetool-core', version: '4.6'
+	compile group: 'org.languagetool', name: 'language-all', version: '4.6'
 
 }
