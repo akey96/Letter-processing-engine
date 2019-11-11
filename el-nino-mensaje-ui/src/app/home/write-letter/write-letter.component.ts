@@ -15,6 +15,8 @@ import {
   PopUpService
 } from 'src/app/shared/services/pop-up.service';
 
+import { FirebaseStorageService } from '../../shared/services/firebase-storage.service';
+
 @Component({
   selector: 'app-write-letter',
   templateUrl: './write-letter.component.html',
@@ -23,7 +25,8 @@ import {
 export class WriteLetterComponent implements OnInit {
   letter: FormGroup;
   listImages = [];
-  constructor(public formBuilder: FormBuilder, public letterService: LetterService, public popUpService: PopUpService) {
+  listImagesRef = [];
+  constructor(public formBuilder: FormBuilder, public letterService: LetterService, public popUpService: PopUpService, private firebaseStorage: FirebaseStorageService) {
 
 
     this.letter = formBuilder.group({
@@ -40,7 +43,11 @@ export class WriteLetterComponent implements OnInit {
 
   cleanMessage() {
     this.letter.get('message').reset();
+    this.listImagesRef.forEach(element => {
+      this.firebaseStorage.deleteCloudStorage(element); 
+    });
     this.listImages = [];
+    this.listImagesRef = [];
   }
 
   sendMessage() {
@@ -56,7 +63,8 @@ export class WriteLetterComponent implements OnInit {
   }
 
   onFileComplete(data: any) {
-    this.listImages.push(data.link)
+    this.listImagesRef.push(data.name);
+    this.listImages.push(data.url);
   }
 
 }

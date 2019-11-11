@@ -1,11 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { HttpClient, HttpResponse, HttpRequest, HttpEventType, HttpErrorResponse } from '@angular/common/http';
-import { catchError, last, map, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { FileUploadModel } from '../../shared/models/fileUploadedModel';
-import { of } from 'rxjs/internal/observable/of';
 import {PopUpService} from 'src/app/shared/services/pop-up.service';
-
+import { FirebaseStorageService } from '../../shared/services/firebase-storage.service';
 
 
 @Component({
@@ -28,32 +26,28 @@ export class FileUploadComponent implements OnInit {
   @Input() accept = 'image/png, image/jpeg, image/jpg';
   @Input() isEnabled;
   
-
-  // tslint:disable-next-line:no-output-native
-  @Output() complete = new EventEmitter<string>();
+  @Output() complete = new EventEmitter<any>();
   fileInformation: any;
   private files: Array<FileUploadModel> = [];
 
-  // tslint:disable-next-line:variable-name
-  constructor(private _http: HttpClient, public popUpService: PopUpService) { 
-
-  }
+  constructor(
+    private _http: HttpClient,
+    public popUpService: PopUpService,
+    private firebaseStorage: FirebaseStorageService) {}
 
   ngOnInit() {
   }
 
   onClick() {
-    const fileUpload = document.getElementById('fileUpload') as HTMLInputElement;
+    let fileUpload: any = document.getElementById('fileUpload') as HTMLInputElement;    
     let validate = true;
 
     fileUpload.onchange = () => {
-      // tslint:disable-next-line:prefer-for-of
       for (let index = 0; index < fileUpload.files.length; index++) {
-        const file = fileUpload.files[index];
         
+        let file = fileUpload.files[index];
         var fileName = file.name;
         var fileSize = file.size;
-
 
         if(fileSize > 3000000){
           validate = false;
@@ -69,7 +63,7 @@ export class FileUploadComponent implements OnInit {
               state: 'in',
               inProgress: false,
               progress: 0,
-              canRetry: false,
+              canRetry: true,
               canCancel: true
             });
           } else {
@@ -88,7 +82,6 @@ export class FileUploadComponent implements OnInit {
   }
 
   cancelFile(file: FileUploadModel) {
-    file.sub.unsubscribe();
 
     this.removeFileFromArray(file);
   }
@@ -100,40 +93,34 @@ export class FileUploadComponent implements OnInit {
   }
 
   private uploadFile(file: FileUploadModel) {
+    // agregar el servicio de firebase
+
     const fd = new FormData();
     fd.append(this.param, file.data);
+    
+    let archivo = fd.get(this.param);
 
-    const req = new HttpRequest('POST', this.target, fd, {
-      reportProgress: true
+    let referencia =  this.firebaseStorage.referenciaCloudStorage(archivo['name']);
+    let tarea = this.firebaseStorage.tareaCloudStorage(archivo['name'], archivo);
+    
+    tarea.percentageChanges().subscribe((porcentaje) => {
+      file.progress = Math.round(porcentaje);
+      if (file.progress == 100) {
+        file.inProgress = false;
+      }
+    }, error => {
+      file.inProgress = false;
+      file.canRetry = true;
     });
 
-    file.inProgress = true;
-    file.sub = this._http.request(req).pipe(
-      map(event => {
-        switch (event.type) {
-              case HttpEventType.UploadProgress:
-                    file.progress = Math.round(event.loaded * 100 / event.total);
-                    break;
-              case HttpEventType.Response:
-                    return event;
-        }
-      }),
-      tap(message => { }),
-      last(),
-      catchError((error: HttpErrorResponse) => {
-        file.inProgress = false;
-        file.canRetry = true;
-        return of(`${file.data.name} upload failed.`);
-      })
-    ).subscribe(
-      (event: any) => {
-        if (typeof (event) === 'object') {
-          this.removeFileFromArray(file);
-          this.complete.emit(event.body);
-          
-        }
-      }
-    );
+    referencia.getDownloadURL().subscribe((URL) => {
+      this.removeFileFromArray(file);
+          // cambiar cuerpo por el retorno de la url
+      this.complete.emit({
+        name: file.data.name,
+        url:URL
+      });
+    });
   }
 
   private uploadFiles() {
