@@ -23,11 +23,10 @@ public class LetterService {
         return letterRepository.save(letter);
     }
 
-    public Letter updateLetterStatusToRead(long letterId) throws IOException {
+    public Letter updateLetterStatusToRead(long letterId) {
         Optional<Letter> optionalLetter = letterRepository.findById(letterId);
         if (optionalLetter.isPresent()) {
             Letter letter = optionalLetter.get();
-            System.out.println(TextCorrector.spellChecker(letter.getMessage()));
             letter.setStatus(Status.READ);
             return letterRepository.save(letter);
         } else {

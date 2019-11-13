@@ -28,7 +28,7 @@ public class LetterController {
 //    }
 
     @PutMapping("/{letterId}/status/read") // mismo nombre en aqui y en PathVariable
-    public Letter updateLetterStatusToRead(@PathVariable("letterId") long letterId) throws IOException {
+    public Letter updateLetterStatusToRead(@PathVariable("letterId") long letterId) {
         return letterService.updateLetterStatusToRead(letterId);
     }
     /*@GetMapping ( " / redactor/letter-response/{letterId} " )
