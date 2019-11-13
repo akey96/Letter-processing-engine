@@ -36,6 +36,8 @@ import { AdministratorModule } from './administrator/administrator.module';
 import {MAT_DATE_LOCALE, MatProgressBarModule} from '@angular/material';
 
 import { FileUploadComponent } from './home/file-upload/file-upload.component';
+import { LoginComponent } from './home/login/login.component';
+import { AuthenticationService } from './shared/services/authentication.service';
 
 
 
@@ -45,7 +47,8 @@ import { FileUploadComponent } from './home/file-upload/file-upload.component';
     NavigationMenuComponent,
     UserHomeComponent,
     WriteLetterComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +80,7 @@ import { FileUploadComponent } from './home/file-upload/file-upload.component';
     LetterService,
     PopUpService,
     UserService,
+    AuthenticationService,
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }],
   bootstrap: [AppComponent]
 })

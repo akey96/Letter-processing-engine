@@ -7,7 +7,6 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-
   url: string;
 
   constructor(public httpClient: HttpClient) {
@@ -16,5 +15,9 @@ export class UserService {
 
   sendUser(user: User) {
     return this.httpClient.post(this.url, user);
+  }
+
+  getUserByUsername(username: any) {
+    return this.httpClient.get(`${this.url}/${username}`);
   }
 }
