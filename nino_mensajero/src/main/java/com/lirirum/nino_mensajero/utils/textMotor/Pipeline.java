@@ -1,4 +1,4 @@
-package com.lirirum.nino_mensajero.Utils.TextMotor;
+package com.lirirum.nino_mensajero.utils.textMotor;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.StringUtils;

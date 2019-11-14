@@ -2,6 +2,7 @@ package com.lirirum.nino_mensajero.events;
 
 import com.lirirum.nino_mensajero.letter.Letter;
 import com.lirirum.nino_mensajero.letter.Priority;
+import com.lirirum.nino_mensajero.utils.textMotor.priority.PriorityAnalizer;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 
@@ -14,9 +15,7 @@ public class LetterEventHandler {
 
     @HandleBeforeCreate
     public void handleAuthorBeforeCreate(Letter letter){
-        logger.info("Inside Letter Before Create....");
-        //letter.setPriority(Priority.MEDIUM_PRIORITY);//change priority
-
+        PriorityAnalizer.givePriority(letter);
     }
 
 }
