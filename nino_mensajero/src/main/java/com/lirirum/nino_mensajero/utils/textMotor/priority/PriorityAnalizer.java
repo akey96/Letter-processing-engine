@@ -35,7 +35,7 @@ public class PriorityAnalizer {
         letter = HighPriorityAnalizer.checkPriority(letter,importantWords,profileKeywords);
 
         if(letter.getPriority().equals(Priority.LOW_PRIORITY))
-            MediumPriorityAnalizer.checkPriority(letter);
+            MediumPriorityAnalizer.checkPriority(letter,importantWords,profileKeywords);
 
         return letter;
     }
@@ -55,6 +55,6 @@ public class PriorityAnalizer {
 
     private static List retrieveKeywords(Letter letter){
         //when the letter will have its own profile assigned the keywords will be assigned//now is hardcoded
-        return Arrays.asList("pelota","feliz","torta","colegio","gato"); //example
+        return Arrays.asList("pelota","feliz","torta","colegio","gato","terco","terror"); //example
     }
 }
