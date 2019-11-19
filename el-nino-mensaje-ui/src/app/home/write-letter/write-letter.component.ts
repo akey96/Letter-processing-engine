@@ -41,11 +41,15 @@ export class WriteLetterComponent implements OnInit {
   ngOnInit() {
   }
 
-  cleanMessage() {
-    this.letter.get('message').reset();
+  cancelForm() {
     this.listImagesRef.forEach(element => {
       this.firebaseStorage.deleteCloudStorage(element); 
     });
+    this.cleanMessage();
+  }
+
+  cleanMessage() {
+    this.letter.get('message').reset();
     this.listImages = [];
     this.listImagesRef = [];
   }
