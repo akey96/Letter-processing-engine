@@ -29,7 +29,7 @@ import { ActivatedRoute, Params, ChildrenOutletContexts } from '@angular/router'
 })
 export class LetterListComponent implements OnInit {
   displayedColumns: string[];
-  dataSource: MatTableDataSource < Letter > ;
+  dataSource: MatTableDataSource <Letter> ;
   subcription: Subscription;
   letter: FormGroup;
   letterSelected: string;
@@ -42,8 +42,8 @@ export class LetterListComponent implements OnInit {
   }) sort: MatSort;
 
   constructor(
-    public letterService: LetterService, 
-    public popupService: PopUpService, 
+    public letterService: LetterService,
+    public popupService: PopUpService,
     public formBuilder: FormBuilder,
     private rutaActiva: ActivatedRoute,
     private router: Router) {
@@ -56,15 +56,15 @@ export class LetterListComponent implements OnInit {
   ngOnInit() {
     this.letterService.getLetters().subscribe((letters: any) => {
       this.dataSource = new MatTableDataSource(letters._embedded.letters);
-      this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       if (letters._embedded.letters[0]) {
         this.letter.get('message').setValue(letters._embedded.letters[0].message);
         this.letterSelected = letters._embedded.letters[0]['_links'].letter.href.split('/')[4];
       }
     }, () => {
       this.popupService.showError('Algo fallo al cargar las cartas, recarga la pagina por favor.');
-    });    
+    });
   }
 
   parsePriority(priority: string) {
@@ -74,7 +74,7 @@ export class LetterListComponent implements OnInit {
   }
 
   selectLetter(letter: Letter) {
-    
+
     this.letter.get('message').setValue(letter.message);
     this.letterSelected = letter['_links'].letter.href.split('/')[4];
 
@@ -98,12 +98,12 @@ export class LetterListComponent implements OnInit {
   }
 
   filterWithRedactorLetters() {
-    this.dataSource = new MatTableDataSource([]);
+    this.dataSource.data = [];
     this.letter.get('message').setValue('');
   }
-  
-  responseLetter(){
-    this.router.navigate(['/redactor','letter-response',this.letterSelected]);
+
+  responseLetter() {
+    this.router.navigate(['/redactor','letter-response', this.letterSelected]);
 
   }
 }
