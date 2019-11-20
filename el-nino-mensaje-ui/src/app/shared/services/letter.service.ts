@@ -1,15 +1,8 @@
-import {
-  Injectable
-} from '@angular/core';
-import {
-  HttpClient
-} from '@angular/common/http';
-import {
-  Letter
-} from '../models/letter.model';
-import {
-  environment
-} from 'src/environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Letter} from '../models/letter.model';
+import {environment} from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,4 +31,11 @@ export class LetterService {
     let urlId = `${this.url}/${id}`;
     return this.httpClient.patch(urlId, letter);
   }
+  
+  updateLetterStatusToRead(letterId: number): Observable<Letter> {
+    
+    const updateUrl = `${environment.serverUrl}/letters-2/${letterId}/status/read`;
+    return this.httpClient.put<Letter>(updateUrl, null);
+  }
+
 }

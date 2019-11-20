@@ -1,12 +1,12 @@
 <mat-card>
 
-  <mat-table *ngIf="letter.valid" [dataSource]="dataSource" matSort>
-    
+  <mat-table [dataSource]="dataSource" matSort>
+
     <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> N° de Carta </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.id }} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Codigo de Carta </mat-header-cell>
+      <mat-cell *matCellDef="let element">CARRED-0{{element.id }} </mat-cell>
     </ng-container>
-    
+
     <ng-container matColumnDef="date">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.creationDate | date:'fullDate'}} </mat-cell>
@@ -29,7 +29,7 @@
   <!--mat-paginator *ngIf="letter.valid" [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator-->
 
   <mat-paginator [length]="" [pageSize]="5" [pageIndex]="pageIndex" ></mat-paginator>
- 
+
 
   <form [formGroup]="letter" *ngIf="letter.valid">
     <mat-form-field appearance="outline">

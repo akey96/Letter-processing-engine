@@ -15,7 +15,11 @@ configurations {
 }
 
 repositories {
-	mavenCentral()
+	// Adding these two repositories via method calls is made possible by Gradle's Java plugin
+	jcenter()
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
+    
 }
 
 dependencies {
@@ -28,4 +32,13 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+	//librerias de motor de texto 
+	compile 'edu.stanford.nlp:stanford-corenlp:3.9.2'
+	compile 'edu.stanford.nlp:stanford-corenlp:3.9.2:models-spanish'
+
+	// librerias para languagetool
+	compile group: 'org.languagetool', name: 'languagetool-core', version: '4.6'
+	compile group: 'org.languagetool', name: 'language-all', version: '4.6'
+
 }
