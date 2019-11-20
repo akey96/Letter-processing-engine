@@ -55,6 +55,6 @@ public class PriorityAnalizer {
 
     private static List retrieveKeywords(Letter letter){
         //when the letter will have its own profile assigned the keywords will be assigned//now is hardcoded
-        return Arrays.asList("pelota","feliz","torta","colegio","gato","terco","terror"); //example
+        return Arrays.asList("pelota","feliz","torta","colegio","gato","terco","terror", "vago", "tosco", "tolerante"); //example
     }
 }

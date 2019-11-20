@@ -68,9 +68,15 @@ export class LetterListComponent implements OnInit {
   }
 
   parsePriority(priority: string) {
-    let splitedPriority: string[];
+    /*let splitedPriority: string[];
     splitedPriority = priority.split('_');
-    return `${splitedPriority[0]} ${splitedPriority[1]}`;
+    return `${splitedPriority[0]} ${splitedPriority[1]}`;*/
+    if (priority === 'LOW_PRIORITY') {
+      return 'PRIORIDAD BAJA';
+    } else if (priority === 'HIGH_PRIORITY') {
+      return 'PRIORIDAD ALTA';
+    }
+    return 'PRIORIDAD MEDIA';
   }
 
   selectLetter(letter: Letter) {

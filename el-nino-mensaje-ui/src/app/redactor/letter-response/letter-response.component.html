@@ -1,11 +1,15 @@
 <mat-card>
-
-  <mat-card-title>
-    N° de Carta {{letterSelected}}
-    con {{letter_status}},
-    recibido el {{letter.value.creationDate}}
-     </mat-card-title>
- 
+  <mat-card-header>
+    <mat-card-title>
+      CARRED-0{{letterSelected}}
+    </mat-card-title>
+    <mat-card-subtitle>
+      Estado: {{letter_status | titlecase}}
+    </mat-card-subtitle>
+    <mat-card-subtitle>
+      Fecha: {{letter.value.creationDate | date }}
+    </mat-card-subtitle>
+  </mat-card-header>
   <form [formGroup]="letter">
       <!--label  formControlName="status">stado: {{letter}}</label-->
 
@@ -14,14 +18,14 @@
       <div class="fade" fxFlex="100%" *ngIf="!isAnswered">
         <h3 fxLayoutAlign="start">Carta Actual</h3>
         <mat-form-field  appearance="outline">
-          <textarea matInput formControlName="message" rows="18" readonly></textarea>
+          <textarea matInput formControlName="message" rows="17" readonly></textarea>
         </mat-form-field>
       </div>
 
       <div class="fade" fxFlex="50%" *ngIf="isAnswered">
         <h3 fxLayoutAlign="start">Carta Actual</h3>
         <mat-form-field  appearance="outline">
-          <textarea matInput formControlName="message" rows="18" readonly></textarea>
+          <textarea matInput formControlName="message" rows="17" readonly></textarea>
          </mat-form-field>
       </div>
 
@@ -31,7 +35,7 @@
           <mat-label>
             <mat-icon>markunread</mat-icon> Responde aqui...
           </mat-label>
-          <textarea matInput formControlName="response" rows="18"></textarea>
+          <textarea matInput formControlName="response" rows="17"></textarea>
         </mat-form-field>
       </div>
     </div>
@@ -41,9 +45,9 @@
 
     <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="end">
       <div class="buttons">
-          <button  color="warn" mat-raised-button (click)="back()" >Cancelar</button>
-        <button  *ngIf="isAnswered" style="background-color: #28A745; color: honeydew" mat-raised-button (click)="enableAnswers()" >Deshabilitar</button>
-        <button  *ngIf="!isAnswered" style="background-color: #28A745; color: honeydew" mat-raised-button (click)="enableAnswers()" >Habilitar</button>
+        <button  color="warn" mat-raised-button (click)="back()" >Cancelar</button>
+        <button  *ngIf="isAnswered" style="background-color: #28A745; color: honeydew" mat-raised-button (click)="enableAnswers()" >Deshabilitar Respuesta</button>
+        <button  *ngIf="!isAnswered" style="background-color: #28A745; color: honeydew" mat-raised-button (click)="enableAnswers()" >Habilitar Respuesta</button>
         <button color="primary" [disabled]="!letter.valid" mat-raised-button (click)="responseLetter()">Guardar</button>
       </div>
     </div>
