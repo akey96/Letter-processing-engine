@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -13,11 +13,31 @@ export class AuthenticationService {
   }
 
   login(credentials: any) {
-    return this.httpClient.post(`${this.url}/access_token`, credentials);
+    let headers: HttpHeaders;
+    headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Authorization', 'Basic ' + btoa('nimeclient:nmsecret'));
+    return this.httpClient.post(`${this.url}/token`, {
+      username: credentials.username,
+      password: credentials.password,
+      grant_type: 'password'
+    },
+    {
+      headers
+    });
   }
 
   checkToken(token: string) {
-    return this.httpClient.post(`${this.url}/check_token`, token);
+    let headers: HttpHeaders;
+    headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Authorization', 'Basic ' + btoa('nimeclient:nmsecret'));
+    return this.httpClient.post(`${this.url}/check_token`, {
+      token
+    },
+    {
+      headers
+    });
   }
 
   getPrincipal() {

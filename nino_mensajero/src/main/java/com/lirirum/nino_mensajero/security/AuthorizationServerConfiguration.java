@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
@@ -21,6 +22,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Autowired
     private TokenStore tokenStore;
+
+    @Autowired
+    public PasswordEncoder encoder;
 
     @Autowired
     private UserApprovalHandler userApprovalHandler;
@@ -47,10 +51,15 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.tokenStore(tokenStore).userApprovalHandler(userApprovalHandler)
-                .authenticationManager(authenticationManager)
+                .authenticationManager(authenticationManager);
+        /*      .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService);
+        */
     }
 
-    @Autowired
-    public PasswordEncoder encoder;
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception
+    {
+        oauthServer.checkTokenAccess("isAuthenticated()");
+    }
 }

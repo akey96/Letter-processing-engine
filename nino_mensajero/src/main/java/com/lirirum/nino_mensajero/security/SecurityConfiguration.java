@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -32,20 +33,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private  CustomUserDetailsService userDetailsService;
 
-    @Override
+    /*@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
-    }
+    }*/
 
 
-    /*@Autowired
+    @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("fer").password("Admin123*").roles("ADMINISTRATOR").and()
                 .withUser("alvaro").password("Admin123*").roles("REDACTOR").and()
                 .withUser("gaby").password("Admin123*").roles("EDITOR");
-    }*/
+    }
 
     @Override
     @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -56,10 +57,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/persons").permitAll()
                 .antMatchers("/oauth/token").permitAll()
+                .antMatchers(HttpMethod.POST, "/letters").permitAll()
                 .anyRequest().authenticated()
                 .and()
+                .cors().and()
                 .httpBasic();
     }
 
@@ -94,6 +96,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return NoOpPasswordEncoder.getInstance();
     }
 }
