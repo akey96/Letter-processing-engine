@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { EditorModule } from './editor/editor.module';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -74,7 +75,8 @@ import { AuthenticationService } from './shared/services/authentication.service'
     FormsModule,
     HttpClientModule,
     RedactorModule,
-    AdministratorModule
+    AdministratorModule,
+    EditorModule
   ],
   providers: [
     LetterService,
