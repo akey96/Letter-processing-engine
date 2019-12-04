@@ -25,6 +25,7 @@ public class PriorityAnalizer {
     public static Letter givePriority(Letter letter){
 
         String correctedText = TextCorrector.spellChecker(letter.getMessage());
+        System.out.println(correctedText);
         CoreDocument coreDocument =new CoreDocument(correctedText);
         stanfordCoreNLP.annotate(coreDocument);
 
