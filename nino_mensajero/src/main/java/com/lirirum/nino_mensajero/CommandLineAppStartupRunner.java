@@ -24,7 +24,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         admin.setCi("5232821CB");
         admin.setEmail("fernando.soto@fundacion-jala.org");
         admin.setBirthday(new Date());
-        admin.setPersonRole(PersonRole.ADMINISTRATOR);
+        admin.setPersonRole(PersonRole.ROLE_ADMINISTRATOR);
         admin.setPersonStatus(PersonStatus.ACTIVE);
         personRepository.save(admin);
     }
