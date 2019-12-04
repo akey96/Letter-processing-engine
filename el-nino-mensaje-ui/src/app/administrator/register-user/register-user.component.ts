@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../shared/services/user.service';
 import { PopUpService } from '../../shared/services/pop-up.service';
+import { ProfileService } from '../../shared/services/profile.service';
+import { Profile } from 'src/app/shared/models/profile.model';
+import {MatDialog} from '@angular/material';
+import { ModalComponent } from './../../modal/modal.component';
+
 
 
 @Component({
@@ -11,17 +16,28 @@ import { PopUpService } from '../../shared/services/pop-up.service';
 })
 export class RegisterUserComponent implements OnInit {
   userForm: FormGroup;
-
+  profiles: Profile[];
 
   minDate = new Date(1910, 0, 1);
   maxDate = new Date((new Date()).getFullYear() - 18, 0, 1);
 
-  constructor(public formBuilder: FormBuilder, public userService: UserService, public popUpService: PopUpService ) {
+  constructor(public formBuilder: FormBuilder,
+     public userService: UserService, 
+     public popUpService: PopUpService,
+     public dialog: MatDialog,
+     public profileService: ProfileService,
+     //public profileService: profileService
+      ) {
 
 
   }
 
   ngOnInit() {
+    
+    this.profileService.getProfiles().subscribe(response => {
+      this.profiles= response._embedded.profiles;
+    });
+    
     this.userForm = this.formBuilder.group({
       name: new FormControl('', [
         Validators.required,
@@ -57,6 +73,15 @@ export class RegisterUserComponent implements OnInit {
       this.popUpService.showError(error.message);
     });
 
+  }
+  openDialog():void{
+    const dialogRef = this.dialog.open( ModalComponent,{
+     // width:'350 px',
+      data :'',
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      console.log(res);
+    })
   }
 
 }
