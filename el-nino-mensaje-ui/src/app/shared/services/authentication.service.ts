@@ -14,14 +14,14 @@ export class AuthenticationService {
 
   login(credentials: any) {
     let headers: HttpHeaders;
+    const formData = new FormData();
     headers = new HttpHeaders();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Authorization', 'Basic ' + btoa('nimeclient:nmsecret'));
-    return this.httpClient.post(`${this.url}/token`, {
-      username: credentials.username,
-      password: credentials.password,
-      grant_type: 'password'
-    },
+    formData.append('username', credentials.username);
+    formData.append('password', credentials.password);
+    formData.append('grant_type', 'password');
+    return this.httpClient.post(`${this.url}/token`, formData,
     {
       headers
     });
@@ -29,12 +29,12 @@ export class AuthenticationService {
 
   checkToken(token: string) {
     let headers: HttpHeaders;
+    const formData = new FormData();
+    formData.append('token', token);
     headers = new HttpHeaders();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Authorization', 'Basic ' + btoa('nimeclient:nmsecret'));
-    return this.httpClient.post(`${this.url}/check_token`, {
-      token
-    },
+    return this.httpClient.post(`${this.url}/check_token`, formData,
     {
       headers
     });

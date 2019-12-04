@@ -22,7 +22,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     public void configure(HttpSecurity http) throws Exception {
         http.
                 anonymous().disable()
-                .requestMatchers().antMatchers("/persons/**")
+                .requestMatchers().antMatchers("/**")
                 .and().authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/persons/**").access(EVERY_ROLE)
                 .antMatchers(HttpMethod.POST,"/persons/**").access(ADMIN)
