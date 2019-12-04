@@ -16,8 +16,8 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @GetMapping()
-    public List<Person> getPersonByIdOrUsername(@RequestParam String username) {
-        return personService.getPersons(username);
+    @GetMapping("/search")
+    public Person getPersonByIdOrUsername(@RequestParam("username") String username) {
+        return personService.searchPersonByUsername(username);
     }
 }

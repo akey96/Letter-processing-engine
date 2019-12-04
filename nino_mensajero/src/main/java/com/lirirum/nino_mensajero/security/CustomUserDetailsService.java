@@ -20,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Person person = personRepository.findByUsername(username);
+        Person person = personRepository.findByUsername(username).get();
         if (person != null) {
             CustomUserDetails customUserDetails = new CustomUserDetails();
             customUserDetails.setUserName(person.getUsername());
