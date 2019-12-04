@@ -33,6 +33,19 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Selecione un Perfil</mat-label>
+          <mat-select formControName="keywords">
+            <mat-option *ngFor="let profile of profiles" [value]="profile.id">
+              {{profile.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> 
+
+        <!--<button mat-button (click)="openDialog()">Añadir perfil</button>-->
+
+
         <div class="form-buttons">
             <button type="button" mat-raised-button color="accent">Cancelar</button>
             <button type="button" mat-raised-button (click)="registerUser()" [disabled]="!userForm.valid" color="primary">Registrar</button>

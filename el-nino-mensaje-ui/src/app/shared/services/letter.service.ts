@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LetterService {
-  url: string;
+    url: string;
 
-  constructor(public httpClient: HttpClient) {
-    this.url = `${environment.serverUrl}/letters`;
-  }
+    constructor(public httpClient: HttpClient) {
+      this.url = `${environment.serverUrl}/letters`;
+    }
 
   sendLetter(letter: Letter) {
     return this.httpClient.post(this.url, letter);
