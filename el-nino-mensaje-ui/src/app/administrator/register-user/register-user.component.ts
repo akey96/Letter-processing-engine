@@ -35,7 +35,7 @@ export class RegisterUserComponent implements OnInit {
   ngOnInit() {
     
     this.profileService.getProfiles().subscribe(response => {
-      this.profiles= response._embedded.profiles;
+      this.profiles= response['_embedded'].profiles;
     });
     
     this.userForm = this.formBuilder.group({
