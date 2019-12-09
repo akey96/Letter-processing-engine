@@ -2,7 +2,9 @@ package com.lirirum.nino_mensajero.utils.textMotor.priority;
 
 import com.lirirum.nino_mensajero.letter.Letter;
 import com.lirirum.nino_mensajero.letter.Priority;
+import com.lirirum.nino_mensajero.letterAnalysis.LetterAnalysis;
 import com.lirirum.nino_mensajero.utils.textCorrector.TextCorrector;
+import com.lirirum.nino_mensajero.utils.textMotor.LetterComponent;
 import com.lirirum.nino_mensajero.utils.textMotor.Pipeline;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.CoreDocument;
@@ -15,6 +17,7 @@ import java.util.List;
 
 public class PriorityAnalizer {
 
+
     private final static String[] selectedTags = {"ADJ","NOUN","PROPN","PRON","VERB"};
 
     private static StanfordCoreNLP stanfordCoreNLP;
@@ -25,13 +28,18 @@ public class PriorityAnalizer {
     public static Letter givePriority(Letter letter){
 
         String correctedText = TextCorrector.spellChecker(letter.getMessage());
-        System.out.println(correctedText);
+        LetterAnalysis letterAnalysis =new LetterAnalysis();
+        letterAnalysis.setTextCorrected(correctedText);
         CoreDocument coreDocument =new CoreDocument(correctedText);
         stanfordCoreNLP.annotate(coreDocument);
 
         List<CoreLabel> coreLabelList = coreDocument.tokens();
         List<String> importantWords = collectImportantWords(coreLabelList);
         List<String> profileKeywords = retrieveKeywords(letter);
+
+        letterAnalysis.setImportantWords(importantWords);
+
+        new LetterComponent().storeAnalysis(letterAnalysis);
 
         letter = HighPriorityAnalizer.checkPriority(letter,importantWords,profileKeywords);
 
