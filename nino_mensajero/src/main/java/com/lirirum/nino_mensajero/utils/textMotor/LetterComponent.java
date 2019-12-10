@@ -4,14 +4,14 @@ import com.lirirum.nino_mensajero.letterAnalysis.LetterAnalysis;
 import com.lirirum.nino_mensajero.letterAnalysis.LetterAnalysisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class LetterComponent {
     @Autowired
     private LetterAnalysisRepository letterAnalysisRepository;
 
     public void storeAnalysis(LetterAnalysis letterAnalysis){
-        System.out.println(letterAnalysis.getImportantWords());
         letterAnalysisRepository.save(letterAnalysis);
     }
 }

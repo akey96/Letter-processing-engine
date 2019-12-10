@@ -1,5 +1,4 @@
 package com.lirirum.nino_mensajero.utils.textMotor.priority;
-
 import com.lirirum.nino_mensajero.letter.Letter;
 import com.lirirum.nino_mensajero.letter.Priority;
 import com.lirirum.nino_mensajero.letterAnalysis.LetterAnalysis;
@@ -9,16 +8,21 @@ import com.lirirum.nino_mensajero.utils.textMotor.Pipeline;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.CoreDocument;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+@Service
 public class PriorityAnalizer {
 
 
     private final static String[] selectedTags = {"ADJ","NOUN","PROPN","PRON","VERB"};
+    @Autowired
+    private static LetterComponent letterComponent;
 
     private static StanfordCoreNLP stanfordCoreNLP;
 
@@ -39,7 +43,7 @@ public class PriorityAnalizer {
 
         letterAnalysis.setImportantWords(importantWords);
 
-        new LetterComponent().storeAnalysis(letterAnalysis);
+        letterComponent.storeAnalysis(letterAnalysis);
 
         letter = HighPriorityAnalizer.checkPriority(letter,importantWords,profileKeywords);
 
