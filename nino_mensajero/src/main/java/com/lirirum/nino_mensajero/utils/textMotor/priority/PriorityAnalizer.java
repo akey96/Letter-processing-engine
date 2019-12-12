@@ -2,6 +2,7 @@ package com.lirirum.nino_mensajero.utils.textMotor.priority;
 import com.lirirum.nino_mensajero.letter.Letter;
 import com.lirirum.nino_mensajero.letter.Priority;
 import com.lirirum.nino_mensajero.letterAnalysis.LetterAnalysis;
+import com.lirirum.nino_mensajero.letterAnalysis.Sentiment;
 import com.lirirum.nino_mensajero.utils.textCorrector.TextCorrector;
 import com.lirirum.nino_mensajero.utils.textMotor.LetterComponent;
 import com.lirirum.nino_mensajero.utils.textMotor.Pipeline;
@@ -22,18 +23,20 @@ public class PriorityAnalizer {
 
     private final static String[] selectedTags = {"ADJ","NOUN","PROPN","PRON","VERB"};
     @Autowired
-    private static LetterComponent letterComponent;
+    private LetterComponent letterComponent;
 
     private static StanfordCoreNLP stanfordCoreNLP;
 
     static{
         stanfordCoreNLP = Pipeline.getPipeline();
     }
-    public static Letter givePriority(Letter letter){
+    public  Letter givePriority(Letter letter){
 
         String correctedText = TextCorrector.spellChecker(letter.getMessage());
+        System.out.println(correctedText);
         LetterAnalysis letterAnalysis =new LetterAnalysis();
         letterAnalysis.setTextCorrected(correctedText);
+        letterAnalysis.setLetterSentiment(Sentiment.NEGATIVE);
         CoreDocument coreDocument =new CoreDocument(correctedText);
         stanfordCoreNLP.annotate(coreDocument);
 
@@ -44,7 +47,7 @@ public class PriorityAnalizer {
         letterAnalysis.setImportantWords(importantWords);
 
         letterComponent.storeAnalysis(letterAnalysis);
-
+        letter.setLetterAnalysis(letterAnalysis);
         letter = HighPriorityAnalizer.checkPriority(letter,importantWords,profileKeywords);
 
         if(letter.getPriority().equals(Priority.LOW_PRIORITY))

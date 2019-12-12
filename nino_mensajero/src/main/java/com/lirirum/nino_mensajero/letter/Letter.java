@@ -109,4 +109,11 @@ public class Letter {
         this.responsable = responsable;
     }
 
+    public LetterAnalysis getLetterAnalysis() {
+        return letterAnalysis;
+    }
+
+    public void setLetterAnalysis(LetterAnalysis letterAnalysis) {
+        this.letterAnalysis = letterAnalysis;
+    }
 }
