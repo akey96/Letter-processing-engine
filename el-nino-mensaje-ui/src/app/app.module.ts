@@ -40,8 +40,6 @@ import { FileUploadComponent } from './home/file-upload/file-upload.component';
 import { LoginComponent } from './home/login/login.component';
 import { AuthenticationService } from './shared/services/authentication.service';
 
-import { ProfileService } from './shared/services/profile.service';
-import { ModalComponent } from './modal/modal.component';
 
 
 @NgModule({
@@ -51,8 +49,7 @@ import { ModalComponent } from './modal/modal.component';
     UserHomeComponent,
     WriteLetterComponent,
     FileUploadComponent,
-    LoginComponent,
-    ModalComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -81,13 +78,10 @@ import { ModalComponent } from './modal/modal.component';
     AdministratorModule,
     EditorModule
   ],
-  entryComponents:[ModalComponent],
-
   providers: [
     LetterService,
     PopUpService,
     UserService,
-    ProfileService,
     AuthenticationService,
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }],
   bootstrap: [AppComponent]

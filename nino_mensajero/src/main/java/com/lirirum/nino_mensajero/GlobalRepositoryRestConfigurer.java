@@ -1,7 +1,6 @@
 package com.lirirum.nino_mensajero;
 
 import com.lirirum.nino_mensajero.letter.Letter;
-import com.lirirum.nino_mensajero.profile.Profile;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
@@ -19,7 +18,7 @@ public class GlobalRepositoryRestConfigurer extends RepositoryRestConfigurerAdap
                 .allowedOrigins("*")
                 .allowedHeaders("*")
                 .allowedMethods("POST", "GET", "DELETE", "PUT", "PATCH");
-        config.exposeIdsFor(Letter.class, Profile.class);
+        config.exposeIdsFor(Letter.class);
     }
 
 }

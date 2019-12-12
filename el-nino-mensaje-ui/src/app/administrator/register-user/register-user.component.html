@@ -1,54 +1,51 @@
 <mat-card>
   <h2>Registro de Usuarios</h2>
-    <form [formGroup]="userForm" >
-        <mat-form-field appearance="outline">
-            <mat-label>Nombre Completo</mat-label>
-            <input matInput placeholder="Nombre Completo*" formControlName="name">
-        </mat-form-field>
+  <form [formGroup]="userForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre Completo</mat-label>
+      <input matInput placeholder="Nombre Completo*" formControlName="name">
+    </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>CI</mat-label>
-          <input matInput placeholder="Carnet de identidad*" formControlName="ci">
-        </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>CI</mat-label>
+      <input matInput placeholder="Carnet de identidad*" formControlName="ci">
+    </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Correo Electronico</mat-label>
-            <input matInput placeholder="Correo Electronico*" formControlName="email" >
-        </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Correo Electronico</mat-label>
+      <input matInput placeholder="Correo Electronico*" formControlName="email">
+    </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Fecha de Nacimiento</mat-label>
-          <input matInput formControlName="birthday" [min]="minDate" [max]="maxDate" [matDatepicker]="datepicker" readonly>
-            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-            <mat-datepicker #datepicker disabled="false" startView="year"></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Rol</mat-label>
-            <mat-select formControlName="personRole">
-              <mat-option [value]="'EDITOR'">
-                Editor
-              </mat-option>
-              <mat-option [value]="'REDACTOR'">
-                Redactor
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha de Nacimiento</mat-label>
+      <input matInput formControlName="birthday" [min]="minDate" [max]="maxDate" [matDatepicker]="datepicker" readonly>
+      <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+      <mat-datepicker #datepicker disabled="false" startView="year"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Rol</mat-label>
+      <mat-select formControlName="personRole">
+        <mat-option [value]="'EDITOR'">
+          Editor
+        </mat-option>
+        <mat-option [value]="'REDACTOR'">
+          Redactor
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Selecione un Perfil</mat-label>
-          <mat-select formControName="keywords">
-            <mat-option *ngFor="let profile of profiles" [value]="profile.id">
-              {{profile.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field> 
+    <mat-form-field appearance="outline">
+      <mat-label>Palabras Clave</mat-label>
+      <input matInput placeholder="Palabras Clave*" formControlName="keywords">
+    </mat-form-field>
 
-        <!--<button mat-button (click)="openDialog()">Añadir perfil</button>-->
+    <!--<button mat-button (click)="openDialog()">Añadir perfil</button>-->
 
 
-        <div class="form-buttons">
-            <button type="button" mat-raised-button color="accent">Cancelar</button>
-            <button type="button" mat-raised-button (click)="registerUser()" [disabled]="!userForm.valid" color="primary">Registrar</button>
-        </div>
-    </form>
+    <div class="form-buttons">
+      <button type="button" mat-raised-button color="accent">Cancelar</button>
+      <button type="button" mat-raised-button (click)="registerUser()" [disabled]="!userForm.valid"
+        color="primary">Registrar</button>
+    </div>
+  </form>
 </mat-card>

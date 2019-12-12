@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../shared/services/user.service';
 import { PopUpService } from '../../shared/services/pop-up.service';
-import { ProfileService } from '../../shared/services/profile.service';
 import { Profile } from 'src/app/shared/models/profile.model';
 import {MatDialog} from '@angular/material';
-import { ModalComponent } from './../../modal/modal.component';
 
 
 
@@ -23,9 +21,7 @@ export class RegisterUserComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
      public userService: UserService, 
-     public popUpService: PopUpService,
-     public dialog: MatDialog,
-     public profileService: ProfileService,
+     public popUpService: PopUpService
      //public profileService: profileService
       ) {
 
@@ -33,11 +29,7 @@ export class RegisterUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    
-    this.profileService.getProfiles().subscribe(response => {
-      this.profiles= response['_embedded'].profiles;
-    });
-    
+        
     this.userForm = this.formBuilder.group({
       name: new FormControl('', [
         Validators.required,
@@ -47,6 +39,9 @@ export class RegisterUserComponent implements OnInit {
         Validators.pattern('^[1-9]+ [A-Za-z]{2,3}$')]),
       birthday: new FormControl('', Validators.required),
       email: new FormControl('', Validators.compose([Validators.email, Validators.required])),
+      keywords: new FormControl('', [
+        Validators.required,
+        Validators.pattern('[a-zA-Z]+((\,|\,\ +)[a-zA-Z]+)+')]),
       username: new FormControl('undefined'),
       password: new FormControl('undefined'),
       personRole: new FormControl('', Validators.required),
@@ -62,6 +57,7 @@ export class RegisterUserComponent implements OnInit {
       this.userForm.get('ci').reset();
       this.userForm.get('birthday').reset();
       this.userForm.get('email').reset();
+      this.userForm.get('keywords').reset();
       this.userForm.get('personRole').reset();
     }, (error: any) => {
       console.log(error.error.cause.cause.message);
@@ -73,15 +69,6 @@ export class RegisterUserComponent implements OnInit {
       this.popUpService.showError(error.message);
     });
 
-  }
-  openDialog():void{
-    const dialogRef = this.dialog.open( ModalComponent,{
-     // width:'350 px',
-      data :'',
-    });
-    dialogRef.afterClosed().subscribe(res => {
-      console.log(res);
-    })
   }
 
 }

@@ -3,7 +3,6 @@ package com.lirirum.nino_mensajero.user;
 
 import lombok.Data;
 import com.lirirum.nino_mensajero.letter.Letter;
-import com.lirirum.nino_mensajero.profile.Profile;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -34,6 +33,12 @@ public class Person {
     @NotBlank
     @Column( nullable = false, unique = true)
     private String email;
+
+    @NotNull
+    @NotBlank
+    @Column(nullable = false)
+    private String keywords;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private PersonRole personRole;
@@ -41,15 +46,4 @@ public class Person {
     private PersonStatus personStatus;
     @OneToMany(mappedBy = "responsable", cascade = CascadeType.ALL)
     private Set<Letter> assignedCards;
-
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
-    @JoinTable(
-            name = "PERSON-PROFILE",
-            joinColumns = @JoinColumn(name = "person_id"),
-            inverseJoinColumns = @JoinColumn(name = "profile_id"))
-    private Set<Profile> profiles;
 }
