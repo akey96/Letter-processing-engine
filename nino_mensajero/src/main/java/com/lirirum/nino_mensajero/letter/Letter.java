@@ -1,5 +1,6 @@
 package com.lirirum.nino_mensajero.letter;
 
+import com.lirirum.nino_mensajero.letterAnalysis.LetterAnalysis;
 import com.lirirum.nino_mensajero.user.Person;
 import lombok.Data;
 
@@ -39,6 +40,9 @@ public class Letter {
     @JoinColumn(name = "responsable_id")
     private Person responsable;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "analysis_id", referencedColumnName = "id")
+    private LetterAnalysis letterAnalysis;
 
     public long getId() {
         return id;
@@ -105,4 +109,11 @@ public class Letter {
         this.responsable = responsable;
     }
 
+    public LetterAnalysis getLetterAnalysis() {
+        return letterAnalysis;
+    }
+
+    public void setLetterAnalysis(LetterAnalysis letterAnalysis) {
+        this.letterAnalysis = letterAnalysis;
+    }
 }
