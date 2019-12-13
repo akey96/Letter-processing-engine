@@ -1,8 +1,12 @@
 package com.lirirum.nino_mensajero.letter;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lirirum.nino_mensajero.content.Content;
 import com.lirirum.nino_mensajero.letterAnalysis.LetterAnalysis;
 import com.lirirum.nino_mensajero.user.Person;
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -43,6 +47,19 @@ public class Letter {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "analysis_id", referencedColumnName = "id")
     private LetterAnalysis letterAnalysis;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "content_id")
+    @JsonIgnore
+    private Content content;
+
+    public void setContent(Content content) {
+        this.content = content;
+    }
+
+    public Content getContent() {
+        return content;
+    }
 
     public long getId() {
         return id;
