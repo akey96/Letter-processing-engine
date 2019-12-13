@@ -4,17 +4,13 @@ package com.lirirum.nino_mensajero.content;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lirirum.nino_mensajero.user.Person;
 import lombok.Data;
-import com.lirirum.nino_mensajero.letter.Letter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @Entity

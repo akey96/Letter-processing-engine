@@ -14,6 +14,7 @@ import {
 import { 
   LetterResponseComponent
 } from './letter-response/letter-response.component';
+import { ContentComponent } from './content/content.component';
 
 export const redactorRoutes: Routes = [{
   path: 'redactor',
@@ -30,6 +31,10 @@ export const redactorRoutes: Routes = [{
     {
       path: 'letter-response/:id',
       component: LetterResponseComponent
+    },
+    {
+      path: ':id/content',
+      component: ContentComponent
     },
   ]
 }];

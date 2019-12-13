@@ -5,8 +5,6 @@ import com.lirirum.nino_mensajero.content.Content;
 import com.lirirum.nino_mensajero.letterAnalysis.LetterAnalysis;
 import com.lirirum.nino_mensajero.user.Person;
 import lombok.Data;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

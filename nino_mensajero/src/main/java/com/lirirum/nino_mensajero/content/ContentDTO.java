@@ -3,7 +3,6 @@ package com.lirirum.nino_mensajero.content;
 import com.lirirum.nino_mensajero.user.Person;
 
 import java.util.Date;
-import java.util.List;
 
 public class ContentDTO {
 

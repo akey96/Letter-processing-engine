@@ -46,10 +46,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material";
 import { ListImagesComponent } from '../home/list-images/list-images.component';
+import { ContentComponent } from './content/content.component';
 
 
 @NgModule({
-  declarations: [LetterListComponent, LetterResponseComponent, DialogImage, ListImagesComponent],
+  declarations: [LetterListComponent, LetterResponseComponent, DialogImage, ListImagesComponent, ContentComponent],
   entryComponents: [
     DialogImage
   ],
