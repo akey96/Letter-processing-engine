@@ -23,7 +23,7 @@ export class AuthenticationService {
     formData.append('grant_type', 'password');
     return this.httpClient.post(`${this.url}/token`, formData,
     {
-      headers
+      headers: headers
     });
   }
 

@@ -11,8 +11,6 @@ import { PopUpService } from '../../shared/services/pop-up.service';
 })
 export class RegisterUserComponent implements OnInit {
   userForm: FormGroup;
-
-
   minDate = new Date(1910, 0, 1);
   maxDate = new Date((new Date()).getFullYear() - 18, 0, 1);
 
@@ -31,7 +29,8 @@ export class RegisterUserComponent implements OnInit {
         Validators.pattern('^[1-9]+ [A-Za-z]{2,3}$')]),
       birthday: new FormControl('', Validators.required),
       email: new FormControl('', Validators.compose([Validators.email, Validators.required])),
-      username: new FormControl('undefined'),
+      username: new FormControl('', [
+        Validators.required]),
       password: new FormControl('undefined'),
       personRole: new FormControl('', Validators.required),
       personStatus: new FormControl('PENDING')
@@ -39,16 +38,15 @@ export class RegisterUserComponent implements OnInit {
   }
 
   registerUser() {
-    console.log(this.userForm.value);
     this.userService.sendUser(this.userForm.value).subscribe(() => {
       this.popUpService.showSuccess('Se registro al usuario correctamente');
       this.userForm.get('name').reset();
+      this.userForm.get('username').reset();
       this.userForm.get('ci').reset();
       this.userForm.get('birthday').reset();
       this.userForm.get('email').reset();
       this.userForm.get('personRole').reset();
     }, (error: any) => {
-      console.log(error.error.cause.cause.message);
       if (error.error.cause.cause.message.indexOf('(ci)=') >= 0) {
         error.message = 'El número de carnet de identidad mas la extension que ingresaste ya está registrado en el sistema';
       } else if (error.error.cause.cause.message.indexOf('(email)=') >= 0) {

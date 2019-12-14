@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       this.authService.checkToken(response.access_token).subscribe((token: any) => {
         this.userService.getUserByUsername(token.user_name).subscribe((user: any) => {
           localStorage.setItem('principal', JSON.stringify(user));
-          this.router.navigate([`/${user.role}/letter-list`]);
+          this.router.navigate([`/${user.personRole.split('_')[1]}/letter-list`]);
         });
       });
     }, () => {

@@ -2,6 +2,11 @@
   <h2>Registro de Usuarios</h2>
     <form [formGroup]="userForm" >
         <mat-form-field appearance="outline">
+            <mat-label>Nombre de Usuario</mat-label>
+            <input matInput placeholder="Nombre de Usuario" formControlName="username">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
             <mat-label>Nombre Completo</mat-label>
             <input matInput placeholder="Nombre Completo*" formControlName="name">
         </mat-form-field>
@@ -25,10 +30,10 @@
           <mat-form-field appearance="outline">
             <mat-label>Rol</mat-label>
             <mat-select formControlName="personRole">
-              <mat-option [value]="'EDITOR'">
+              <mat-option [value]="'ROLE_EDITOR'">
                 Editor
               </mat-option>
-              <mat-option [value]="'REDACTOR'">
+              <mat-option [value]="'ROLE_REDACTOR'">
                 Redactor
               </mat-option>
             </mat-select>
