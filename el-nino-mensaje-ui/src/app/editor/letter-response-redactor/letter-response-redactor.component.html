@@ -1,1 +1,53 @@
-<p>letter-response-redactor works!</p>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            CARRED-0{{letterSelected}}
+        </mat-card-title>
+        <mat-card-subtitle>
+            Estado: {{letter_status | titlecase}}
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+            Fecha: {{letter.value.creationDate | date }}
+        </mat-card-subtitle>
+    </mat-card-header>
+    <form [formGroup]="letter">
+        <!--label  formControlName="status">stado: {{letter}}</label-->
+
+        <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+
+
+            <div class="fade" fxFlex="50%">
+                <h3 fxLayoutAlign="start">Carta Actual</h3>
+                <mat-form-field appearance="outline">
+                    <textarea matInput formControlName="message" rows="17" readonly></textarea>
+                </mat-form-field>
+            </div>
+
+            <div class="fade" fxFlex="50%">
+                <h3 fxLayoutAlign="start">Carta Respuesta</h3>
+                <mat-form-field appearance="outline">
+                    <mat-label>
+                        <mat-icon>markunread</mat-icon>
+                    </mat-label>
+                    <textarea matInput formControlName="response" rows="17" readonly></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+
+
+        <app-list-images [listImages]="listImages"></app-list-images>
+
+        <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="end">
+            <div class="buttons">
+                <button color="warn" mat-raised-button (click)="back()">Regresar</button>
+                <button style="background-color: #28A745; color: honeydew" mat-raised-button>Generar Boletin</button>
+            </div>
+        </div>
+    </form>
+
+    <!--
+    <div *ngIf="!letter.valid">
+      <h3>Aun no tiene cartas asignadas, Espere a que el sistema le asigne alguna carta.</h3>
+    </div>
+    -->
+</mat-card>

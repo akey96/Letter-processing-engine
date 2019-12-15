@@ -12,6 +12,7 @@ import {
   LetterResponseRedactorComponent
 } from './letter-response-redactor/letter-response-redactor.component';
 import { EditorGuard } from '../shared/guards/editor.guard';
+import { ContentListComponent } from './content-list/content-list.component';
 
 export const editorRoutes: Routes = [{
   path: 'editor',
@@ -21,8 +22,12 @@ export const editorRoutes: Routes = [{
   ],
   children: [{
       path: '',
-      redirectTo: 'letters-list',
+      redirectTo: 'content-list',
       pathMatch: 'full'
+    },
+    {
+      path: 'content-list',
+      component: ContentListComponent
     },
     {
       path: 'letter-response-redactor/:id',

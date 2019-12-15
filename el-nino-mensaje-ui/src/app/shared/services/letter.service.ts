@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LetterService {
-  url: string;
+    url: string;
 
-  constructor(public httpClient: HttpClient) {
-    this.url = `${environment.serverUrl}/letters`;
-  }
+    constructor(public httpClient: HttpClient) {
+      this.url = `${environment.serverUrl}/letters`;
+    }
 
   sendLetter(letter: Letter) {
     return this.httpClient.post(this.url, letter);
@@ -38,4 +38,14 @@ export class LetterService {
     return this.httpClient.put<Letter>(updateUrl, null);
   }
 
+  getLetterByContentId(contentId) {
+    const url = `${environment.serverUrl}/letters/search/findByContentId?contentId=${contentId}`;
+    
+    return this.httpClient.get(url);
+  }
+
+  getLetterByResponsableId(responsableId){
+    const url = `${environment.serverUrl}//letters/search/findByResponsableId?responsableId=${responsableId}`;
+    return this.httpClient.get(url);
+  }
 }

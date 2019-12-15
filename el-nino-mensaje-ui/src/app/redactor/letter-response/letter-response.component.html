@@ -11,6 +11,17 @@
     </mat-card-subtitle>
   </mat-card-header>
   <form [formGroup]="letter">
+
+
+      <div mat-dialog-actions align="end">
+          <a (click)="openDialog()"  _ngcontent-c1="" aria-label="Angular Material" class="docs-button mat-button" mat-button=""  tabindex="0" aria-disabled="false" ><span class="mat-button-wrapper">
+              <img _ngcontent-c1="" alt="angular" class="docs-angular-logo" src="/assets/images/add_circle_outline-24px.svg">
+              <span _ngcontent-c1="">Agregar contenido</span>
+              </span> <div class="mat-button-ripple mat-ripple" matripple=""></div><div class="mat-button-focus-overlay">
+              </div>
+          </a>
+      </div>
+
       <!--label  formControlName="status">stado: {{letter}}</label-->
 
     <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">

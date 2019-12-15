@@ -32,3 +32,6 @@ th.mat-sort-header-sorted {
     text-align: center;
   }
 
+  .mat-dialog-actions {
+    justify-content: flex-end;
+  }

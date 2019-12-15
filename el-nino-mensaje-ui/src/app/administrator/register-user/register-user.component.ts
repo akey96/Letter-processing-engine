@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../shared/services/user.service';
 import { PopUpService } from '../../shared/services/pop-up.service';
+import { Profile } from 'src/app/shared/models/profile.model';
+import {MatDialog} from '@angular/material';
+
 
 
 @Component({
@@ -11,15 +14,17 @@ import { PopUpService } from '../../shared/services/pop-up.service';
 })
 export class RegisterUserComponent implements OnInit {
   userForm: FormGroup;
+  profiles: Profile[];
+
   minDate = new Date(1910, 0, 1);
   maxDate = new Date((new Date()).getFullYear() - 18, 0, 1);
 
-  constructor(public formBuilder: FormBuilder, public userService: UserService, public popUpService: PopUpService ) {
-
-
-  }
+  constructor(public formBuilder: FormBuilder,
+              public userService: UserService,
+              public popUpService: PopUpService) {}
 
   ngOnInit() {
+
     this.userForm = this.formBuilder.group({
       name: new FormControl('', [
         Validators.required,
@@ -31,6 +36,9 @@ export class RegisterUserComponent implements OnInit {
       email: new FormControl('', Validators.compose([Validators.email, Validators.required])),
       username: new FormControl('', [
         Validators.required]),
+      keywords: new FormControl('', [
+        Validators.required,
+        Validators.pattern('[a-zA-Z]+((\,|\,\ +)[a-zA-Z]+)+')]),
       password: new FormControl('undefined'),
       personRole: new FormControl('', Validators.required),
       personStatus: new FormControl('PENDING')
@@ -45,6 +53,7 @@ export class RegisterUserComponent implements OnInit {
       this.userForm.get('ci').reset();
       this.userForm.get('birthday').reset();
       this.userForm.get('email').reset();
+      this.userForm.get('keywords').reset();
       this.userForm.get('personRole').reset();
     }, (error: any) => {
       if (error.error.cause.cause.message.indexOf('(ci)=') >= 0) {
