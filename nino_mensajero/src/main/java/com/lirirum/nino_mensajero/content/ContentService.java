@@ -25,6 +25,7 @@ public class ContentService {
 
         Content content = new Content();
         content.setId(contentDTO.id);
+        content.setDescription(contentDTO.description);
         content.setContent(contentDTO.content);
         content.setPerson(contentDTO.person);
         content.setCreationDate(contentDTO.creationDate);

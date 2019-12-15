@@ -26,9 +26,8 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;" class="selected-period" [ngClass]="periodIsSelected(row)"
       (click)="selectLetter(row)"></mat-row>
   </mat-table>
-  <!--mat-paginator *ngIf="letter.valid" [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator-->
 
-  <mat-paginator [length]="" [pageSize]="5" [pageIndex]="pageIndex" ></mat-paginator>
+  <mat-paginator [length]="" [pageSize]="5"></mat-paginator>
 
 
   <form [formGroup]="letter" *ngIf="letter.valid">

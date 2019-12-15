@@ -1,5 +1,6 @@
 package com.lirirum.nino_mensajero;
 
+import com.lirirum.nino_mensajero.content.Content;
 import com.lirirum.nino_mensajero.letter.Letter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -13,6 +14,7 @@ public class GlobalRepositoryRestConfigurer extends RepositoryRestConfigurerAdap
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+        config.exposeIdsFor(Content.class, Letter.class);
         config.getCorsRegistry()
                 .addMapping("/**")
                 .allowedOrigins("*")
