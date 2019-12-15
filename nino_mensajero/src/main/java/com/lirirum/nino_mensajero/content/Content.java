@@ -15,6 +15,32 @@ import java.util.Date;
 @Data
 @Entity
 public class Content {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long id;
+
+    @NotNull
+    @NotBlank
+    @Column(nullable = false)
+    private String content;
+
+    @NotNull
+    @NotBlank
+    @Column(nullable = false)
+    private String description;
+
+    @NotNull
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
+    private Date creationDate;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "person_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Person person;
+
     public void setId(long id) {
         this.id = id;
     }
@@ -47,30 +73,14 @@ public class Content {
         return person;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    @NotNull
-    @NotBlank
-    @Column(nullable = false)
-    private String content;
 
-    @NotNull
-    @NotBlank
-    @Column(nullable = false)
-    private String description;
-
-    @NotNull
-    @Temporal(TemporalType.DATE)
-    @Column(nullable = false)
-    private Date creationDate;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "person_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Person person;
 
 }
