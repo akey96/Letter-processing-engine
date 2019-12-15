@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class MediumPriorityAnalizer {
-    private static HashMap<String, List<String>> synonymsDictionary = new HashMap<>();
+    public static HashMap<String, List<String>> synonymsDictionary = new HashMap<>();
     static{
         InputStream stream = chargeStream();
         chargeSynonyms(stream);

@@ -1,6 +1,9 @@
 package com.lirirum.nino_mensajero.letter;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.lirirum.nino_mensajero.content.Content;
 import com.lirirum.nino_mensajero.letterAnalysis.LetterAnalysis;
 import com.lirirum.nino_mensajero.user.Person;
@@ -15,6 +18,7 @@ import java.util.Set;
 @Entity
 @Table(name = "LETTER")
 @Data
+
 public class Letter {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -38,7 +42,9 @@ public class Letter {
     @ElementCollection
     private Set<String> images;
     private String response;
+
     @ManyToOne
+    @JsonIgnoreProperties("assignedCards")
     @JoinColumn(name = "responsable_id")
     private Person responsable;
 
