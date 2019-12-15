@@ -38,16 +38,16 @@ export class LetterResponseRedactorComponent implements OnInit {
         status: new FormControl('', Validators.required),
         creationDate: new FormControl('', Validators.required),
         priority: new FormControl('', Validators.required),
-        
+
       });
 
     console.log(this.letter);
-      
+
   }
 
   ngOnInit() {
     this.isAnswered = false;
- 
+
     this.route.paramMap.subscribe(params => {
       if (params.has("id")) {
         this.letterSelected = params.get('id');
@@ -59,14 +59,14 @@ export class LetterResponseRedactorComponent implements OnInit {
           this.letter.get('status').setValue(letter.status);
           this.letter.get('creationDate').setValue(letter.creationDate);
           this.letter.get('priority').setValue(letter.priority);
-          
+
           if(letter.priority === 'LOW_PRIORITY') {
             this.letter_status = 'prioridad baja';
           } else if(letter.priority === 'MEDIUM_PRIORITY') {
             this.letter_status = 'prioridad media';
           } else {
             this.letter_status = 'prioridad alta';
-          } 
+          }
         }, (err) => {
           this.popupService.showError('Algo fallo al cargar las cartas, recarga la pagina por favor.');
         });
@@ -91,7 +91,6 @@ export class LetterResponseRedactorComponent implements OnInit {
 
   enableAnswers() {
     this.isAnswered = !this.isAnswered;
-    
   }
 
   back() {

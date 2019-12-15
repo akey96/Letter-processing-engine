@@ -39,7 +39,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     public void run(String...args) throws Exception {
 
         Person admin = personRepository.findByUsername("fer").orElse(new Person());
-        admin.setUsername(usernameAdmin);
+        admin.setUsername(usernameAdmin.toLowerCase());
         admin.setPassword(encoder.encode(passwordAdmin));
         admin.setName(nameAdmin);
         admin.setCi(ciAdmin);

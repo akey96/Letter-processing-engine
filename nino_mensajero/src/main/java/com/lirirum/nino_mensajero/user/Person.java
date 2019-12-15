@@ -41,9 +41,6 @@ public class Person {
     @Column( nullable = false, unique = true)
     private String email;
 
-    @NotNull
-    @NotBlank
-    @Column(nullable = false)
     private String keywords;
 
     @Column(nullable = false)

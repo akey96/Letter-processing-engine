@@ -34,14 +34,11 @@ export class RegisterUserComponent implements OnInit {
         Validators.pattern('^[1-9]+ [A-Za-z]{2,3}$')]),
       birthday: new FormControl('', Validators.required),
       email: new FormControl('', Validators.compose([Validators.email, Validators.required])),
-      username: new FormControl('', [
-        Validators.required]),
-      keywords: new FormControl('', [
-        Validators.required,
-        Validators.pattern('[a-zA-Z]+((\,|\,\ +)[a-zA-Z]+)+')]),
-      password: new FormControl('undefined'),
+      username: new FormControl('', Validators.required),
+      keywords: new FormControl('') ,
+      password: new FormControl('', Validators.required),
       personRole: new FormControl('', Validators.required),
-      personStatus: new FormControl('PENDING')
+      personStatus: new FormControl('ACTIVE')
     });
   }
 
@@ -50,6 +47,7 @@ export class RegisterUserComponent implements OnInit {
       this.popUpService.showSuccess('Se registro al usuario correctamente');
       this.userForm.get('name').reset();
       this.userForm.get('username').reset();
+      this.userForm.get('password').reset();
       this.userForm.get('ci').reset();
       this.userForm.get('birthday').reset();
       this.userForm.get('email').reset();
@@ -64,6 +62,9 @@ export class RegisterUserComponent implements OnInit {
       this.popUpService.showError(error.message);
     });
 
+  }
+  redactorIsSelected() {
+    return this.userForm.get('personRole').value === 'ROLE_REDACTOR';
   }
 
 }

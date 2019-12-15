@@ -2,11 +2,6 @@
   <h2>Registro de Usuarios</h2>
   <form [formGroup]="userForm">
     <mat-form-field appearance="outline">
-      <mat-label>Nombre de Usuario</mat-label>
-      <input matInput placeholder="Nombre de Usuario" formControlName="username">
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
       <mat-label>Nombre Completo</mat-label>
       <input matInput placeholder="Nombre Completo*" formControlName="name">
     </mat-form-field>
@@ -38,9 +33,17 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field *ngIf="redactorIsSelected()" appearance="outline">
       <mat-label>Palabras Clave</mat-label>
       <input matInput placeholder="Palabras Clave*" formControlName="keywords">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre de Usuario</mat-label>
+      <input matInput placeholder="Nombre de Usuario" formControlName="username">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Contraseña</mat-label>
+      <input type="password" matInput placeholder="Contraseña" formControlName="password">
     </mat-form-field>
     <div class="form-buttons">
       <button type="button" mat-raised-button color="accent">Cancelar</button>

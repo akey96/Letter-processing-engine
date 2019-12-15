@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class AuthenticationService {
   url: string;
 
-  constructor(public httpClient: HttpClient) {
+  constructor(public httpClient: HttpClient, public router: Router) {
     this.url = `${environment.serverUrl}/oauth`;
   }
 
@@ -18,12 +19,12 @@ export class AuthenticationService {
     headers = new HttpHeaders();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Authorization', 'Basic ' + btoa('nimeclient:nmsecret'));
-    formData.append('username', credentials.username);
+    formData.append('username', credentials.username.toLowerCase());
     formData.append('password', credentials.password);
     formData.append('grant_type', 'password');
     return this.httpClient.post(`${this.url}/token`, formData,
     {
-      headers: headers
+      headers
     });
   }
 
@@ -42,5 +43,11 @@ export class AuthenticationService {
 
   getPrincipal() {
     return JSON.parse(localStorage.getItem('principal'));
+  }
+
+  logout() {
+    localStorage.removeItem('acess_token');
+    localStorage.removeItem('principal');
+    this.router.navigate(['']);
   }
 }

@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthInterceptorService implements HttpInterceptor {
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token: string = localStorage.getItem('access_token');
@@ -20,6 +22,19 @@ export class AuthInterceptorService implements HttpInterceptor {
       });
     }
 
-    return next.handle(request);
+    return next.handle(request).pipe(catchError(error => {
+      this.handlerAuthError(error);
+      return throwError(error.status);
+    }));
+  }
+
+  private handlerAuthError(error: HttpErrorResponse) {
+    if (error.status === 401) {
+      this.router.navigate(['']);
+    } else if (error.status === 403) {
+      let principal: any;
+      principal = JSON.parse(localStorage.getItem('principal'));
+      this.router.navigate([`${principal.personRole().split('_')[1].toLowerCase()}`]);
+    }
   }
 }
