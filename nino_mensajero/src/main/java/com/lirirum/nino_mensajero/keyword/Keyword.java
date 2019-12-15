@@ -20,4 +20,19 @@ public class Keyword {
             inverseJoinColumns = @JoinColumn(name = "id"))
     Set<Person> personSet;
 
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public Set<Person> getPersonSet() {
+        return personSet;
+    }
+
+    public void setPersonSet(Set<Person> personSet) {
+        this.personSet = personSet;
+    }
 }
