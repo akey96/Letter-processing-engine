@@ -122,4 +122,12 @@ public class Person {
     public void setAssignedCards(Set<Letter> assignedCards) {
         this.assignedCards = assignedCards;
     }
+
+    public Set<Keyword> getKeywordSet() {
+        return keywordSet;
+    }
+
+    public void setKeywordSet(Set<Keyword> keywordSet) {
+        this.keywordSet = keywordSet;
+    }
 }

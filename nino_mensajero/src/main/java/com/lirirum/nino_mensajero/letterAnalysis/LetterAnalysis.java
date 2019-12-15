@@ -1,5 +1,7 @@
 package com.lirirum.nino_mensajero.letterAnalysis;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.lirirum.nino_mensajero.letter.Letter;
 import com.sun.istack.NotNull;
 import lombok.Data;
@@ -11,6 +13,9 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "LETTER_ANALYSIS")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class LetterAnalysis {
 
     @Id

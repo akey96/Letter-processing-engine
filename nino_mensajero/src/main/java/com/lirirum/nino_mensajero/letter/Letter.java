@@ -15,6 +15,7 @@ import java.util.Set;
 @Entity
 @Table(name = "LETTER")
 @Data
+
 public class Letter {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
