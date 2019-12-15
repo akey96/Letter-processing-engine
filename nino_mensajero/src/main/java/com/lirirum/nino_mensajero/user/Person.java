@@ -1,6 +1,7 @@
 package com.lirirum.nino_mensajero.user;
 
 
+import com.lirirum.nino_mensajero.keyword.Keyword;
 import lombok.Data;
 import com.lirirum.nino_mensajero.letter.Letter;
 import javax.persistence.*;
@@ -46,4 +47,79 @@ public class Person {
     private PersonStatus personStatus;
     @OneToMany(mappedBy = "responsable", cascade = CascadeType.ALL)
     private Set<Letter> assignedCards;
+
+    @ManyToMany(mappedBy = "personSet")
+    private Set<Keyword> keywordSet;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCi() {
+        return ci;
+    }
+
+    public void setCi(String ci) {
+        this.ci = ci;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
+    }
+
+    public PersonRole getPersonRole() {
+        return personRole;
+    }
+
+    public void setPersonRole(PersonRole personRole) {
+        this.personRole = personRole;
+    }
+
+    public PersonStatus getPersonStatus() {
+        return personStatus;
+    }
+
+    public void setPersonStatus(PersonStatus personStatus) {
+        this.personStatus = personStatus;
+    }
+
+    public Set<Letter> getAssignedCards() {
+        return assignedCards;
+    }
+
+    public void setAssignedCards(Set<Letter> assignedCards) {
+        this.assignedCards = assignedCards;
+    }
 }
