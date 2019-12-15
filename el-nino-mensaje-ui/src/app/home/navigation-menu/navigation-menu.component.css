@@ -21,7 +21,9 @@
   height: 45px;
 }
 
-
+.center {
+  flex: 1 1 auto;
+}
 @media screen and (max-width: 800px) {
   .web-menu {
     display: none;
@@ -30,5 +32,4 @@
   .responsive-menu {
     display: unset;
   }
-
 }

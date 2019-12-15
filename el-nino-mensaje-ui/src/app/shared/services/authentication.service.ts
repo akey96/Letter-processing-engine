@@ -46,8 +46,8 @@ export class AuthenticationService {
   }
 
   logout() {
-    localStorage.removeItem('acess_token');
+    localStorage.removeItem('access_token');
     localStorage.removeItem('principal');
-    this.router.navigate(['']);
+    this.router.navigate(['/login']);
   }
 }

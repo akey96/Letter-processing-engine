@@ -17,8 +17,9 @@
       </button>
       <img class="logo web-menu"  src="../../assets/images/lirium.jpeg">&nbsp;&nbsp;&nbsp;&nbsp;
       <span *ngFor="let ruta of rutas" class="web-menu" [routerLink]="ruta.url">{{ruta.nombre}}</span>
+      <span class="center"></span>
+      <span (click)="logout()">Logout</span>
     </mat-toolbar>
-  <!-- {{letter.routerState.snapshot.url}}-->
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
