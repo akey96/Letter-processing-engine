@@ -38,7 +38,7 @@ export class LetterService {
     return this.httpClient.put<Letter>(updateUrl, null);
   }
 
-  getLetterByContentId(contentId) {
+  getLetterByContentId(contentId: number) {
     const url = `${environment.serverUrl}/letters/search/findByContentId?contentId=${contentId}`;
     
     return this.httpClient.get(url);

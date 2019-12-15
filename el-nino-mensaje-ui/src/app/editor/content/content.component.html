@@ -1,41 +1,42 @@
 <mat-card>
     <mat-card-header>
         <mat-card-title>
-            CARRED-0{{letterSelected}}
+            CARRED-0{{contentSelected}}
         </mat-card-title>
         <mat-card-subtitle>
-            Estado: {{letter_status | titlecase}}
+            Redactor: {{this.redactor.name | titlecase}}
         </mat-card-subtitle>
         <mat-card-subtitle>
-            Fecha: {{letter.value.creationDate | date }}
+            Cartas:  
+            <a *ngFor="let letter of letters" routerLink="/redactor/letter-response/{{letter.id}}" > carta {{letter.id}}, </a>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+            Fecha: {{content.creationDate | date }}
         </mat-card-subtitle>
     </mat-card-header>
-    <form [formGroup]="letter">
+    <form [formGroup]="contentForm">
         <!--label  formControlName="status">stado: {{letter}}</label-->
 
         <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
 
 
             <div class="fade" fxFlex="50%">
-                <h3 fxLayoutAlign="start">Carta Actual</h3>
+                <h3 fxLayoutAlign="start">Descripcion</h3>
                 <mat-form-field appearance="outline">
-                    <textarea matInput formControlName="message" rows="17" readonly></textarea>
+                    <textarea matInput formControlName="description" rows="17" readonly></textarea>
                 </mat-form-field>
             </div>
 
             <div class="fade" fxFlex="50%">
-                <h3 fxLayoutAlign="start">Carta Respuesta</h3>
+                <h3 fxLayoutAlign="start">Contenido</h3>
                 <mat-form-field appearance="outline">
                     <mat-label>
                         <mat-icon>markunread</mat-icon>
                     </mat-label>
-                    <textarea matInput formControlName="response" rows="17" readonly></textarea>
+                    <textarea matInput formControlName="content" rows="17" readonly></textarea>
                 </mat-form-field>
             </div>
         </div>
-
-
-        <app-list-images [listImages]="listImages"></app-list-images>
 
         <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="end">
             <div class="buttons">

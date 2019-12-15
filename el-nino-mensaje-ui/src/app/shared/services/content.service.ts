@@ -31,4 +31,5 @@ export class ContentService {
     const url = `${environment.serverUrl}/persons/${personId}/content`;
     return this.httpClient.post(url, content);
   }
+
 }
