@@ -82,7 +82,7 @@ export class LetterResponseComponent implements OnInit {
 
         // harcode user
         this.user = {
-          id: 1,
+          id: 13,
           name: '2001-01-01 00:00:00',
           birthday: Date.now(),
           primaryEmail: 'pepito@gmail.com',

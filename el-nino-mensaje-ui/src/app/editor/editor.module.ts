@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LetterResponseRedactorComponent } from './letter-response-redactor/letter-response-redactor.component';
+import { ContentComponent } from './content/content.component';
 import { EditorRoutingModule } from './editor-routing.module';
 
 
@@ -24,7 +24,7 @@ import { RedactorModule } from '../redactor/redactor.module';
 import { ContentListComponent } from './content-list/content-list.component';
 
 @NgModule({
-  declarations: [LetterResponseRedactorComponent, ContentListComponent],
+  declarations: [ContentComponent, ContentListComponent],
   entryComponents: [
     DialogImage
   ],

@@ -9,8 +9,8 @@ import {
   UserHomeComponent
 } from '../home/user-home/user-home.component';
 import {
-  LetterResponseRedactorComponent
-} from './letter-response-redactor/letter-response-redactor.component';
+  ContentComponent
+} from './content/content.component';
 import { ContentListComponent } from './content-list/content-list.component';
 
 export const editorRoutes: Routes = [{
@@ -26,8 +26,8 @@ export const editorRoutes: Routes = [{
       component: ContentListComponent
     },
     {
-      path: 'letter-response-redactor/:id',
-      component: LetterResponseRedactorComponent,
+      path: 'content/:id',
+      component: ContentComponent,
     }
   ]
 }];
