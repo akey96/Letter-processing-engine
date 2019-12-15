@@ -1,0 +1,43 @@
+<mat-card>
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Codigo de respuesta </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.description | titlecase}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="creationDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de respuesta </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.creationDate | date:'fullDate'}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="selected-period" [ngClass]="contentIsSelected(row)"
+      (click)="selectContent(row)"></mat-row>
+  </mat-table>
+
+  <mat-paginator [length]="" [pageSize]="5" ></mat-paginator>
+
+
+  <form [formGroup]="content" *ngIf="content.valid">
+    <mat-form-field appearance="outline">
+      <mat-label>
+        <mat-icon>markunread</mat-icon> Respuesta del Redactor
+      </mat-label>
+      <textarea matInput formControlName="content" rows="10" readonly></textarea>
+    </mat-form-field>
+    <div class="buttons">
+      <button color="warn" mat-raised-button (click)="rejectContent()">{{'Devolver respuesta al redactor' | titlecase}}</button>
+      <button color="primary" mat-raised-button (click)="viewContent()" >{{'Ver contenido de la respuesta' | titlecase}}</button>
+    </div>
+  </form>
+  <div *ngIf="!content.valid">
+    <h3>Aun no hay respuestas de los redactores disponibles.</h3>
+  </div>
+</mat-card>

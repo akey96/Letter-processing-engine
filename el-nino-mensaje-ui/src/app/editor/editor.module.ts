@@ -19,12 +19,12 @@ import {
 } from '@angular/forms';
 import { DialogImage } from '../home/list-images/dialog-image/dialog-image';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material";
-import { ListImagesComponent } from '../home/list-images/list-images.component';
-import { RedactorModule } from  '../redactor/redactor.module';
+import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
+import { RedactorModule } from '../redactor/redactor.module';
+import { ContentListComponent } from './content-list/content-list.component';
 
 @NgModule({
-  declarations: [LetterResponseRedactorComponent],
+  declarations: [LetterResponseRedactorComponent, ContentListComponent],
   entryComponents: [
     DialogImage
   ],

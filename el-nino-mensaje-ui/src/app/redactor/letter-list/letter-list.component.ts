@@ -19,7 +19,7 @@ import { MatPaginator } from '@angular/material/paginator';
 
 import { Router} from '@angular/router';
 import { take } from 'rxjs/operators';
-import { ActivatedRoute, Params, ChildrenOutletContexts } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -110,6 +110,5 @@ export class LetterListComponent implements OnInit {
 
   responseLetter() {
     this.router.navigate(['/redactor','letter-response', this.letterSelected]);
-
   }
 }
