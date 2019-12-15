@@ -15,6 +15,8 @@ import {
 } from '@angular/forms';
 
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { DialogContent } from './dialog-content/dialog-content';
 
 
 @Component({
@@ -24,6 +26,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class LetterResponseComponent implements OnInit {
 
+  user: any;
   subcription: Subscription;
   letters: String [];
   letter: FormGroup;
@@ -32,6 +35,7 @@ export class LetterResponseComponent implements OnInit {
   isAnswered: boolean;
   letter_status: string;
   constructor(
+    public dialog: MatDialog,
     public letterService: LetterService,
     public popupService: PopUpService,
     public formBuilder: FormBuilder,
@@ -75,6 +79,14 @@ export class LetterResponseComponent implements OnInit {
         }, (err) => {
           this.popupService.showError('Algo fallo al cargar las cartas, recarga la pagina por favor.');
         });
+
+        // harcode user
+        this.user = {
+          id: 1,
+          name: '2001-01-01 00:00:00',
+          birthday: Date.now(),
+          primaryEmail: 'pepito@gmail.com',
+        };
       }
     });
   }
@@ -92,6 +104,33 @@ export class LetterResponseComponent implements OnInit {
   cleanMessage() {
     this.letter.get('message').reset();
     this.letter.get('response').reset();
+  }
+  
+
+  openDialog(): void {
+    
+    this.route.paramMap.subscribe(params => {
+      if (params.has("id")) {
+        
+        const letterId = parseInt(params.get('id'));
+        const personId = this.user.id;
+
+        const dialogRef = this.dialog.open(DialogContent, {
+          width: '600px',
+          data: {personId, letterId }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+        });
+
+      }
+    });
+    
+  }
+
+  hidenDialog() {
+    this.dialog.closeAll();
   }
 
   enableAnswers() {

@@ -38,4 +38,14 @@ export class LetterService {
     return this.httpClient.put<Letter>(updateUrl, null);
   }
 
+  getLetterByContentId(contentId) {
+    const url = `${environment.serverUrl}/letters/search/findByContentId?contentId=${contentId}`;
+    
+    return this.httpClient.get(url);
+  }
+
+  getLetterByResponsableId(responsableId){
+    const url = `${environment.serverUrl}//letters/search/findByResponsableId?responsableId=${responsableId}`;
+    return this.httpClient.get(url);
+  }
 }

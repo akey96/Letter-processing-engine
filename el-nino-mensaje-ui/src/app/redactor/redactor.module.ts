@@ -46,13 +46,18 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material";
 import { ListImagesComponent } from '../home/list-images/list-images.component';
-import { ContentComponent } from './content/content.component';
+import { DialogContent } from './letter-response/dialog-content/dialog-content';
+import {
+  MatDatepickerModule,
+  MatSelectModule
+} from '@angular/material';
 
 
 @NgModule({
-  declarations: [LetterListComponent, LetterResponseComponent, DialogImage, ListImagesComponent, ContentComponent],
+  declarations: [LetterListComponent, LetterResponseComponent, DialogImage, DialogContent, ListImagesComponent],
   entryComponents: [
-    DialogImage
+    DialogImage,
+    DialogContent
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}

@@ -1,0 +1,19 @@
+form {
+    width: 90%;
+    margin: 3% auto;
+    height: 100%;
+  }
+  .form-buttons {
+    text-align: center;
+  }
+  .form-buttons button{
+    margin-right: 1%;
+  }
+  h2 {
+    text-align: center;
+  }
+  .mat-form-field {
+    width: 100%;
+  }
+  
+  

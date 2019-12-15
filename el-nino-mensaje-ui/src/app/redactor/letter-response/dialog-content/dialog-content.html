@@ -1,0 +1,21 @@
+
+    <h2>Registro de Contenido</h2>
+    <form [formGroup]="contentForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Descripcion</mat-label>
+            <input matInput placeholder="Descripcion*" formControlName="description">
+        </mat-form-field>
+
+        
+        <mat-form-field  appearance="outline">
+            <mat-label>Contenido</mat-label>
+            <textarea matInput placeholder="Contenido*" formControlName="content" rows="7" ></textarea>
+        </mat-form-field>
+
+        <div class="form-buttons">
+            <button type="button" mat-raised-button (click)="onNoClick()" color="accent">Cancelar</button>
+            <button type="button" mat-raised-button (click)="registerContent()" [disabled]="!contentForm.valid"
+                color="primary">Registrar</button>
+        </div>
+    </form>
+
