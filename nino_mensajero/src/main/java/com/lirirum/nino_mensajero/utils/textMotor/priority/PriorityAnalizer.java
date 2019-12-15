@@ -30,8 +30,6 @@ public class PriorityAnalizer {
     }
 
     private static List retrieveKeywords(Letter letter, Person person){
-        //return Arrays.asList(person.getKeywords().split(",")); //example
-        return Arrays.asList("feliz","fuerte");
-
+        return Arrays.asList(person.getKeywords().split(","));
     }
 }

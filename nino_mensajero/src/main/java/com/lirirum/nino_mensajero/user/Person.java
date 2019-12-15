@@ -1,19 +1,25 @@
 package com.lirirum.nino_mensajero.user;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.lirirum.nino_mensajero.keyword.Keyword;
 import lombok.Data;
 import com.lirirum.nino_mensajero.letter.Letter;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.util.Date;
 import java.util.Set;
-
+@EqualsAndHashCode(exclude = "assignedCards")
 @Data
 @Entity
 @Table(name = "PERSON")
+
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -45,9 +51,11 @@ public class Person {
     private PersonRole personRole;
     @Enumerated(EnumType.STRING)
     private PersonStatus personStatus;
+    @JsonIgnoreProperties("responsable")
     @OneToMany(mappedBy = "responsable", cascade = CascadeType.ALL)
     private Set<Letter> assignedCards;
 
+    @JsonIgnoreProperties("personSet")
     @ManyToMany(mappedBy = "personSet")
     private Set<Keyword> keywordSet;
 
