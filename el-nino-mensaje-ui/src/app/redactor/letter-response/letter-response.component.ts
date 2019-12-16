@@ -2,10 +2,18 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { Letter } from 'src/app/shared/models/letter.model';
-import { LetterService } from 'src/app/shared/services/letter.service';
-import { PopUpService } from 'src/app/shared/services/pop-up.service';
-import { Subscription } from 'rxjs';
+import {
+  Letter
+} from 'src/app/shared/models/letter.model';
+import {
+  LetterService
+} from 'src/app/shared/services/letter.service';
+import {
+  PopUpService
+} from 'src/app/shared/services/pop-up.service';
+import {
+  Subscription
+} from 'rxjs';
 
 import {
   FormControl,
@@ -14,11 +22,19 @@ import {
   Validators
 } from '@angular/forms';
 
-import { Router, ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material';
-import { DialogContent } from './dialog-content/dialog-content';
-import { AuthenticationService } from 'src/app/shared/services/authentication.service';
-import { ContentService } from 'src/app/shared/services/content.service';
+import {
+  Router,
+  ActivatedRoute
+} from '@angular/router';
+import {
+  MatDialog
+} from '@angular/material';
+import {
+  AuthenticationService
+} from 'src/app/shared/services/authentication.service';
+import {
+  ContentService
+} from 'src/app/shared/services/content.service';
 
 
 @Component({
@@ -30,13 +46,13 @@ export class LetterResponseComponent implements OnInit {
 
   user: any;
   subcription: Subscription;
-  letters: String [];
+  letters: string[];
   letter: FormGroup;
   contentForm: FormGroup;
   letterSelected: string;
   listImages = [];
   isAnswered: boolean;
-  letter_status: string;
+  letterStatus: string;
   constructor(
     public dialog: MatDialog,
     public letterService: LetterService,
@@ -45,31 +61,32 @@ export class LetterResponseComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private contentService: ContentService,
-    private authenticationService: AuthenticationService ) {
+    private authenticationService: AuthenticationService) {
 
-      this.letter = this.formBuilder.group({
-        message: new FormControl('', Validators.required),
-        response: new FormControl('', Validators.required),
-        status: new FormControl('', Validators.required),
-        creationDate: new FormControl('', Validators.required),
-        priority: new FormControl('', Validators.required),
+    this.letter = this.formBuilder.group({
+      message: new FormControl('', Validators.required),
+      response: new FormControl('', Validators.required),
+      status: new FormControl('', Validators.required),
+      creationDate: new FormControl('', Validators.required),
+      priority: new FormControl('', Validators.required),
 
-      });
+    });
 
-      this.route.paramMap.subscribe(params => {
-        if (params.has("id")) {
-          const letterId = parseInt(params.get('id'));
-          let lettersArray = []
-          lettersArray.push(letterId);
-          this.contentForm = this.formBuilder.group({
-            description: new FormControl('', [  
-              Validators.required,
-              Validators.pattern('^[A-Za-z]+(\ +[A-Za-z]+)*$')]),
-            creationDate: new FormControl(Date.now(), Validators.required),
-            letters: new FormControl(lettersArray)
-          });
-        }
-      });
+    this.route.paramMap.subscribe(params => {
+      if (params.has('id')) {
+        const letterId = parseInt(params.get('id'));
+        const lettersArray = [];
+        lettersArray.push(letterId);
+        this.contentForm = this.formBuilder.group({
+          description: new FormControl('', [
+            Validators.required,
+            Validators.pattern('^[A-Za-z]+(\ +[A-Za-z]+)*$')
+          ]),
+          creationDate: new FormControl(Date.now(), Validators.required),
+          letters: new FormControl(lettersArray)
+        });
+      }
+    });
 
 
   }
@@ -78,7 +95,7 @@ export class LetterResponseComponent implements OnInit {
     this.isAnswered = false;
 
     this.route.paramMap.subscribe(params => {
-      if (params.has("id")) {
+      if (params.has('id')) {
         this.letterSelected = params.get('id');
         this.letterService.getLettersId(this.letterSelected).subscribe((letter: any) => {
           this.listImages = letter.images;
@@ -88,39 +105,34 @@ export class LetterResponseComponent implements OnInit {
           this.letter.get('creationDate').setValue(letter.creationDate);
           this.letter.get('priority').setValue(letter.priority);
 
-          if(letter.priority === 'LOW_PRIORITY') {
-            this.letter_status = 'prioridad baja';
-          } else if(letter.priority === 'MEDIUM_PRIORITY') {
-            this.letter_status = 'prioridad media';
+          if (letter.priority === 'LOW_PRIORITY') {
+            this.letterStatus = 'prioridad baja';
+          } else if (letter.priority === 'MEDIUM_PRIORITY') {
+            this.letterStatus = 'prioridad media';
           } else {
-            this.letter_status = 'prioridad alta';
+            this.letterStatus = 'prioridad alta';
           }
-          console.log('carta', letter)
           this.letterService.getContentById(letter.id).subscribe(resp => {
-            console.log('conten',resp)
-            document.querySelector('#description')['value'] = resp['description'];
-          })
+          });
         }, (err) => {
-          this.popupService.showError('Algo fallo al cargar las cartas, recarga la pagina por favor.');
+          this.popupService.showError('Algo fallo al cargar la carta, por favor recarga la pagina');
         });
 
-        let user = this.authenticationService.getPrincipal()
+        const user = this.authenticationService.getPrincipal();
         this.user = {
           id: user.id,
           name: user.name,
           birthday: user.birthday,
           email: user.email,
         };
-        console.log(this.user);
       }
     });
   }
 
 
-  responseLetter(){
+  responseLetter() {
     this.letterService.updateLetter(this.letterSelected, this.letter.value).subscribe((resp) => {
       this.popupService.showSuccess('Tu respuesta fue guardada exitosamente');
-      this.router.navigate(['/redactor','letter-list']);
     }, (error) => {
       this.popupService.showError('NO SE PUDO GUARDAR TU RESPUESTA, POR FAVOR INTENTA GUARDARLA NUEVAMENTE');
     });
@@ -132,24 +144,24 @@ export class LetterResponseComponent implements OnInit {
 
 
   openDialog(): void {
-    if(this.letter.value.status == 'REPLIED')  {
+    if (this.letter.value.status === 'REPLIED') {
       this.popupService.showError('Ya existe un contenido con esta carta');
     } else {
-      let description = document.querySelector('#description')['value']
-    this.contentForm.get('description').setValue(description);
-    this.contentService.createContent(this.user.id, this.contentForm.value).subscribe((resp) => {
-      let letterId = this.contentForm.value.letters[0];
-      this.letter.get('status').setValue('REPLIED')
-      this.letterService.updateLetter(letterId,  this.letter.value).subscribe((resp) => {
-        this.popupService.showSuccess('Se registro el contenido correctamente');
-      })
-      
+      this.contentForm.get('description').setValue('Respuesta a la carta con id:' + this.contentForm.value.letters[0] );
+      this.contentService.createContent(this.user.id, this.contentForm.value).subscribe((resp) => {
+        const letterId = this.contentForm.value.letters[0];
+        this.letter.get('status').setValue('REPLIED');
+        this.letterService.updateLetter(letterId, this.letter.value).subscribe(() => {
+          this.popupService.showSuccess('La respuesta que diste fue enviada correctamente a un editor');
+          this.router.navigate(['/redactor', 'letter-list']);
+        });
 
-    }, (error) => {
-      this.popupService.showError(error);
-    })
+
+      }, (error) => {
+        this.popupService.showError(error);
+      });
     }
-    
+
   }
 
   hidenDialog() {
@@ -162,8 +174,7 @@ export class LetterResponseComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['/redactor','letter-list']);
+    this.router.navigate(['/redactor', 'letter-list']);
   }
 
 }
-

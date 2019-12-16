@@ -1,11 +1,10 @@
 
-    <h2>Registro de Contenido</h2>
+    <h2>Escribe una breve descripcion de la respuesta que diste a la carta para que el editor pueda reconocerla</h2>
     <form [formGroup]="contentForm">
         <mat-form-field appearance="outline">
             <mat-label>Descripcion</mat-label>
             <input matInput placeholder="Descripcion*" formControlName="description">
         </mat-form-field>
-
 
         <div class="form-buttons">
             <button type="button" mat-raised-button (click)="onNoClick()" color="accent">Cancelar</button>

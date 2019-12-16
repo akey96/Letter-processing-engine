@@ -4,55 +4,24 @@
       CARRED-0{{letterSelected}}
     </mat-card-title>
     <mat-card-subtitle>
-      Estado: {{letter_status | titlecase}}
+      Estado: {{letterStatus | titlecase}}
     </mat-card-subtitle>
     <mat-card-subtitle>
       Fecha: {{letter.value.creationDate | date }}
     </mat-card-subtitle>
   </mat-card-header>
   <form [formGroup]="letter">
-
-    <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center"
-      align="start">
-
-
-      <div class="fade" fxFlex="100%">
-        <a (click)="openDialog()" _ngcontent-c1="" aria-label="Angular Material" class="docs-button mat-button"
-          mat-button="" tabindex="0" aria-disabled="false"><span class="mat-button-wrapper">
-            <img _ngcontent-c1="" alt="angular" class="docs-angular-logo"
-              src="/assets/images/add_circle_outline-24px.svg">
-            <span _ngcontent-c1="">Agregar contenido</span></span>
-          <div class="mat-button-ripple mat-ripple" matripple=""></div>
-          <div class="mat-button-focus-overlay"></div>
-        </a>
-        <mat-form-field fxLayoutAlign="start" appearance="outline">
-          <mat-label>Describa su contenido</mat-label>
-          <input id="description" matInput placeholder="Describa su contenido*"  rows="17">
-        </mat-form-field>
-      </div>
-    </div>
-
-    <!--label  formControlName="status">stado: {{letter}}</label-->
-
-
     <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
 
-      <div class="fade" fxFlex="100%" *ngIf="!isAnswered">
-        <h3 fxLayoutAlign="start">Carta Actual</h3>
+      <div class="fade" fxFlex="50%">
+        <h3 fxLayoutAlign="start">Contenido de la Carta</h3>
         <mat-form-field appearance="outline">
           <textarea matInput formControlName="message" rows="17" readonly></textarea>
         </mat-form-field>
       </div>
 
-      <div class="fade" fxFlex="50%" *ngIf="isAnswered">
-        <h3 fxLayoutAlign="start">Carta Actual</h3>
-        <mat-form-field appearance="outline">
-          <textarea matInput formControlName="message" rows="17" readonly></textarea>
-        </mat-form-field>
-      </div>
-
-      <div class="fade" fxFlex="50%" *ngIf="isAnswered">
-        <h3 fxLayoutAlign="start">Carta Respuesta</h3>
+      <div class="fade" fxFlex="50%">
+        <h3 fxLayoutAlign="start">Respuesta a la Carta</h3>
         <mat-form-field appearance="outline">
           <mat-label>
             <mat-icon>markunread</mat-icon> Responde aqui...
@@ -66,19 +35,10 @@
 
     <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="end">
       <div class="buttons">
-        <button color="warn" mat-raised-button (click)="back()">Cancelar</button>
-        <button *ngIf="isAnswered" style="background-color: #28A745; color: honeydew" mat-raised-button
-          (click)="enableAnswers()">Deshabilitar Respuesta</button>
-        <button *ngIf="!isAnswered" style="background-color: #28A745; color: honeydew" mat-raised-button
-          (click)="enableAnswers()">Habilitar Respuesta</button>
-        <button color="primary" [disabled]="!letter.valid" mat-raised-button (click)="responseLetter()">Guardar</button>
+        <button color="accent" mat-raised-button (click)="back()">Regresar a la lista de Cartas</button>
+        <button color="primary" [disabled]="!letter.valid" mat-raised-button (click)="responseLetter()">Guardar Respuesta</button>
+        <button color="primary" [disabled]="!letter.valid" mat-raised-button (click)="openDialog()">Mandar Respuesta al Editor</button>
       </div>
     </div>
   </form>
-
-  <!--
-  <div *ngIf="!letter.valid">
-    <h3>Aun no tiene cartas asignadas, Espere a que el sistema le asigne alguna carta.</h3>
-  </div>
-  -->
 </mat-card>
