@@ -31,9 +31,6 @@ export interface DialogData {
           description: new FormControl('', [
             Validators.required,
             Validators.pattern('^[A-Za-z]+(\ +[A-Za-z]+)*$')]),
-          content: new FormControl('', [
-            Validators.required,
-            Validators.pattern('^[A-Za-z]+(\ +[A-Za-z]+)*$')]),
           creationDate: new FormControl(Date.now(), Validators.required),
           letters: new FormControl(lettersArray)
         });

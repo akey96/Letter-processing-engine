@@ -26,7 +26,6 @@ public class ContentService {
         Content content = new Content();
         content.setId(contentDTO.id);
         content.setDescription(contentDTO.description);
-        content.setContent(contentDTO.content);
         content.setPerson(contentDTO.person);
         content.setCreationDate(contentDTO.creationDate);
 
@@ -52,7 +51,6 @@ public class ContentService {
         }
 
         return contentRepository.findById(contentId).map(content -> {
-            content.setContent(contentRequest.getContent());
             return contentRepository.save(content);
         }).orElseThrow(() -> new ResourceNotFoundException("ContentId " + contentId + "not found"));
     }

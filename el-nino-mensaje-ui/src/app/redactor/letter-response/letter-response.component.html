@@ -12,35 +12,46 @@
   </mat-card-header>
   <form [formGroup]="letter">
 
+    <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center"
+      align="start">
 
-      <div mat-dialog-actions align="end">
-          <a (click)="openDialog()"  _ngcontent-c1="" aria-label="Angular Material" class="docs-button mat-button" mat-button=""  tabindex="0" aria-disabled="false" ><span class="mat-button-wrapper">
-              <img _ngcontent-c1="" alt="angular" class="docs-angular-logo" src="/assets/images/add_circle_outline-24px.svg">
-              <span _ngcontent-c1="">Agregar contenido</span>
-              </span> <div class="mat-button-ripple mat-ripple" matripple=""></div><div class="mat-button-focus-overlay">
-              </div>
-          </a>
+
+      <div class="fade" fxFlex="100%">
+        <a (click)="openDialog()" _ngcontent-c1="" aria-label="Angular Material" class="docs-button mat-button"
+          mat-button="" tabindex="0" aria-disabled="false"><span class="mat-button-wrapper">
+            <img _ngcontent-c1="" alt="angular" class="docs-angular-logo"
+              src="/assets/images/add_circle_outline-24px.svg">
+            <span _ngcontent-c1="">Agregar contenido</span></span>
+          <div class="mat-button-ripple mat-ripple" matripple=""></div>
+          <div class="mat-button-focus-overlay"></div>
+        </a>
+        <mat-form-field fxLayoutAlign="start" appearance="outline">
+          <mat-label>Describa su contenido</mat-label>
+          <input id="description" matInput placeholder="Describa su contenido*"  rows="17">
+        </mat-form-field>
       </div>
+    </div>
 
-      <!--label  formControlName="status">stado: {{letter}}</label-->
+    <!--label  formControlName="status">stado: {{letter}}</label-->
+
 
     <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
 
       <div class="fade" fxFlex="100%" *ngIf="!isAnswered">
         <h3 fxLayoutAlign="start">Carta Actual</h3>
-        <mat-form-field  appearance="outline">
+        <mat-form-field appearance="outline">
           <textarea matInput formControlName="message" rows="17" readonly></textarea>
         </mat-form-field>
       </div>
 
       <div class="fade" fxFlex="50%" *ngIf="isAnswered">
         <h3 fxLayoutAlign="start">Carta Actual</h3>
-        <mat-form-field  appearance="outline">
+        <mat-form-field appearance="outline">
           <textarea matInput formControlName="message" rows="17" readonly></textarea>
-         </mat-form-field>
+        </mat-form-field>
       </div>
 
-      <div class="fade" fxFlex="50%" *ngIf="isAnswered" >
+      <div class="fade" fxFlex="50%" *ngIf="isAnswered">
         <h3 fxLayoutAlign="start">Carta Respuesta</h3>
         <mat-form-field appearance="outline">
           <mat-label>
@@ -51,14 +62,15 @@
       </div>
     </div>
 
-
-  <app-list-images [listImages]="listImages" ></app-list-images>
+    <app-list-images [listImages]="listImages"></app-list-images>
 
     <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="end">
       <div class="buttons">
-        <button  color="warn" mat-raised-button (click)="back()" >Cancelar</button>
-        <button  *ngIf="isAnswered" style="background-color: #28A745; color: honeydew" mat-raised-button (click)="enableAnswers()" >Deshabilitar Respuesta</button>
-        <button  *ngIf="!isAnswered" style="background-color: #28A745; color: honeydew" mat-raised-button (click)="enableAnswers()" >Habilitar Respuesta</button>
+        <button color="warn" mat-raised-button (click)="back()">Cancelar</button>
+        <button *ngIf="isAnswered" style="background-color: #28A745; color: honeydew" mat-raised-button
+          (click)="enableAnswers()">Deshabilitar Respuesta</button>
+        <button *ngIf="!isAnswered" style="background-color: #28A745; color: honeydew" mat-raised-button
+          (click)="enableAnswers()">Habilitar Respuesta</button>
         <button color="primary" [disabled]="!letter.valid" mat-raised-button (click)="responseLetter()">Guardar</button>
       </div>
     </div>

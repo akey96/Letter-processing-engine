@@ -3,12 +3,12 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import {Letter} from 'src/app/shared/models/letter.model';
-import { LetterService} from 'src/app/shared/services/letter.service';
-import { PopUpService} from 'src/app/shared/services/pop-up.service';
-import {Subscription} from 'rxjs';
-import { MatTableDataSource} from '@angular/material/table';
-import { MatSort} from '@angular/material/sort';
+import { Letter } from 'src/app/shared/models/letter.model';
+import { LetterService } from 'src/app/shared/services/letter.service';
+import { PopUpService } from 'src/app/shared/services/pop-up.service';
+import { Subscription } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 import {
   FormControl,
   FormGroup,
@@ -17,9 +17,9 @@ import {
 } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -29,7 +29,7 @@ import { ActivatedRoute} from '@angular/router';
 })
 export class LetterListComponent implements OnInit {
   displayedColumns: string[];
-  dataSource: MatTableDataSource <Letter> ;
+  dataSource: MatTableDataSource<Letter>;
   subcription: Subscription;
   letter: FormGroup;
   letterSelected: string;
@@ -47,7 +47,7 @@ export class LetterListComponent implements OnInit {
     public formBuilder: FormBuilder,
     private rutaActiva: ActivatedRoute,
     private router: Router) {
-    this.displayedColumns = ['id','date', 'status', 'priority'];
+    this.displayedColumns = ['id', 'date', 'status', 'priority'];
     this.letter = formBuilder.group({
       message: new FormControl('', Validators.required)
     });
@@ -84,16 +84,19 @@ export class LetterListComponent implements OnInit {
     this.letter.get('message').setValue(letter.message);
     this.letterSelected = letter['_links'].letter.href.split('/')[4];
 
-    this.letterService.updateLetterStatusToRead(letter.id).pipe(take(1)).subscribe((letterResponse: Letter) => {
-      this.dataSource.data = this.dataSource.data.map(letterDataSource => {
-        if (letterResponse.id === letterDataSource.id) {
-          return letterResponse;
-        } else {
-          return letterDataSource;
-        }
-      });
-    }, () => {
+    if (letter.status != 'REPLIED') {
+      this.letterService.updateLetterStatusToRead(letter.id).pipe(take(1)).subscribe((letterResponse: Letter) => {
+        this.dataSource.data = this.dataSource.data.map(letterDataSource => {
+          if (letterResponse.id === letterDataSource.id) {
+            return letterResponse;
+          } else {
+            return letterDataSource;
+          }
         });
+      }, () => {
+      });
+    }
+    
   }
 
   periodIsSelected(letter: Letter) {
@@ -108,6 +111,6 @@ export class LetterListComponent implements OnInit {
   }
 
   responseLetter() {
-    this.router.navigate(['/redactor','letter-response', this.letterSelected]);
+    this.router.navigate(['/redactor', 'letter-response', this.letterSelected]);
   }
 }

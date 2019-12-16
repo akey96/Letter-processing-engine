@@ -20,10 +20,6 @@ public class Content {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @NotNull
-    @NotBlank
-    @Column(nullable = false)
-    private String content;
 
     @NotNull
     @NotBlank
@@ -45,10 +41,6 @@ public class Content {
         this.id = id;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
@@ -61,9 +53,6 @@ public class Content {
         return id;
     }
 
-    public String getContent() {
-        return content;
-    }
 
     public Date getCreationDate() {
         return creationDate;
