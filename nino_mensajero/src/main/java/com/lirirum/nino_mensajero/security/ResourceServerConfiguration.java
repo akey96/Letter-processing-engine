@@ -25,9 +25,10 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .requestMatchers().antMatchers("/**")
                 .and().authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/persons/**").access(EVERY_ROLE)
-                .antMatchers(HttpMethod.POST,"/persons/**").access(ADMIN)
+                .antMatchers(HttpMethod.POST,"/persons/**").access(ADMIN_REDACTOR)
                 .antMatchers(HttpMethod.PUT, "/letters/**").access(REDACTOR_EDITOR)
                 .antMatchers(HttpMethod.GET, "/letters/**").access(REDACTOR_EDITOR)
+                .antMatchers(HttpMethod.GET, "/contents/**").access(EDITOR)
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
 }
