@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 
@@ -15,13 +15,14 @@ export class AuthenticationService {
 
   login(credentials: any) {
     let headers: HttpHeaders;
-    const formData = new FormData();
+    let formData = new HttpParams();
     headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    headers.append('Authorization', 'Basic ' + btoa('nimeclient:nmsecret'));
-    formData.append('username', credentials.username.toLowerCase());
-    formData.append('password', credentials.password);
-    formData.append('grant_type', 'password');
+    headers = headers.set('Content-Type', 'application/x-www-form-urlencoded')
+           .set('Authorization', 'Basic ' + btoa('nimeclient:nmsecret'));
+    formData = formData.set('username', credentials.username.toLowerCase())
+                       .set('password', credentials.password)
+                       .set('grant_type', 'password');
+    console.log(formData);
     return this.httpClient.post(`${this.url}/token`, formData,
     {
       headers
@@ -30,11 +31,11 @@ export class AuthenticationService {
 
   checkToken(token: string) {
     let headers: HttpHeaders;
-    const formData = new FormData();
-    formData.append('token', token);
+    let formData = new HttpParams();
+    formData = formData.set('token', token);
     headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    headers.append('Authorization', 'Basic ' + btoa('nimeclient:nmsecret'));
+    headers = headers.set('Content-Type', 'application/x-www-form-urlencoded')
+           .set('Authorization', 'Basic ' + btoa('nimeclient:nmsecret'));
     return this.httpClient.post(`${this.url}/check_token`, formData,
     {
       headers

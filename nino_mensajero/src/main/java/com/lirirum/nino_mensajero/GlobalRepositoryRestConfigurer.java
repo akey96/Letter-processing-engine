@@ -16,6 +16,12 @@ public class GlobalRepositoryRestConfigurer extends RepositoryRestConfigurerAdap
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
         config.exposeIdsFor(Letter.class, Content.class, Person.class);
+        config.getCorsRegistry()
+                .addMapping("/**")
+                .allowedOrigins("*")
+                .allowedHeaders("*")
+                .allowedMethods("*").allowCredentials(false).maxAge(3600);
+
     }
 
 }

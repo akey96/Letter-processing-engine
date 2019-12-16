@@ -4,18 +4,23 @@ import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthInterceptorService implements HttpInterceptor {
+  private url: string;
 
-  constructor(public router: Router, public authenticationService: AuthenticationService) { }
+  constructor(public router: Router, public authenticationService: AuthenticationService) {
+    this.url = `${environment.serverUrl}`;
+
+   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token: string = localStorage.getItem('access_token');
     let request = req;
-    if (req.url !== 'http://localhost:8080/oauth/token' && req.url !== 'http://localhost:8080/oauth/check_token') {
+    if (!req.headers.get('Authorization') && !(req.url === `${this.url}/letters` && req.method === 'POST')) {
       request = req.clone({
         setHeaders: {
           authorization: `Bearer ${ token }`
