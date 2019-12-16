@@ -34,9 +34,9 @@ export class RegisterUserComponent implements OnInit {
         Validators.pattern('^[1-9]+ [A-Za-z]{2,3}$')]),
       birthday: new FormControl('', Validators.required),
       email: new FormControl('', Validators.compose([Validators.email, Validators.required])),
-      username: new FormControl('', Validators.required),
+      username: new FormControl('', [Validators.required, Validators.minLength(4)]),
       keywords: new FormControl('') ,
-      password: new FormControl('', Validators.required),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       personRole: new FormControl('', Validators.required),
       personStatus: new FormControl('ACTIVE')
     });
