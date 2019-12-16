@@ -18,6 +18,13 @@ export class LetterService {
     return this.httpClient.post(this.url, letter);
   }
 
+
+  getContentById(letterId) {
+    let urlId = `${this.url}/${letterId}/content`;
+    return this.httpClient.get(urlId);
+    
+  }
+
   getLetters() {
     return this.httpClient.get < Letter[] > (this.url);
   }

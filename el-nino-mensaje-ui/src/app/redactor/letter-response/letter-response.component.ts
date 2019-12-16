@@ -95,7 +95,11 @@ export class LetterResponseComponent implements OnInit {
           } else {
             this.letter_status = 'prioridad alta';
           }
-
+          console.log('carta', letter)
+          this.letterService.getContentById(letter.id).subscribe(resp => {
+            console.log('conten',resp)
+            document.querySelector('#description')['value'] = resp['description'];
+          })
         }, (err) => {
           this.popupService.showError('Algo fallo al cargar las cartas, recarga la pagina por favor.');
         });
@@ -128,7 +132,10 @@ export class LetterResponseComponent implements OnInit {
 
 
   openDialog(): void {
-    let description = document.querySelector('#description')['value']
+    if(this.letter.value.status == 'REPLIED')  {
+      this.popupService.showError('Ya existe un contenido con esta carta');
+    } else {
+      let description = document.querySelector('#description')['value']
     this.contentForm.get('description').setValue(description);
     this.contentService.createContent(this.user.id, this.contentForm.value).subscribe((resp) => {
       let letterId = this.contentForm.value.letters[0];
@@ -141,6 +148,8 @@ export class LetterResponseComponent implements OnInit {
     }, (error) => {
       this.popupService.showError(error);
     })
+    }
+    
   }
 
   hidenDialog() {

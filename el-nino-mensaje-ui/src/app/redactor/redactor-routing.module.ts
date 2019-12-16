@@ -24,7 +24,7 @@ export const redactorRoutes: Routes = [{
   ],
   children: [{
       path: '',
-      redirectTo: 'letters-list',
+      redirectTo: 'letter-list',
       pathMatch: 'full'
     },
     {
