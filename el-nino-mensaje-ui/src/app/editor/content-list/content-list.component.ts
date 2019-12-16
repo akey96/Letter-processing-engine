@@ -60,7 +60,7 @@ export class ContentListComponent implements OnInit {
     }
   }
   viewContent() {
-    this.router.navigate(['/editor', '/content/', this.contentSelected]);
+    this.router.navigate(['/editor', 'content', this.contentSelected]);
   }
 
   rejectContent() {

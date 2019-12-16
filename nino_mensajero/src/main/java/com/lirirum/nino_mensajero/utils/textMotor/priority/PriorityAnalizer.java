@@ -3,6 +3,7 @@ import com.lirirum.nino_mensajero.letter.Letter;
 import com.lirirum.nino_mensajero.letter.Priority;
 import com.lirirum.nino_mensajero.letterAnalysis.LetterAnalysis;
 import com.lirirum.nino_mensajero.letterAnalysis.Sentiment;
+import com.lirirum.nino_mensajero.user.Person;
 import com.lirirum.nino_mensajero.utils.textCorrector.TextCorrector;
 import com.lirirum.nino_mensajero.utils.textMotor.LetterComponent;
 import com.lirirum.nino_mensajero.utils.textMotor.Pipeline;
@@ -20,57 +21,15 @@ import java.util.List;
 @Service
 public class PriorityAnalizer {
 
-
-    private final static String[] selectedTags = {"ADJ","NOUN","PROPN","PRON","VERB"};
-    @Autowired
-    private LetterComponent letterComponent;
-
-    private static StanfordCoreNLP stanfordCoreNLP;
-
-    static{
-        stanfordCoreNLP = Pipeline.getPipeline();
-    }
     public  Letter givePriority(Letter letter){
-
-        String correctedText = TextCorrector.spellChecker(letter.getMessage());
-        System.out.println(correctedText);
-        LetterAnalysis letterAnalysis =new LetterAnalysis();
-        letterAnalysis.setTextCorrected(correctedText);
-        letterAnalysis.setLetterSentiment(Sentiment.NEGATIVE);
-        CoreDocument coreDocument =new CoreDocument(correctedText);
-        stanfordCoreNLP.annotate(coreDocument);
-
-        List<CoreLabel> coreLabelList = coreDocument.tokens();
-        List<String> importantWords = collectImportantWords(coreLabelList);
-        List<String> profileKeywords = retrieveKeywords(letter);
-
-        letterAnalysis.setImportantWords(importantWords);
-
-        letterComponent.storeAnalysis(letterAnalysis);
-        letter.setLetterAnalysis(letterAnalysis);
-        letter = HighPriorityAnalizer.checkPriority(letter,importantWords,profileKeywords);
-
+        List<String> profileKeywords = retrieveKeywords(letter,letter.getResponsable());
+        letter = HighPriorityAnalizer.checkPriority(letter,letter.getLetterAnalysis().getImportantWords(),profileKeywords);
         if(letter.getPriority().equals(Priority.LOW_PRIORITY))
-            MediumPriorityAnalizer.checkPriority(letter,importantWords,profileKeywords);
-
+            MediumPriorityAnalizer.checkPriority(letter,letter.getLetterAnalysis().getImportantWords(),profileKeywords);
         return letter;
     }
-    private static List<String> collectImportantWords(List<CoreLabel> coreLabelList){
-        List<String> importantWords = new ArrayList<>();
-        for(CoreLabel coreLabel: coreLabelList)
-            if(checkTag(coreLabel.tag()))
-                importantWords.add(coreLabel.word()); // we add the relevant words of the document to a list for further analysis
-        return importantWords;
-    }
-    private static boolean checkTag(String tag){
-        for(String x:selectedTags)
-            if(tag.equals(x))
-                return true;
-        return false;
-    }
 
-    private static List retrieveKeywords(Letter letter){
-        //when the letter will have its own profile assigned the keywords will be assigned//now is hardcoded
-        return Arrays.asList("pelota","feliz","torta","colegio","gato","terco","terror", "vago", "tosco", "tolerante"); //example
+    private static List retrieveKeywords(Letter letter, Person person){
+        return Arrays.asList(person.getKeywords().split(","));
     }
 }

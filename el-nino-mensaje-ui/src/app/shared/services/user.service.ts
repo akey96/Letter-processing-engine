@@ -20,4 +20,9 @@ export class UserService {
   getUserByUsername(username: any) {
     return this.httpClient.get(`${this.url}/search/findByUsername?username=${username}`);
   }
+
+  getPersonByContentId(contentId) {
+    return this.httpClient.get(`${environment.serverUrl}/contents/${contentId}/person`);
+  }
+
 }
