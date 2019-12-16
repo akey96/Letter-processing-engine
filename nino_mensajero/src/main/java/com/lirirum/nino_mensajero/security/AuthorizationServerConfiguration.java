@@ -2,6 +2,7 @@ package com.lirirum.nino_mensajero.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +20,10 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
     private static final int ONE_DAY = 60 * 60 * 24;
     private static final int THIRTY_DAYS = 60 * 60 * 24 * 30;
+    @Value("${auth.client}")
+    private String client;
+    @Value("${auth.secret}")
+    private String secret;
 
     @Autowired
     private TokenStore tokenStore;
@@ -39,8 +44,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("nimeclient")
-                .secret(encoder.encode("nmsecret"))
+                .withClient(client)
+                .secret(encoder.encode(secret))
                 .authorizedGrantTypes("password", "refresh_token")
                 .authorities("REDACTOR", "EDITOR", "ADMINISTRATOR")
                 .scopes("all")

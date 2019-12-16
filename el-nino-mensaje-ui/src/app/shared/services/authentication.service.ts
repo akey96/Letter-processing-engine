@@ -8,9 +8,13 @@ import { Router } from '@angular/router';
 })
 export class AuthenticationService {
   url: string;
+  oauthClient: string;
+  oauthSecret: string;
 
   constructor(public httpClient: HttpClient, public router: Router) {
     this.url = `${environment.serverUrl}/oauth`;
+    this.oauthClient = environment.oauthClientId;
+    this.oauthSecret = environment.oauthSecret;
   }
 
   login(credentials: any) {
@@ -18,11 +22,10 @@ export class AuthenticationService {
     let formData = new HttpParams();
     headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/x-www-form-urlencoded')
-           .set('Authorization', 'Basic ' + btoa('nimeclient:nmsecret'));
+           .set('Authorization', 'Basic ' + btoa(`${this.oauthClient}:${this.oauthSecret}`));
     formData = formData.set('username', credentials.username.toLowerCase())
                        .set('password', credentials.password)
                        .set('grant_type', 'password');
-    console.log(formData);
     return this.httpClient.post(`${this.url}/token`, formData,
     {
       headers
@@ -35,7 +38,7 @@ export class AuthenticationService {
     formData = formData.set('token', token);
     headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/x-www-form-urlencoded')
-           .set('Authorization', 'Basic ' + btoa('nimeclient:nmsecret'));
+           .set('Authorization', 'Basic ' + btoa(`${this.oauthClient}:${this.oauthSecret}`));
     return this.httpClient.post(`${this.url}/check_token`, formData,
     {
       headers

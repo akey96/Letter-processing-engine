@@ -69,19 +69,18 @@ export class ContentComponent implements OnInit {
             this.contentForm.get('content').setValue(this.content.content);
             this.contentForm.get('description').setValue(this.content.description);
 
-            console.log(this.content);
           }, (err) => {
             this.popupService.showError('Algo fallo al cargar las cartas, recarga la pagina por favor.');
           });
 
           // this.letters.forEach((letter) => {
-            
+
           //   this.lettersLink.push(`${environment.serverUrl}/letters/${letter.id}`);
           //   console.log(this.lettersLink)
           // });
 
 
-          // this.letter.get('message').setValue(letter.message); 
+          // this.letter.get('message').setValue(letter.message);
         }, (err) => {
           this.popupService.showError('Algo fallo al cargar las cartas, recarga la pagina por favor.');
         });
