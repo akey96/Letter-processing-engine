@@ -11,13 +11,17 @@ import {
 import {
   LetterListComponent
 } from './letter-list/letter-list.component';
-import { 
+import {
   LetterResponseComponent
 } from './letter-response/letter-response.component';
+import { RedactorGuard } from '../shared/guards/redactor.guard';
 
 export const redactorRoutes: Routes = [{
   path: 'redactor',
   component: UserHomeComponent,
+  canActivate: [
+    RedactorGuard
+  ],
   children: [{
       path: '',
       redirectTo: 'letters-list',

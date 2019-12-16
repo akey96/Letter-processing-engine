@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 
 import { ActivatedRoute,  Router, UrlSegment } from '@angular/router';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 
 @Component({
   selector: 'app-navigation-menu',
@@ -18,14 +19,14 @@ export class NavigationMenuComponent implements OnInit {
   constructor(
     private rutaActiva: ActivatedRoute,
     private router: Router,
+    private authenticationService: AuthenticationService
 
-  ) {//console.log(route);
+  ) {
   }
 
-  url: String;
+  url: string;
 
   ngOnInit() {
-   
     this.rutaActiva.url.subscribe((urlSegments: UrlSegment[]) => {
 
       let arregloUrl = this.router.url.split('/').slice(1);
@@ -47,12 +48,15 @@ export class NavigationMenuComponent implements OnInit {
         } else if (arregloUrl[0] === 'administrator') {
           this.rutas = [{
             nombre: 'Registro de nuevo personal',
-            url: '/administrator/register-user',        
+            url: '/administrator/register-user',
           }];
         }
       }
-     console.log(this.router.url.split('/').slice(1));
     });
+  }
+
+  logout() {
+    this.authenticationService.logout();
   }
 }
 

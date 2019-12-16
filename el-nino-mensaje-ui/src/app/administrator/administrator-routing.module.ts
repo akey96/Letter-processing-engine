@@ -9,10 +9,14 @@ import {
   UserHomeComponent
 } from '../home/user-home/user-home.component';
 import { RegisterUserComponent } from './register-user/register-user.component';
+import { AdministratorGuard } from '../shared/guards/administrator.guard';
 
 export const administratorRoutes: Routes = [{
   path: 'administrator',
   component: UserHomeComponent,
+  canActivate: [
+    AdministratorGuard
+  ],
   children: [{
       path: '',
       redirectTo: 'register-user',
@@ -33,4 +37,5 @@ export const administratorRoutes: Routes = [{
     RouterModule
   ]
 })
+
 export class AdministratorRoutingModule {}

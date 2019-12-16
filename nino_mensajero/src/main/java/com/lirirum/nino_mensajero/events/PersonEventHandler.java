@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +21,15 @@ public class PersonEventHandler {
 
     @Autowired
     private KeywordRepository keywordRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @HandleBeforeCreate()
+    public void handlePersonCreation(Person person) {
+        person.setUsername(person.getUsername().toLowerCase());
+        person.setPassword(passwordEncoder.encode(person.getPassword()));
+    }
+
     @HandleAfterCreate
     public void handleAuthorBeforeCreate(Person person)
     {

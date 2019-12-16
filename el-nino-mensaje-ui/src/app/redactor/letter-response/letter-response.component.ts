@@ -48,16 +48,15 @@ export class LetterResponseComponent implements OnInit {
         status: new FormControl('', Validators.required),
         creationDate: new FormControl('', Validators.required),
         priority: new FormControl('', Validators.required),
-        
+
       });
 
-    console.log(this.letter);
-      
+
   }
 
   ngOnInit() {
     this.isAnswered = false;
- 
+
     this.route.paramMap.subscribe(params => {
       if (params.has("id")) {
         this.letterSelected = params.get('id');
@@ -68,14 +67,14 @@ export class LetterResponseComponent implements OnInit {
           this.letter.get('status').setValue(letter.status);
           this.letter.get('creationDate').setValue(letter.creationDate);
           this.letter.get('priority').setValue(letter.priority);
-          
+
           if(letter.priority === 'LOW_PRIORITY') {
             this.letter_status = 'prioridad baja';
           } else if(letter.priority === 'MEDIUM_PRIORITY') {
             this.letter_status = 'prioridad media';
           } else {
             this.letter_status = 'prioridad alta';
-          } 
+          }
         }, (err) => {
           this.popupService.showError('Algo fallo al cargar las cartas, recarga la pagina por favor.');
         });
@@ -99,19 +98,18 @@ export class LetterResponseComponent implements OnInit {
     }, (error) => {
       this.popupService.showError('NO SE PUDO GUARDAR TU RESPUESTA, POR FAVOR INTENTA GUARDARLA NUEVAMENTE');
     });
-    console.log(this.letter.value);
   }
   cleanMessage() {
     this.letter.get('message').reset();
     this.letter.get('response').reset();
   }
-  
+
 
   openDialog(): void {
-    
+
     this.route.paramMap.subscribe(params => {
       if (params.has("id")) {
-        
+
         const letterId = parseInt(params.get('id'));
         const personId = this.user.id;
 
@@ -121,12 +119,11 @@ export class LetterResponseComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed');
         });
 
       }
     });
-    
+
   }
 
   hidenDialog() {
@@ -135,12 +132,12 @@ export class LetterResponseComponent implements OnInit {
 
   enableAnswers() {
     this.isAnswered = !this.isAnswered;
-    
+
   }
 
   back() {
     this.router.navigate(['/redactor','letter-list']);
   }
-  
+
 }
 

@@ -93,7 +93,6 @@ export class LetterListComponent implements OnInit {
         }
       });
     }, () => {
-          console.log('error', letter);
         });
   }
 

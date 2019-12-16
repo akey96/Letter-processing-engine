@@ -28,7 +28,7 @@ import { WriteLetterComponent } from './home/write-letter/write-letter.component
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LetterService } from './shared/services/letter.service';
 import { PopUpService } from './shared/services/pop-up.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RedactorModule } from './redactor/redactor.module';
 import { UserService } from './shared/services/user.service';
 import { AdministratorModule } from './administrator/administrator.module';
@@ -39,6 +39,7 @@ import {MAT_DATE_LOCALE, MatProgressBarModule} from '@angular/material';
 import { FileUploadComponent } from './home/file-upload/file-upload.component';
 import { LoginComponent } from './home/login/login.component';
 import { AuthenticationService } from './shared/services/authentication.service';
+import { AuthInterceptorService } from './shared/interceptors/auth-interceptor.service';
 
 
 
@@ -79,6 +80,11 @@ import { AuthenticationService } from './shared/services/authentication.service'
     EditorModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    },
     LetterService,
     PopUpService,
     UserService,

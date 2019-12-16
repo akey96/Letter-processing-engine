@@ -11,11 +11,19 @@ import {
 import {
   ContentComponent
 } from './content/content.component';
-import { ContentListComponent } from './content-list/content-list.component';
+import {
+  EditorGuard
+} from '../shared/guards/editor.guard';
+import {
+  ContentListComponent
+} from './content-list/content-list.component';
 
 export const editorRoutes: Routes = [{
   path: 'editor',
   component: UserHomeComponent,
+  canActivate: [
+    EditorGuard
+  ],
   children: [{
       path: '',
       redirectTo: 'content-list',

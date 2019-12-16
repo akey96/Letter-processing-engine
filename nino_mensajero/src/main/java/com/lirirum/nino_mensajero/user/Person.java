@@ -26,7 +26,14 @@ public class Person {
     private long id;
     @NotNull
     @NotBlank
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
+    private String username;
+    @NotNull
+    @NotBlank
+    @Column(nullable = true)
+    private String password;
+    @NotNull
+    @NotBlank
     private String name;
     @NotNull
     @NotBlank
@@ -41,9 +48,6 @@ public class Person {
     @Column( nullable = false, unique = true)
     private String email;
 
-    @NotNull
-    @NotBlank
-    @Column(nullable = false)
     private String keywords;
 
     @Column(nullable = false)

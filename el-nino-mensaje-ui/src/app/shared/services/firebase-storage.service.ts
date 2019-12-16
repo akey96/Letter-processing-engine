@@ -22,9 +22,7 @@ export class FirebaseStorageService {
   public deleteCloudStorage(nombreArchivo: string) {
     let deleteElement = this.storage.ref(nombreArchivo);
     deleteElement.delete().subscribe(resp => {
-      console.log(resp);
     }, error => {
-      console.log(error);
     });
   }
 }

@@ -26,11 +26,11 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.login(this.loginFormGroup.value).subscribe((response: any) => {
-      localStorage.setItem('access_token', response.token);
-      this.authService.checkToken(response.token).subscribe((token: any) => {
-        this.userService.getUserByUsername(token.username).subscribe((user: any) => {
+      localStorage.setItem('access_token', response.access_token);
+      this.authService.checkToken(response.access_token).subscribe((token: any) => {
+        this.userService.getUserByUsername(token.user_name).subscribe((user: any) => {
           localStorage.setItem('principal', JSON.stringify(user));
-          this.router.navigate([`/${user.role}/letter-list`]);
+          this.router.navigate([`/${user.personRole.split('_')[1].toLowerCase()}`]);
         });
       });
     }, () => {
