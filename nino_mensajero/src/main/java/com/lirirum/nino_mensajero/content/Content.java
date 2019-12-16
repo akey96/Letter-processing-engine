@@ -27,6 +27,11 @@ public class Content {
     private String description;
 
     @NotNull
+    @NotBlank
+    @Column(nullable = false)
+    private String content;
+
+    @NotNull
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private Date creationDate;

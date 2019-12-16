@@ -80,8 +80,9 @@ export class LetterResponseComponent implements OnInit {
         this.contentForm = this.formBuilder.group({
           description: new FormControl('', [
             Validators.required,
-            Validators.pattern('^[A-Za-z]+(\ +[A-Za-z]+)*$')
+            Validators.pattern('^[A-Za-z]+(\ +[A-Za-z]+)*$'),
           ]),
+          content: new FormControl(''),
           creationDate: new FormControl(Date.now(), Validators.required),
           letters: new FormControl(lettersArray)
         });
@@ -112,8 +113,6 @@ export class LetterResponseComponent implements OnInit {
           } else {
             this.letterStatus = 'prioridad alta';
           }
-          this.letterService.getContentById(letter.id).subscribe(resp => {
-          });
         }, (err) => {
           this.popupService.showError('Algo fallo al cargar la carta, por favor recarga la pagina');
         });
@@ -147,7 +146,8 @@ export class LetterResponseComponent implements OnInit {
     if (this.letter.value.status === 'REPLIED') {
       this.popupService.showError('Ya existe un contenido con esta carta');
     } else {
-      this.contentForm.get('description').setValue('Respuesta a la carta con id:' + this.contentForm.value.letters[0] );
+      this.contentForm.get('description').setValue('Respuesta A Carta Individual Numero ' + this.contentForm.value.letters[0]);
+      this.contentForm.get('content').setValue(this.letter.get('response').value);
       this.contentService.createContent(this.user.id, this.contentForm.value).subscribe((resp) => {
         const letterId = this.contentForm.value.letters[0];
         this.letter.get('status').setValue('REPLIED');

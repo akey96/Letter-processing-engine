@@ -27,6 +27,7 @@ public class ContentService {
         content.setId(contentDTO.id);
         content.setDescription(contentDTO.description);
         content.setPerson(contentDTO.person);
+        content.setContent(contentDTO.content);
         content.setCreationDate(contentDTO.creationDate);
 
         Content contentSave = personRepository.findById(personId).map(person -> {

@@ -12,7 +12,7 @@
         <input formControlName="password" type="password" matInput placeholder="Password">
         <mat-error>El password es requerido</mat-error>
       </mat-form-field><br><br>
-      <button mat-raised-button [routerLink]="['/write-letter']" routerLinkActive="router-link-active" >Cancelar</button>&nbsp;
+      <button mat-raised-button type="button" [routerLink]="['/write-letter']" routerLinkActive="router-link-active" >Cancelar</button>&nbsp;
       <button mat-raised-button color="primary" [disabled]="!loginFormGroup.valid" (click)="login()">Entrar</button>
     </form>
   </mat-card-content>

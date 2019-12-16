@@ -8,6 +8,7 @@ public class ContentDTO {
 
     public long id;
     public String description;
+    public String content;
     public Date creationDate;
     public Person person;
     public Iterable<Long> letters;
