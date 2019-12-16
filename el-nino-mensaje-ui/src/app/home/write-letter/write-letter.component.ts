@@ -43,7 +43,7 @@ export class WriteLetterComponent implements OnInit {
 
   cancelForm() {
     this.listImagesRef.forEach(element => {
-      this.firebaseStorage.deleteCloudStorage(element); 
+      this.firebaseStorage.deleteCloudStorage(element);
     });
     this.cleanMessage();
   }
@@ -56,7 +56,6 @@ export class WriteLetterComponent implements OnInit {
 
   sendMessage() {
     this.letter.value.images = this.listImages;
-    console.log(this.letter.value);
     this.letterService.sendLetter(this.letter.value).subscribe(() => {
       this.popUpService.showSuccess('Felicidades tu carta fue mandada exitosamente!');
       this.cleanMessage();

@@ -40,9 +40,6 @@ export class LetterResponseRedactorComponent implements OnInit {
         priority: new FormControl('', Validators.required),
 
       });
-
-    console.log(this.letter);
-
   }
 
   ngOnInit() {
@@ -53,7 +50,6 @@ export class LetterResponseRedactorComponent implements OnInit {
         this.letterSelected = params.get('id');
         this.letterService.getLettersId(this.letterSelected).subscribe((letter: any) => {
           this.listImages = letter.images;
-          console.log(this.listImages);
           this.letter.get('message').setValue(letter.message);
           this.letter.get('response').setValue(letter.response);
           this.letter.get('status').setValue(letter.status);
@@ -82,7 +78,6 @@ export class LetterResponseRedactorComponent implements OnInit {
     }, (error) => {
       this.popupService.showError('NO SE PUDO GUARDAR TU RESPUESTA, POR FAVOR INTENTA GUARDARLA NUEVAMENTE');
     });
-    console.log(this.letter.value);
   }
   cleanMessage() {
     this.letter.get('message').reset();

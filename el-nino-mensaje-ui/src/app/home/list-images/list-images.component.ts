@@ -8,7 +8,7 @@ import { DialogImage } from './dialog-image/dialog-image';
   styleUrls: ['./list-images.component.css']
 })
 export class ListImagesComponent implements OnInit {
-  
+
   @Input() listImages=[];
   urlImage:string;
 
@@ -17,7 +17,6 @@ export class ListImagesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.listImages)
   }
 
   showDialog(url) {
@@ -36,7 +35,6 @@ export class ListImagesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 
