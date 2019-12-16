@@ -29,7 +29,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class LetterListComponent implements OnInit {
   displayedColumns: string[];
-  dataSource: MatTableDataSource<Letter>;
+  dataSource: MatTableDataSource<any>;
   subcription: Subscription;
   letter: FormGroup;
   letterSelected: string;
@@ -54,13 +54,16 @@ export class LetterListComponent implements OnInit {
   }
 
   ngOnInit() {
+    let ableLetters: any[];
     this.letterService.getLetters().subscribe((letters: any) => {
-      this.dataSource = new MatTableDataSource(letters._embedded.letters);
+      ableLetters = this.selectAbleLetters(letters._embedded.letters);
+      this.dataSource = new MatTableDataSource(ableLetters);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      if (letters._embedded.letters[0]) {
-        this.letter.get('message').setValue(letters._embedded.letters[0].message);
-        this.letterSelected = letters._embedded.letters[0]['_links'].letter.href.split('/')[4];
+      if (ableLetters) {
+
+        this.letter.get('message').setValue(ableLetters[0].message);
+        this.letterSelected = ableLetters[0]._links.letter.href.split('/')[4];
       }
     }, () => {
       this.popupService.showError('Algo fallo al cargar las cartas, recarga la pagina por favor.');
@@ -68,9 +71,6 @@ export class LetterListComponent implements OnInit {
   }
 
   parsePriority(priority: string) {
-    /*let splitedPriority: string[];
-    splitedPriority = priority.split('_');
-    return `${splitedPriority[0]} ${splitedPriority[1]}`;*/
     if (priority === 'LOW_PRIORITY') {
       return 'PRIORIDAD BAJA';
     } else if (priority === 'HIGH_PRIORITY') {
@@ -79,27 +79,18 @@ export class LetterListComponent implements OnInit {
     return 'PRIORIDAD MEDIA';
   }
 
-  selectLetter(letter: Letter) {
-
+  selectLetter(letter: any) {
     this.letter.get('message').setValue(letter.message);
-    this.letterSelected = letter['_links'].letter.href.split('/')[4];
+    this.letterSelected = letter._links.letter.href.split('/')[4];
 
-    if (letter.status != 'REPLIED') {
+    if (letter.status === 'NEW') {
       this.letterService.updateLetterStatusToRead(letter.id).pipe(take(1)).subscribe((letterResponse: Letter) => {
-        this.dataSource.data = this.dataSource.data.map(letterDataSource => {
-          if (letterResponse.id === letterDataSource.id) {
-            return letterResponse;
-          } else {
-            return letterDataSource;
-          }
-        });
-      }, () => {
+        this.ngOnInit();
       });
     }
-    
   }
 
-  periodIsSelected(letter: Letter) {
+  periodIsSelected(letter: any) {
     if (letter.message === this.letter.get('message').value) {
       return 'selected';
     }
@@ -112,5 +103,17 @@ export class LetterListComponent implements OnInit {
 
   responseLetter() {
     this.router.navigate(['/redactor', 'letter-response', this.letterSelected]);
+  }
+
+  redactorIsAbleToRespond(letter: any) {
+    return letter.status !== 'REPLIED' && letter.status !== 'PRINTED';
+  }
+
+  selectAbleLetters(letters: any[]) {
+    return letters.filter(letter => {
+      if (this.redactorIsAbleToRespond(letter)) {
+        return letter;
+      }
+    });
   }
 }

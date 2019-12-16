@@ -22,7 +22,7 @@ export class LetterService {
   getContentById(letterId) {
     let urlId = `${this.url}/${letterId}/content`;
     return this.httpClient.get(urlId);
-    
+
   }
 
   getLetters() {
@@ -38,16 +38,16 @@ export class LetterService {
     let urlId = `${this.url}/${id}`;
     return this.httpClient.patch(urlId, letter);
   }
-  
+
   updateLetterStatusToRead(letterId: number): Observable<Letter> {
-    
+
     const updateUrl = `${environment.serverUrl}/letters-2/${letterId}/status/read`;
     return this.httpClient.put<Letter>(updateUrl, null);
   }
 
   getLetterByContentId(contentId: number) {
     const url = `${environment.serverUrl}/letters/search/findByContentId?contentId=${contentId}`;
-    
+
     return this.httpClient.get(url);
   }
 
