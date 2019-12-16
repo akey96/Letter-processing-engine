@@ -35,8 +35,8 @@
 
     <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="end">
       <div class="buttons">
-        <button color="accent" mat-raised-button (click)="back()">Regresar a la lista de Cartas</button>
-        <button color="primary" [disabled]="!letter.valid" mat-raised-button (click)="responseLetter()">Guardar Respuesta</button>
+        <button color="" mat-raised-button (click)="back()">Regresar a la lista de Cartas</button>
+        <button color="accent" [disabled]="!letter.valid" mat-raised-button (click)="responseLetter()">Guardar Respuesta</button>
         <button color="primary" [disabled]="!letter.valid" mat-raised-button (click)="openDialog()">Mandar Respuesta al Editor</button>
       </div>
     </div>

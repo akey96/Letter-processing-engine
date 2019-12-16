@@ -33,7 +33,7 @@
       <textarea matInput formControlName="content" rows="10" readonly></textarea>
     </mat-form-field>
     <div class="buttons">
-      <button color="warn" mat-raised-button (click)="rejectContent()">{{'Devolver respuesta al redactor' | titlecase}}</button>
+      <button color="warn" disabled="true" mat-raised-button (click)="rejectContent()">{{'Devolver respuesta al redactor' | titlecase}}</button>
       <button color="primary" mat-raised-button (click)="viewContent()" >{{'Ver contenido de la respuesta' | titlecase}}</button>
     </div>
   </form>

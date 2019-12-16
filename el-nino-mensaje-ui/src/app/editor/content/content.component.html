@@ -1,44 +1,35 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>
-            CARRED-0{{contentSelected}}
+        <mat-card-title *ngIf="this.content">
+          {{this.content.description}}
         </mat-card-title>
-        <mat-card-subtitle>
+        <mat-card-subtitle *ngIf="this.redactor">
             Redactor: {{this.redactor.name | titlecase}}
         </mat-card-subtitle>
         <mat-card-subtitle>
-            Cartas:  
-            <a *ngFor="let letter of letters" routerLink="/redactor/letter-response/{{letter.id}}" > carta {{letter.id}}, </a>
+            Cartas:
+            <a *ngFor="let letter of letters" > carta {{letter.id}} </a>
         </mat-card-subtitle>
-        <mat-card-subtitle>
+        <mat-card-subtitle *ngIf="this.content">
             Fecha: {{content.creationDate | date }}
         </mat-card-subtitle>
     </mat-card-header>
     <form [formGroup]="contentForm">
-        <!--label  formControlName="status">stado: {{letter}}</label-->
-
         <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-
-
             <div class="fade" fxFlex="100%">
-                <h3 fxLayoutAlign="start">Descripcion</h3>
+                <h3 fxLayoutAlign="start">Respuesta del Redactor</h3>
                 <mat-form-field appearance="outline">
-                    <textarea matInput formControlName="description" rows="17" readonly></textarea>
+                    <textarea matInput formControlName="content" rows="17" readonly></textarea>
                 </mat-form-field>
             </div>
         </div>
 
         <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="end">
             <div class="buttons">
-                <button color="warn" mat-raised-button (click)="back()">Regresar</button>
-                <button style="background-color: #28A745; color: honeydew" mat-raised-button>Generar Boletin</button>
+                <button color="" mat-raised-button (click)="back()">Regresar a la Lista de Respuestas</button>
+                <button disabled="true" color="warn" mat-raised-button (click)="back()">Devolver respuesta al Redactor</button>
+                <button disabled="true" color="primary"  mat-raised-button>Agregar al Boletin</button>
             </div>
         </div>
     </form>
-
-    <!--
-    <div *ngIf="!letter.valid">
-      <h3>Aun no tiene cartas asignadas, Espere a que el sistema le asigne alguna carta.</h3>
-    </div>
-    -->
 </mat-card>

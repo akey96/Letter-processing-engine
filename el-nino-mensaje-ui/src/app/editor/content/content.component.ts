@@ -43,6 +43,7 @@ export class ContentComponent implements OnInit {
     this.contentForm = formBuilder.group({
       id: new FormControl(''),
       description: new FormControl('', Validators.required),
+      content: new FormControl(''),
       creation_date: new FormControl('', Validators.required),
       letters: new FormControl(''),
     });
@@ -65,7 +66,7 @@ export class ContentComponent implements OnInit {
           this.contentService.getContentById(this.contentSelected).subscribe((contentResponse: any) => {
 
             this.content = contentResponse;
-            this.contentForm.get('description').setValue(this.content.description);
+            this.contentForm.get('content').setValue(this.content.content);
 
           }, (err) => {
             this.popupService.showError('Algo fallo al cargar las cartas, recarga la pagina por favor.');

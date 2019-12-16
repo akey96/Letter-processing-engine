@@ -50,6 +50,18 @@ export class NavigationMenuComponent implements OnInit {
             nombre: 'Registro de nuevo personal',
             url: '/administrator/register-user',
           }];
+        } else if (arregloUrl[0] === 'editor') {
+          if (arregloUrl[1] === 'content-list') {
+            this.rutas = [{
+              nombre: 'Lista de Respuestas de los redactores',
+              url: '/editor/content-list',
+            }];
+          } else if (arregloUrl[1] === 'content') {
+            this.rutas = [{
+              nombre: 'Vista individual de respuesta',
+              url: '/editor/content-list',
+            }];
+          }
         }
       }
     });
