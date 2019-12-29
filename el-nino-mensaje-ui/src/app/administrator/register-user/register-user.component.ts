@@ -4,6 +4,7 @@ import { UserService } from '../../shared/services/user.service';
 import { PopUpService } from '../../shared/services/pop-up.service';
 import { Profile } from 'src/app/shared/models/profile.model';
 import {MatDialog} from '@angular/material';
+import { Router } from '@angular/router';
 
 
 
@@ -21,7 +22,8 @@ export class RegisterUserComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
               public userService: UserService,
-              public popUpService: PopUpService) {}
+              public popUpService: PopUpService,
+              public router: Router) {}
 
   ngOnInit() {
 
@@ -53,6 +55,7 @@ export class RegisterUserComponent implements OnInit {
       this.userForm.get('email').reset();
       this.userForm.get('keywords').reset();
       this.userForm.get('personRole').reset();
+      this.router.navigate(['/administrator/user-list']);
     }, (error: any) => {
       if (error.error.cause.cause.message.indexOf('(ci)=') >= 0) {
         error.message = 'El número de carnet de identidad mas la extension que ingresaste ya está registrado en el sistema';
