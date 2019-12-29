@@ -84,9 +84,8 @@ export class LetterListComponent implements OnInit {
     this.letterSelected = letter._links.letter.href.split('/')[4];
 
     if (letter.status === 'NEW') {
-      this.letterService.updateLetterStatusToRead(letter.id).pipe(take(1)).subscribe((letterResponse: Letter) => {
-        this.ngOnInit();
-      });
+      letter.status = 'READ';
+      this.letterService.updateLetter(letter.id, letter).subscribe();
     }
   }
 
