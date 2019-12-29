@@ -26,7 +26,6 @@ export class WriteLetterComponent implements OnInit {
   letter: FormGroup;
   listImages = [];
   listImagesRef = [];
-  
   constructor(public formBuilder: FormBuilder, public letterService: LetterService, public popUpService: PopUpService, private firebaseStorage: FirebaseStorageService) {
 
 
@@ -72,4 +71,3 @@ export class WriteLetterComponent implements OnInit {
   }
 
 }
-

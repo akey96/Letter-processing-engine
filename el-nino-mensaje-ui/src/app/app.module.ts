@@ -22,7 +22,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule, MatCheckboxModule, MatRadioModule } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
+
 import { UserHomeComponent } from './home/user-home/user-home.component';
 import { WriteLetterComponent } from './home/write-letter/write-letter.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -41,8 +41,7 @@ import { LoginComponent } from './home/login/login.component';
 import { AuthenticationService } from './shared/services/authentication.service';
 import { AuthInterceptorService } from './shared/interceptors/auth-interceptor.service';
 
-import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
-import {MatGridListModule} from '@angular/material/grid-list';
+
 
 @NgModule({
   declarations: [
@@ -73,15 +72,12 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatRadioModule,
     MatSelectModule,
     MatProgressBarModule,
-    FlexLayoutModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
     RedactorModule,
     AdministratorModule,
-    EditorModule,
-    ScrollToModule.forRoot(),
-    MatGridListModule
+    EditorModule
   ],
   providers: [
     {
