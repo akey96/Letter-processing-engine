@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { UserService } from '../../shared/services/user.service';
 import { PopUpService } from '../../shared/services/pop-up.service';
 import { Profile } from 'src/app/shared/models/profile.model';
-import {MatDialog} from '@angular/material';
 import { Router } from '@angular/router';
 
 
@@ -47,14 +46,6 @@ export class RegisterUserComponent implements OnInit {
   registerUser() {
     this.userService.sendUser(this.userForm.value).subscribe(() => {
       this.popUpService.showSuccess('Se registro al usuario correctamente');
-      this.userForm.get('name').reset();
-      this.userForm.get('username').reset();
-      this.userForm.get('password').reset();
-      this.userForm.get('ci').reset();
-      this.userForm.get('birthday').reset();
-      this.userForm.get('email').reset();
-      this.userForm.get('keywords').reset();
-      this.userForm.get('personRole').reset();
       this.router.navigate(['/administrator/user-list']);
     }, (error: any) => {
       if (error.error.cause.cause.message.indexOf('(ci)=') >= 0) {

@@ -3,6 +3,7 @@ package com.lirirum.nino_mensajero.events;
 import com.lirirum.nino_mensajero.keyword.Keyword;
 import com.lirirum.nino_mensajero.keyword.KeywordRepository;
 import com.lirirum.nino_mensajero.user.Person;
+import com.lirirum.nino_mensajero.user.PersonRole;
 import com.lirirum.nino_mensajero.utils.textCorrector.TextCorrector;
 import com.lirirum.nino_mensajero.utils.textMotor.priority.MediumPriorityAnalizer;
 import org.slf4j.Logger;
@@ -35,16 +36,18 @@ public class PersonEventHandler {
     @HandleAfterCreate
     public void handleAuthorBeforeCreate(Person person)
     {
-        String[] keywords = person.getKeywords().split(",");
-        keywords = correctedWords(keywords);
-        for(String keyword:keywords){
-            addKeyword(keyword,person);
-            List<String> keywordSynonyms =MediumPriorityAnalizer.synonymsDictionary.get(keyword);
-            if(keywordSynonyms != null) {
-                for(String synonym: keywordSynonyms)
-                    addKeyword(synonym,person);
-            }
+        if (person.getPersonRole() == PersonRole.ROLE_REDACTOR) {
+            String[] keywords = person.getKeywords().split(",");
+            keywords = correctedWords(keywords);
+            for(String keyword:keywords){
+                addKeyword(keyword,person);
+                List<String> keywordSynonyms =MediumPriorityAnalizer.synonymsDictionary.get(keyword);
+                if(keywordSynonyms != null) {
+                    for(String synonym: keywordSynonyms)
+                        addKeyword(synonym,person);
+                }
 
+            }
         }
     }
     private String[] correctedWords(String[] keywords){
