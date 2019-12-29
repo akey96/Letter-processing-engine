@@ -10,6 +10,7 @@ import {
 } from '../home/user-home/user-home.component';
 import { RegisterUserComponent } from './register-user/register-user.component';
 import { AdministratorGuard } from '../shared/guards/administrator.guard';
+import { UserListComponent } from './user-list/user-list.component';
 
 export const administratorRoutes: Routes = [{
   path: 'administrator',
@@ -19,8 +20,12 @@ export const administratorRoutes: Routes = [{
   ],
   children: [{
       path: '',
-      redirectTo: 'register-user',
+      redirectTo: 'user-list',
       pathMatch: 'full'
+    },
+    {
+      path: 'user-list',
+      component: UserListComponent
     },
     {
       path: 'register-user',

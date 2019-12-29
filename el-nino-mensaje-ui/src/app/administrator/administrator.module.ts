@@ -16,17 +16,19 @@ import {
   MatInputModule,
   MatDatepickerModule,
   MatButtonModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTableModule
 } from '@angular/material';
 import {
   FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
+import { UserListComponent } from './user-list/user-list.component';
 
 
 
 @NgModule({
-  declarations: [RegisterUserComponent],
+  declarations: [RegisterUserComponent, UserListComponent],
   imports: [
     CommonModule,
     AdministratorRoutingModule,
@@ -38,6 +40,7 @@ import {
     MatDatepickerModule,
     MatButtonModule,
     MatSelectModule,
+    MatTableModule
   ]
 })
 export class AdministratorModule {}

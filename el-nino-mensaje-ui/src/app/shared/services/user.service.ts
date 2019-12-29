@@ -25,4 +25,8 @@ export class UserService {
     return this.httpClient.get(`${environment.serverUrl}/contents/${contentId}/person`);
   }
 
+  getAllUsers() {
+    return this.httpClient.get(this.url);
+  }
+
 }

@@ -46,7 +46,7 @@
       <input type="password" matInput placeholder="Contraseña" formControlName="password">
     </mat-form-field>
     <div class="form-buttons">
-      <button type="button" mat-raised-button color="accent">Cancelar</button>
+      <button type="button" mat-raised-button color="accent" routerLink="/administrator/user-list">Cancelar</button>
       <button type="button" mat-raised-button (click)="registerUser()" [disabled]="!userForm.valid"
         color="primary">Registrar</button>
     </div>

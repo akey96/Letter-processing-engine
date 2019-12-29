@@ -46,10 +46,17 @@ export class NavigationMenuComponent implements OnInit {
             }
           }
         } else if (arregloUrl[0] === 'administrator') {
-          this.rutas = [{
-            nombre: 'Registro de nuevo personal',
-            url: '/administrator/register-user',
-          }];
+          if (arregloUrl[1] === 'user-list') {
+            this.rutas = [{
+              nombre: 'Lista de Usuarios',
+              url: '/administrator/user-list'
+            }];
+          } else {
+            this.rutas = [{
+              nombre: 'Registro de nuevo personal',
+              url: '/administrator/register-user',
+            }];
+          }
         } else if (arregloUrl[0] === 'editor') {
           if (arregloUrl[1] === 'content-list') {
             this.rutas = [{
