@@ -23,13 +23,13 @@ public class LetterAnalysis {
     private long id;
     @NotNull
     @NotBlank
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String textCorrected;
     @NotNull
     @Column( nullable = false)
     @ElementCollection(targetClass=String.class)
     private List<String> importantWords;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     @Enumerated(EnumType.STRING)
     private Sentiment letterSentiment;
 

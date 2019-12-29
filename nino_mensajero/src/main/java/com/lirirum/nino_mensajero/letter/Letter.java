@@ -18,14 +18,13 @@ import java.util.Set;
 @Entity
 @Table(name = "LETTER")
 @Data
-
 public class Letter {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     @NotBlank
     @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String message;
     @NotNull
     @Temporal(TemporalType.DATE)
@@ -41,6 +40,7 @@ public class Letter {
     private Status status;
     @ElementCollection
     private Set<String> images;
+    @Column(columnDefinition = "TEXT")
     private String response;
 
     @ManyToOne

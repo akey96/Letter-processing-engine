@@ -42,7 +42,7 @@ export class ContentListComponent implements OnInit {
       this.dataSource.sort = this.sort;
       if (contents._embedded.contents[0]) {
         this.content.get('content').setValue(contents._embedded.contents[0].content);
-        this.contentSelected = contents.id;
+        this.contentSelected = contents._embedded.contents[0].id;
       }
     }, () => {
       this.popUpService.showError('Algo fallo al cargar las respuestas de los redactores, recarga la pagina por favor.');
