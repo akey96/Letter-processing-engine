@@ -40,12 +40,6 @@ export class LetterService {
     return this.httpClient.patch(urlId, letter);
   }
 
-  updateLetterStatusToRead(letterId: number): Observable<Letter> {
-
-    const updateUrl = `${environment.serverUrl}/letters-2/${letterId}/status/read`;
-    return this.httpClient.put<Letter>(updateUrl, null);
-  }
-
   getLetterByContentId(contentId: number) {
     const url = `${environment.serverUrl}/letters/search/findByContentId?contentId=${contentId}`;
 
