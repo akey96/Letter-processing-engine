@@ -13,7 +13,9 @@ import org.springframework.data.rest.core.annotation.HandleAfterCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -31,6 +33,8 @@ public class PersonEventHandler {
     public void handlePersonCreation(Person person) {
         person.setUsername(person.getUsername().toLowerCase());
         person.setPassword(passwordEncoder.encode(person.getPassword()));
+        cleanKeywords(person);
+        System.out.println(person.getKeywords());
     }
 
     @HandleAfterCreate
@@ -49,6 +53,16 @@ public class PersonEventHandler {
 
             }
         }
+    }
+    private void cleanKeywords(Person p){
+        String [] temp = p.getKeywords().split(",");
+        String res = "";
+        for(int i = 0 ; i < temp.length;i++){
+            res+=TextCorrector.spellChecker(temp[i])+",";
+        }
+        String save =  res.substring(0,res.length()-1);
+        System.out.println(save);
+        p.setKeywords(save );
     }
     private String[] correctedWords(String[] keywords){
         for(int i = 0 ; i < keywords.length;i++) {

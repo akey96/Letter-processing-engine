@@ -14,6 +14,8 @@ public class TextCorrector {
 
     public static String spellChecker(String texto){
         try {
+            texto = texto.trim();
+            texto = texto.toLowerCase();
             JLanguageTool langTool = new JLanguageTool(new Spanish());
             List<RuleMatch> matches = langTool.check(texto);
             List<String> wrongWords = new ArrayList<String>();
