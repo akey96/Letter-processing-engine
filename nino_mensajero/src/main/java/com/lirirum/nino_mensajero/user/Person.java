@@ -37,7 +37,7 @@ public class Person {
     private String name;
     @NotNull
     @NotBlank
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String ci;
     @NotNull
     @Past
@@ -45,7 +45,7 @@ public class Person {
     private Date birthday;
     @NotNull
     @NotBlank
-    @Column( nullable = false, unique = true)
+    @Column( nullable = false)
     private String email;
 
     private String keywords;

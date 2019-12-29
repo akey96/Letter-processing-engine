@@ -48,12 +48,8 @@ export class RegisterUserComponent implements OnInit {
       this.popUpService.showSuccess('Se registro al usuario correctamente');
       this.router.navigate(['/administrator/user-list']);
     }, (error: any) => {
-      if (error.error.cause.cause.message.indexOf('(ci)=') >= 0) {
-        error.message = 'El número de carnet de identidad mas la extension que ingresaste ya está registrado en el sistema';
-      } else if (error.error.cause.cause.message.indexOf('(email)=') >= 0) {
-        error.message = 'El correo que ingresaste ya está registrado en el sistema';
-      }
-      this.popUpService.showError(error.message);
+      this.popUpService.showError(`El nmobre de usuarii "${this.userForm.get('username').value}" ya a sido registrado,
+      por favor ingresa un nombre de usuario distinto`);
     });
 
   }
