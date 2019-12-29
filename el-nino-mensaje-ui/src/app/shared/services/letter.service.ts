@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Letter} from '../models/letter.model';
 import {environment} from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { Observable } from 'rxjs';
 export class LetterService {
     url: string;
 
-    constructor(public httpClient: HttpClient) {
+    constructor(public httpClient: HttpClient, public authService: AuthenticationService) {
       this.url = `${environment.serverUrl}/letters`;
     }
 
@@ -51,8 +52,9 @@ export class LetterService {
     return this.httpClient.get(url);
   }
 
-  getLetterByResponsableId(responsableId){
-    const url = `${environment.serverUrl}//letters/search/findByResponsableId?responsableId=${responsableId}`;
+  getLetterByResponsableId() {
+    const responsableId = this.authService.getPrincipal().id;
+    const url = `${this.url}/search/findByResponsableId?responsableId=${responsableId}`;
     return this.httpClient.get(url);
   }
 }

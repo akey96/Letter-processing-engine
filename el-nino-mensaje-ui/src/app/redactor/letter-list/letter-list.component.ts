@@ -55,7 +55,7 @@ export class LetterListComponent implements OnInit {
 
   ngOnInit() {
     let ableLetters: any[];
-    this.letterService.getLetters().subscribe((letters: any) => {
+    this.letterService.getLetterByResponsableId().subscribe((letters: any) => {
       ableLetters = this.selectAbleLetters(letters._embedded.letters);
       this.dataSource = new MatTableDataSource(ableLetters);
       this.dataSource.paginator = this.paginator;
