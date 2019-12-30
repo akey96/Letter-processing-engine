@@ -41,7 +41,7 @@ app-file-upload {
 }
 
 #contenedor-div {
-    background-image: url('../../../assets/images/fondo.jpg');
+    background-image: url('../../../assets/images/3602.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
@@ -53,15 +53,15 @@ app-file-upload {
 }
 
 .red {
-    background-color: rgba(255, 34, 9, 0.7);
+    background-color: rgba(34, 95, 114, 0.8);
 }
 
 .white {
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgb(255, 255, 255);
 }
 
 .gray {
-    background-color: rgba(59, 61, 68, 0.6);
+    background-color: rgba(0, 212, 166, 0.85);
 }
 
 .container {
@@ -91,7 +91,7 @@ app-file-upload {
     color: #FFF;
     font-weight: 600;
     text-transform: uppercase;
-    background: transparent;
+    background-color: rgb(173, 42, 134);
     font-size: 40px;
     transition: all 1s;
     border-width: 5px;
@@ -106,7 +106,7 @@ app-file-upload {
     color: #FFF;
     font-weight: 600;
     text-transform: uppercase;
-    background: transparent;
+    background-color: rgb(223, 80, 170);
     font-size: 40px;
     transition: all 1s;
     border-width: 5px;
@@ -115,3 +115,4 @@ app-file-upload {
     height: 100px;
     width: 500px;
 }
+

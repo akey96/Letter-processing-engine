@@ -1,7 +1,9 @@
 <div id="contenedor-div">
-
+    <img style="position:absolute; top:400px; left:700px;" src="../../../assets/images/carta.png" width="400px" height="280px">
+    <img style="position:absolute; top:150px; left:1000px;" src="../../../assets/images/niña.png">
     <div class="jumbotron red">
-        <h1>Escribe tus aventuras, emociones e imaginaciones!<br>Recuerda! Puedes mandarnos fotos y dibujos de tus experiencias!
+        <h1>Escribe tus aventuras, emociones e imaginaciones!<br>Recuerda! Puedes mandarnos fotos y dibujos de tus
+            experiencias!
         </h1>
 
         <br>
@@ -9,15 +11,16 @@
         <br>
         <br>
 
-        <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+        <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%"
+            fxLayoutAlign="center">
             <div class="buttons">
-                <button [ngx-scroll-to]="'#destination'" mat-raised-button class="button-degrade">Envia tu carta aqui</button>
+                <button [ngx-scroll-to]="'#destination'" mat-raised-button class="button-degrade">Envia tu carta
+                    aqui</button>
             </div>
         </div>
-        <br>
-        <br>
-        <br>
 
+        <br>
+        <br>
         <br>
         <br>
         <br>
@@ -26,7 +29,6 @@
         <br>
         <br>
     </div>
-
     <div layout="row" class="white">
         <br>
         <br>
@@ -40,6 +42,11 @@
         <br>
         <br>
         <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        
     </div>
 
 
@@ -49,41 +56,43 @@
         </mat-grid-tile>
         <mat-grid-tile class="gray" rowspan="7" colspan="10">
 
-            <form [formGroup]="letter">
-                <mat-form-field class="white" style="border-radius: 7px;" appearance="outline">
+            <form  [formGroup]="letter">
+                <mat-form-field class="white" style="border-radius: 7px; " appearance="outline">
                     <mat-label>
                         <mat-icon matSuffix>create</mat-icon>
                         Escribe Aqui!
                     </mat-label>
-                    <textarea matInput rows="14" formControlName="message"></textarea>
+                    <textarea matInput rows="20" formControlName="message"></textarea>
                 </mat-form-field>
 
                 <app-list-images [listImages]="listImages"></app-list-images>
 
-                <div layout="row" class="buttons">
+                <div  layout="row" class="buttons">
 
-                    <button type="button" mat-raised-button color="warn" (click)="cancelForm()" [disabled]="!letter.valid">
-                    <mat-icon matSuffix>delete</mat-icon>
-                    Borrar Carta
-                  </button>
+                    <button type="button" mat-raised-button color="warn" (click)="cancelForm()"
+                        [disabled]="!letter.valid">
+                        <mat-icon matSuffix>delete</mat-icon>
+                        Borrar Carta
+                    </button>
 
-                    <button type="button" mat-raised-button color="primary" (click)="sendMessage()" [disabled]="!letter.valid">
-                    <mat-icon matSuffix>create</mat-icon>
-                    Mandar Carta
-                  </button>
+                    <button type="button" mat-raised-button color="primary" (click)="sendMessage()"
+                        [disabled]="!letter.valid">
+                        <mat-icon matSuffix>create</mat-icon>
+                        Mandar Carta
+                    </button>
 
-                    <app-file-upload [isEnabled]="!letter.valid" (complete)="onFileComplete($event)"></app-file-upload>
+                    <app-file-upload  [isEnabled]="!letter.valid" (complete)="onFileComplete($event)"></app-file-upload>
 
 
                 </div>
-
+                <div id="destination"></div>
             </form>
 
         </mat-grid-tile>
 
-        <mat-grid-tile rowspan="7" colspan="1" class="white"></mat-grid-tile>
+        <mat-grid-tile  rowspan="7" colspan="1" class="white"></mat-grid-tile>
 
-        <mat-grid-tile id="destination" rowspan="1" colspan="12" class="white"></mat-grid-tile>
+        <mat-grid-tile  rowspan="1" colspan="12" class="white"></mat-grid-tile>
     </mat-grid-list>
 
 </div>
