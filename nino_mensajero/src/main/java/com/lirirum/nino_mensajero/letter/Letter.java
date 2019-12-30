@@ -39,6 +39,7 @@ public class Letter {
     @Column(nullable = false)
     private Status status;
     @ElementCollection
+    @Column(columnDefinition = "TEXT")
     private Set<String> images;
     @Column(columnDefinition = "TEXT")
     private String response;

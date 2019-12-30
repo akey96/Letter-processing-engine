@@ -15,7 +15,7 @@ import {
   PopUpService
 } from 'src/app/shared/services/pop-up.service';
 
-import { FirebaseStorageService } from '../../shared/services/firebase-storage.service';
+
 
 @Component({
   selector: 'app-write-letter',
@@ -25,8 +25,7 @@ import { FirebaseStorageService } from '../../shared/services/firebase-storage.s
 export class WriteLetterComponent implements OnInit {
   letter: FormGroup;
   listImages = [];
-  listImagesRef = [];
-  constructor(public formBuilder: FormBuilder, public letterService: LetterService, public popUpService: PopUpService, private firebaseStorage: FirebaseStorageService) {
+  constructor(public formBuilder: FormBuilder, public letterService: LetterService, public popUpService: PopUpService) {
 
 
     this.letter = formBuilder.group({
@@ -42,20 +41,17 @@ export class WriteLetterComponent implements OnInit {
   }
 
   cancelForm() {
-    this.listImagesRef.forEach(element => {
-      this.firebaseStorage.deleteCloudStorage(element);
-    });
     this.cleanMessage();
   }
 
   cleanMessage() {
     this.letter.get('message').reset();
     this.listImages = [];
-    this.listImagesRef = [];
   }
 
   sendMessage() {
     this.letter.value.images = this.listImages;
+    console.log(this.letter.value)
     this.letterService.sendLetter(this.letter.value).subscribe(() => {
       this.popUpService.showSuccess('Felicidades tu carta fue mandada exitosamente!');
       this.cleanMessage();
@@ -66,8 +62,9 @@ export class WriteLetterComponent implements OnInit {
   }
 
   onFileComplete(data: any) {
-    this.listImagesRef.push(data.name);
+    
     this.listImages.push(data.url);
+    console.log(this.listImages)
   }
 
 }

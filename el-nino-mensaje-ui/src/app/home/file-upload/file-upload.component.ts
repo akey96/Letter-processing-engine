@@ -3,7 +3,6 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { HttpClient } from '@angular/common/http';
 import { FileUploadModel } from '../../shared/models/fileUploadedModel';
 import {PopUpService} from 'src/app/shared/services/pop-up.service';
-import { FirebaseStorageService } from '../../shared/services/firebase-storage.service';
 
 
 @Component({
@@ -29,20 +28,23 @@ export class FileUploadComponent implements OnInit {
   @Output() complete = new EventEmitter<any>();
   fileInformation: any;
   private files: Array<FileUploadModel> = [];
-
+  base64textString = [];
   constructor(
     private _http: HttpClient,
-    public popUpService: PopUpService,
-    private firebaseStorage: FirebaseStorageService) {}
+    public popUpService: PopUpService) {}
 
   ngOnInit() {
   }
-
+  handleReaderLoaded(e) {
+    this.base64textString.push('data:image/png;base64,' + btoa(e.target.result));
+    this.uploadFiles();
+  }
   onClick() {
     let fileUpload: any = document.getElementById('fileUpload') as HTMLInputElement;    
     let validate = true;
 
-    fileUpload.onchange = () => {
+    fileUpload.onchange = (evt: any) => {
+
       for (let index = 0; index < fileUpload.files.length; index++) {
         
         let file = fileUpload.files[index];
@@ -57,15 +59,12 @@ export class FileUploadComponent implements OnInit {
           // recuperamos la extensión del archivo
           var ext = fileName.split('.').pop();
           if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' ) {
+            const reader = new FileReader();
 
-            this.files.push({
-              data: file,
-              state: 'in',
-              inProgress: false,
-              progress: 0,
-              canRetry: true,
-              canCancel: true
-            });
+            reader.onload = this.handleReaderLoaded.bind(this);
+            reader.readAsBinaryString(file);
+
+
           } else {
             validate = false;
             this.popUpService.showError('Solo se permiten imágenes de formato jpg, jpeg y png');
@@ -73,71 +72,30 @@ export class FileUploadComponent implements OnInit {
         }
 
       }
-      if(validate) {
-        this.uploadFiles();
-      }
+    
     };
 
     fileUpload.click();
-  }
-
-  cancelFile(file: FileUploadModel) {
-
-    this.removeFileFromArray(file);
-  }
-
-  retryFile(file: FileUploadModel) {
-    this.uploadFile(file);
-
-    file.canRetry = false;
-  }
-
-  private uploadFile(file: FileUploadModel) {
-    // agregar el servicio de firebase
-
-    const fd = new FormData();
-    fd.append(this.param, file.data);
-    
-    let archivo = fd.get(this.param);
-
-    let referencia =  this.firebaseStorage.referenciaCloudStorage(archivo['name']);
-    let tarea = this.firebaseStorage.tareaCloudStorage(archivo['name'], archivo);
-    
-    tarea.percentageChanges().subscribe((porcentaje) => {
-      file.progress = Math.round(porcentaje);
-      if (file.progress == 100) {
-        file.inProgress = false;
-      }
-    }, error => {
-      file.inProgress = false;
-      file.canRetry = true;
-    });
-
-    referencia.getDownloadURL().subscribe((URL) => {
-      this.removeFileFromArray(file);
-          // cambiar cuerpo por el retorno de la url
-      this.complete.emit({
-        name: file.data.name,
-        url:URL
-      });
-    });
   }
 
   private uploadFiles() {
     const fileUpload = document.getElementById('fileUpload') as HTMLInputElement;
     fileUpload.value = '';
 
-    this.files.forEach(file => {
-      this.uploadFile(file);
+    this.base64textString.forEach(file => {
+      this.removeFileFromArray(file);
+      this.complete.emit({
+        url:file
+      });
     });
 
   }
 
   private removeFileFromArray(file: FileUploadModel) {
-    const index = this.files.indexOf(file);
+    const index = this.base64textString.indexOf(file);
 
     if (index > -1) {
-      this.files.splice(index, 1);
+      this.base64textString.splice(index, 1);
     }
   }
 }
