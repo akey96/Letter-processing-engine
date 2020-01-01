@@ -41,7 +41,8 @@ import { LoginComponent } from './home/login/login.component';
 import { AuthenticationService } from './shared/services/authentication.service';
 import { AuthInterceptorService } from './shared/interceptors/auth-interceptor.service';
 
-
+import {MatGridListModule} from '@angular/material/grid-list';
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,9 @@ import { AuthInterceptorService } from './shared/interceptors/auth-interceptor.s
     HttpClientModule,
     RedactorModule,
     AdministratorModule,
-    EditorModule
+    EditorModule,
+    ScrollToModule.forRoot(),
+    MatGridListModule
   ],
   providers: [
     {
