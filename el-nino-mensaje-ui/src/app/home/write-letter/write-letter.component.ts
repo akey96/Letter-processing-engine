@@ -25,6 +25,13 @@ import {
 export class WriteLetterComponent implements OnInit {
   letter: FormGroup;
   listImages = [];
+  topN = '150px';
+  leftN : string;
+
+  topC = '450px';
+  leftC: string;
+  
+
   constructor(public formBuilder: FormBuilder, public letterService: LetterService, public popUpService: PopUpService) {
 
 
@@ -37,7 +44,12 @@ export class WriteLetterComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit() { 
+    var width = window.innerWidth;
+    this.leftN = (width-(width*0.4))+'px';
+    this.leftC = (width-(width*0.61))+'px';
+
+    console.log( this.leftN, width)
   }
 
   cancelForm() {
