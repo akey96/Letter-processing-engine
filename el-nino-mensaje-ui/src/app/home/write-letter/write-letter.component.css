@@ -76,12 +76,14 @@ textarea {
     align-items: center;
 }
 
-.jumbotron .container {
+.jumbotron{
     max-width: 100%;
     /* allows the jumbotron to adjust on smaller widths */
 }
 
 .jumbotron h1 {
+    position: relative;
+    top: -100px;
     text-align: center;
     /* centers the heading */
     color: #FFF;
@@ -119,4 +121,3 @@ textarea {
     height: 100px;
     width: 500px;
 }
-

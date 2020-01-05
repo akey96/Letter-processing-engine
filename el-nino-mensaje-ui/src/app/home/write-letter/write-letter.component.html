@@ -1,71 +1,41 @@
 <div id="contenedor-div">
-    <img style="position:absolute; top:400px; left:700px;" src="../../../assets/images/carta.png" width="400px" height="280px">
-    <img style="position:absolute; top:150px; left:1000px;" src="../../../assets/images/niña.png">
-    <div class="jumbotron red">
-        <h1>Escribe tus aventuras, emociones e imaginaciones!<br>Recuerda! Puedes mandarnos fotos y dibujos de tus
-            experiencias!
-        </h1>
-
-        <br>
-        <br>
-        <br>
-        <br>
-
-        <div fxLayout="row" class="container" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <img [style.top]="topN" [style.left]="leftN"  style="position: absolute; z-index:1;" src="../../../assets/images/niña.png">
+    <img [style.top]="topC" [style.left]="leftC" style="position: absolute; z-index:1;" src="../../../assets/images/carta.png" width="400px"height="280px">
+    <mat-grid-list gutterSize="0px" cols="12" rowHeight="100px">
             
-            <button  [ngx-scroll-to]="'#destination'" mat-raised-button class="button-degrade">Envia tu carta aqui</button>
-            
-        </div>
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-    </div>
-    <div layout="row" class="white">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
         
-    </div>
-
-
-    <mat-grid-list cols="12">
-        <mat-grid-tile rowspan="7" colspan="1" class="white">
-
+        <mat-grid-tile class="jumbotron red" [colspan]="12" [rowspan]="6">
+            
+            <h1>Escribe tus aventuras, emociones e imaginaciones!<br>Recuerda! Puedes mandarnos fotos y dibujos de tus
+                experiencias!
+                <br>
+                <br>
+                <br>
+                <button [ngx-scroll-to]="'#destination'" mat-raised-button class="button-degrade">Envia tu carta
+                    aqui</button>
+            </h1>
+            
         </mat-grid-tile>
-        <mat-grid-tile class="gray" rowspan="7" colspan="10">
 
-            <form  [formGroup]="letter">
+        <mat-grid-tile id="punto" class="white" [colspan]="12" [rowspan]="2">
+        </mat-grid-tile>
+
+        <mat-grid-tile class="white" [colspan]="1" [rowspan]="9">
+        </mat-grid-tile>
+
+        <mat-grid-tile class="gray" [colspan]="10" [rowspan]="9">
+            <form [formGroup]="letter">
                 <mat-form-field class="white" style="border-radius: 7px; " appearance="outline">
                     <mat-label>
                         <mat-icon matSuffix>create</mat-icon>
                         Escribe Aqui!
                     </mat-label>
-                    <textarea matInput rows="20" formControlName="message"></textarea>
+                    <textarea matInput rows="17" formControlName="message"></textarea>
                 </mat-form-field>
 
                 <app-list-images [listImages]="listImages"></app-list-images>
 
-                <div  layout="row" class="buttons">
+                <div layout="row" class="buttons">
 
                     <button type="button" mat-raised-button color="warn" (click)="cancelForm()"
                         [disabled]="!letter.valid">
@@ -79,18 +49,21 @@
                         Mandar Carta
                     </button>
 
-                    <app-file-upload  [isEnabled]="!letter.valid" (complete)="onFileComplete($event)"></app-file-upload>
+                    <app-file-upload [isEnabled]="!letter.valid" (complete)="onFileComplete($event)"></app-file-upload>
 
 
                 </div>
                 <div id="destination"></div>
             </form>
-
         </mat-grid-tile>
 
-        <mat-grid-tile  rowspan="7" colspan="1" class="white"></mat-grid-tile>
+        <mat-grid-tile class="white" [colspan]="1" [rowspan]="9">
+        </mat-grid-tile>
 
-        <mat-grid-tile  rowspan="1" colspan="12" class="white"></mat-grid-tile>
+        <mat-grid-tile class="white" [colspan]="12" [rowspan]="1">
+        </mat-grid-tile>
+
     </mat-grid-list>
+
 
 </div>
