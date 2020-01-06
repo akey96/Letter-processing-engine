@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.1.7.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
+	id 'war'
 }
 
 group = 'com.lirirum'
@@ -27,6 +28,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	implementation 'org.springframework.boot:spring-boot-starter-security:2.2.1.RELEASE'
 	implementation  'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.2.1.RELEASE'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
