@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serverUrl: 'http://3.134.95.249:8080',
+  serverUrl: 'http://18.217.199.89:8080',
   oauthClientId: 'nimeclient',
   oauthSecret: 'nmsecret',
   firebase:  {

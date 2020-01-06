@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  serverUrl: 'http://localhost:8080',
+  serverUrl: 'http://18.217.199.89:8080',
   oauthClientId: 'nimeclient',
   oauthSecret: 'nmsecret',
   firebase:  {
