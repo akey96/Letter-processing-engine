@@ -132,8 +132,8 @@ export class LetterResponseComponent implements OnInit {
   responseLetter() {
     this.letterService.updateLetter(this.letterSelected, this.letter.value).subscribe((resp) => {
       this.popupService.showSuccess('Tu respuesta fue guardada exitosamente');
-    }, (error) => {
-      this.popupService.showError('NO SE PUDO GUARDAR TU RESPUESTA, POR FAVOR INTENTA GUARDARLA NUEVAMENTE');
+    }, () => {
+      this.popupService.showError('No se pudo guardar tu respuesta, por favor intenta guardala nuevamente');
     });
   }
   cleanMessage() {
@@ -158,7 +158,7 @@ export class LetterResponseComponent implements OnInit {
 
 
       }, (error) => {
-        this.popupService.showError(error);
+        this.popupService.showError('No se pudo mandar tu respuesta al editor, por favor intenta nuevamente');
       });
     }
 
